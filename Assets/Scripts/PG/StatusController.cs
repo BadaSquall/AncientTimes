@@ -21,7 +21,7 @@ namespace AncientTimes.Assets.Scripts.PG
         void Start()
         {
             animator = GetComponent<Animator>();
-            walkSpeed = 75.0f;
+            walkSpeed = 300.0f;
         }
 
 		private bool tempUp = true;
