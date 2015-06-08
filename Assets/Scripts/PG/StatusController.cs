@@ -43,7 +43,7 @@ namespace AncientTimes.Assets.Scripts.PG
         public void WalkRight()
         {
             rigidbody2D.velocity = new Vector2(walkSpeed * Time.deltaTime, 0.0f);
-            if (tempRight == false) {
+            if (!tempRight) {
 				animator.SetTrigger ("WalkRight");
 				tempRight = true;
 				tempLeft = false;
@@ -55,7 +55,7 @@ namespace AncientTimes.Assets.Scripts.PG
         public void WalkLeft()
         {
             rigidbody2D.velocity = new Vector2(walkSpeed * Time.deltaTime * (-1.0f), 0.0f);
-			if (tempLeft == false) {
+			if (!tempLeft) {
 				animator.SetTrigger("WalkLeft");
 				tempRight = false;
 				tempLeft = true;
@@ -67,7 +67,7 @@ namespace AncientTimes.Assets.Scripts.PG
         public void WalkDown()
         {
             rigidbody2D.velocity = new Vector2(0.0f, walkSpeed * Time.deltaTime * (-1.0f));
-			if (tempDown == false) {
+			if (!tempDown) {
 				animator.SetTrigger("WalkDown");
 				tempRight = false;
 				tempLeft = false;
@@ -79,7 +79,7 @@ namespace AncientTimes.Assets.Scripts.PG
         public void WalkUp()
         {
             rigidbody2D.velocity = new Vector2(0.0f, walkSpeed * Time.deltaTime);
-			if (tempUp == false) {
+			if (!tempUp) {
 				animator.SetTrigger("WalkUp");
 				tempRight = false;
 				tempLeft = false;
