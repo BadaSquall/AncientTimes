@@ -24,11 +24,6 @@ namespace AncientTimes.Assets.Scripts.PG
             walkSpeed = 300.0f;
         }
 
-		private bool tempUp = true;
-		private bool tempRight = false;
-		private bool tempLeft = false;
-		private bool tempDown = false;
-
         void LateUpdate()
         {
             if (OnStatusChange == null) return;
@@ -43,55 +38,29 @@ namespace AncientTimes.Assets.Scripts.PG
         public void WalkRight()
         {
             rigidbody2D.velocity = new Vector2(walkSpeed * Time.deltaTime, 0.0f);
-            if (!tempRight) {
-				animator.SetTrigger ("WalkRight");
-				tempRight = true;
-				tempLeft = false;
-				tempUp = false;
-				tempDown = false;
-			}
+			animator.SetTrigger ("WalkRight");
         }
 
         public void WalkLeft()
         {
+            Debug.Log("eccomi");
             rigidbody2D.velocity = new Vector2(walkSpeed * Time.deltaTime * (-1.0f), 0.0f);
-			if (!tempLeft) {
-				animator.SetTrigger("WalkLeft");
-				tempRight = false;
-				tempLeft = true;
-				tempUp = false;
-				tempDown = false;
-			}
+			animator.SetTrigger("WalkLeft");
         }
 
         public void WalkDown()
         {
             rigidbody2D.velocity = new Vector2(0.0f, walkSpeed * Time.deltaTime * (-1.0f));
-			if (!tempDown) {
-				animator.SetTrigger("WalkDown");
-				tempRight = false;
-				tempLeft = false;
-				tempUp = false;
-				tempDown = true;
-			}
+			animator.SetTrigger("WalkDown");
         }
 
         public void WalkUp()
-        {
+        { 
             rigidbody2D.velocity = new Vector2(0.0f, walkSpeed * Time.deltaTime);
-			if (!tempUp) {
-				animator.SetTrigger("WalkUp");
-				tempRight = false;
-				tempLeft = false;
-				tempUp = true;
-				tempDown = false;
-			}
+			animator.SetTrigger("WalkUp");
         }
 
-        public void Idle()
-        {
-            rigidbody2D.velocity = new Vector2(0.0f, 0.0f);
-        }
+        public void Idle() { rigidbody2D.velocity = new Vector2(0.0f, 0.0f); }
 
         #endregion Methods
     }
