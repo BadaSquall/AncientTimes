@@ -21,7 +21,7 @@ namespace AncientTimes.Assets.Scripts.PG
 
         void OnDisable() { StatusController.OnStatusChange -= OnStateChange; }
 
-        void Update() { OnStateCycle(); }
+		void FixedUpdate() { OnStateCycle (); }
 
         void OnStateCycle()
         {
