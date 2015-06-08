@@ -12,12 +12,17 @@ namespace AncientTimes.Assets.Scripts.PG
         public delegate void OnStatusChangeHandler(Status newStatus);
         public static event OnStatusChangeHandler OnStatusChange;
         private Animator animator;
+        private float walkSpeed;
 
         #endregion Properties
 
         #region Methods
 
-        void Start() { animator = GetComponent<Animator>(); }
+        void Start()
+        {
+            animator = GetComponent<Animator>();
+            walkSpeed = 300.0f;
+        }
 
         void LateUpdate()
         {
@@ -30,13 +35,34 @@ namespace AncientTimes.Assets.Scripts.PG
             else OnStatusChange(Status.Idle);
         }
 
-        public void WalkRight() { animator.SetTrigger("WalkRight"); }
+        public void WalkRight()
+        {
+            rigidbody2D.velocity = new Vector2(walkSpeed * Time.deltaTime, 0.0f);
+            animator.SetTrigger("WalkRight");
+        }
 
-        public void WalkLeft() { animator.SetTrigger("WalkLeft"); }
+        public void WalkLeft()
+        {
+            rigidbody2D.velocity = new Vector2(walkSpeed * Time.deltaTime * (-1.0f), 0.0f);
+            animator.SetTrigger("WalkLeft");
+        }
 
-        public void WalkDown() { animator.SetTrigger("WalkDown"); }
+        public void WalkDown()
+        {
+            rigidbody2D.velocity = new Vector2(0.0f, walkSpeed * Time.deltaTime * (-1.0f));
+            animator.SetTrigger("WalkDown");
+        }
 
-        public void WalkUp() { animator.SetTrigger("WalkUp"); }
+        public void WalkUp()
+        {
+            rigidbody2D.velocity = new Vector2(0.0f, walkSpeed * Time.deltaTime);
+            animator.SetTrigger("WalkUp");
+        }
+
+        public void Idle()
+        {
+            rigidbody2D.velocity = new Vector2(0.0f, 0.0f);
+        }
 
         #endregion Methods
     }

@@ -10,42 +10,30 @@ namespace AncientTimes.Assets.Scripts.PG
 
         private StatusController controller;
         private StatusController.Status currentStatus;
-        private float walkSpeed;
 
         #endregion Properties
 
         #region Methods
 
-        void Start()
-        {
-            controller = GetComponent<StatusController>();
-            walkSpeed = 3.0f;
-        }
+        void Start() { controller = GetComponent<StatusController>(); }
 
         void OnEnable() { StatusController.OnStatusChange += OnStateChange; }
 
         void OnDisable() { StatusController.OnStatusChange -= OnStateChange; }
 
-        void Update()
-        {
-            OnStateCycle();
-        }
+        void Update() { OnStateCycle(); }
 
         void OnStateCycle()
         {
             switch (currentStatus)
             {
                 case StatusController.Status.WalkingLeft:
-                    transform.Translate(new Vector3((walkSpeed * -1.0f) * Time.deltaTime, 0.0f, 0.0f));
                     break;
                 case StatusController.Status.WalkingRight:
-                    transform.Translate(new Vector3(walkSpeed * Time.deltaTime, 0.0f, 0.0f));
                     break;
                 case StatusController.Status.WalkingDown:
-                    transform.Translate(new Vector3(0.0f, (walkSpeed * -1.0f) * Time.deltaTime, 0.0f));
                     break;
                 case StatusController.Status.WalkingUp:
-                    transform.Translate(new Vector3(0.0f, walkSpeed * Time.deltaTime, 0.0f));
                     break;
             }
         }
@@ -67,6 +55,9 @@ namespace AncientTimes.Assets.Scripts.PG
                     break;
                 case StatusController.Status.WalkingUp:
                     controller.WalkUp();
+                    break;
+                case StatusController.Status.Idle:
+                    controller.Idle();
                     break;
             }
 
