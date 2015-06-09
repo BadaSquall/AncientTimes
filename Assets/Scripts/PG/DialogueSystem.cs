@@ -46,11 +46,17 @@ namespace AncientTimes.Assets.Scripts.PG
 
 		void OnTriggerStay2D(Collider2D coll)
 		{
-			if (Input.GetKeyDown ("k")) 
+			if (Input.GetKey("k")) 
 			{
 				Text.SetActive(false);
 				animation = true;
 			}
+		}
+
+
+		void K ()
+		{
+
 		}
 
 		void FixedUpdate()
