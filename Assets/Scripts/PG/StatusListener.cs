@@ -86,6 +86,10 @@ namespace AncientTimes.Assets.Scripts.PG
                     if (currentStatus == StatusController.Status.WalkingUp)
                         hasToAbort = true;
                     break;
+                case StatusController.Status.Idle:
+                    if (currentStatus == StatusController.Status.Idle)
+                        hasToAbort = true;
+                    break;
             }
 
             return hasToAbort;
