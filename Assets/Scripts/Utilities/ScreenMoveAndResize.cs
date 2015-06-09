@@ -9,10 +9,11 @@ namespace AncientTimes.Assets.Scripts.Utilities
 
         void Start()
         {
-            var scaleX = Screen.width / ScreenDefinition.x;
-            var scaleY = Screen.height / ScreenDefinition.y;
-            gameObject.transform.localScale = new Vector3(scaleX, scaleY, 1.0f);
-            gameObject.transform.position = new Vector3(gameObject.transform.position.x * scaleX, gameObject.transform.position.y * scaleY, 1.0f);
-        }
+			var scaleX = Screen.width / ScreenDefinition.x;
+			var scaleY = Screen.height / ScreenDefinition.y;
+			gameObject.transform.localScale = new Vector3(gameObject.transform.localScale.x * scaleX, gameObject.transform.localScale.y * scaleY, 1.0f);
+			gameObject.transform.position = new Vector3(gameObject.transform.position.x * scaleX, gameObject.transform.position.y * scaleY, 1.0f);
+		
+		}
     }
 }
