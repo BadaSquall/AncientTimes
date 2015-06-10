@@ -17,8 +17,12 @@ namespace AncientTimes.Assets.Scripts.PG
 		public GameObject TextChat;
 
 		private Animation anim;
-		private bool animation = false;
-		private bool opened = false;
+
+		private bool Contact = false;
+		private bool AnimationOpen = false;
+		private bool AnimationClose = false;
+		private bool Control = false;
+		private bool Last = false;
 
 		#endregion Properties
 
@@ -37,53 +41,70 @@ namespace AncientTimes.Assets.Scripts.PG
 		// Update is called once per frame
 		void Update () 
 		{
+			if (Contact)
+				DialogueControl ();
 		}
 
+		void DialogueControl()
+		{
+			if (Input.GetKeyDown ("k") && !AnimationOpen && !Control && !Last) {
+				AnimationOpen = true;
+				Control = true;
+			} else if (Input.GetKeyDown ("k") && Control && !Last) {
+				//Slide ad animazioni fino a Last = true	
+				Last = true;
+			} else if (Input.GetKeyDown ("k") && Last) {
+				AnimationClose = true;
+				Control = false;
+			}
+		}
+
+		void AnimationTrigger()
+		{
+			if (AnimationOpen && !AnimationClose) 
+			{
+				AnimationOp();
+				AnimationOpen = false;
+			} else if (AnimationClose && Last)
+			{
+				AnimationCl();
+				AnimationClose = false;
+				Last = false;
+			}
+		}
+		
 		void OnTriggerEnter2D(Collider2D coll)
 		{
+			Contact = true;
 			Text.SetActive (true);
-		}
-
-		void OnTriggerStay2D(Collider2D coll)
-		{
-			if (Input.GetKey("k")) 
-			{
-				Text.SetActive(false);
-				animation = true;
-			}
-		}
-
-
-		void K ()
-		{
-
-		}
-
-		void FixedUpdate()
-		{
-			if (Input.GetKeyDown("k") && opened)
-			{
-				anim.Play("CloseDialogue");
-				opened = false;
-				TextName.SetActive(false);
-				TextChat.SetActive(false);
-			}
-
-			if (animation) 
-			{
-				DialogueSys.SetActive(true);
-				anim.Play("OpenDialogue");
-				TextName.SetActive(true);
-				TextChat.SetActive(true);
-				animation = false;
-				opened = true;
-			}
 		}
 
 		void OnTriggerExit2D(Collider2D coll)
 		{
+			Contact = false;
 			Text.SetActive (false);
 		}
+
+		void FixedUpdate()
+		{
+			AnimationTrigger ();
+		}
+
+		void AnimationOp(){
+			Text.SetActive (false);
+			DialogueSys.SetActive (true);
+			anim.Play ("OpenDialogue");
+			TextName.SetActive (true);
+			TextChat.SetActive (true);
+		}
+
+		void AnimationCl()
+		{
+			anim.Play ("CloseDialogue");
+			Text.SetActive (true);
+		}
+
+
 
 		#endregion Methods
 	}
