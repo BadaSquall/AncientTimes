@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using AncientTimes.Assets.Scripts.System;
 
 namespace AncientTimes.Assets.Scripts.PG
 {
@@ -13,6 +14,7 @@ namespace AncientTimes.Assets.Scripts.PG
         public static event OnStatusChangeHandler OnStatusChange;
         private Animator animator;
         private float walkSpeed;
+        public Console Dialogue;
 
         #endregion Properties
 
@@ -26,6 +28,7 @@ namespace AncientTimes.Assets.Scripts.PG
 
         void LateUpdate()
         {
+            if (Input.GetKeyDown("k")) Dialogue.Write("ciao");
             if (OnStatusChange == null) return;
 
             if (Input.GetKey("right")) OnStatusChange(Status.WalkingRight);

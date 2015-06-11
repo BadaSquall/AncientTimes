@@ -4,7 +4,6 @@ using System.Collections;
 
 namespace AncientTimes.Assets.Scripts.PG
 {
-	[RequireComponent(typeof(Animator))]
 	public class DialogueSystem : MonoBehaviour 
 	{
 
@@ -16,95 +15,87 @@ namespace AncientTimes.Assets.Scripts.PG
 		public GameObject TextName;
 		public GameObject TextChat;
 
-		private Animation anim;
+		private Animation dyalogueAnimation;
 
-		private bool Contact = false;
-		private bool AnimationOpen = false;
-		private bool AnimationClose = false;
-		private bool Control = false;
-		private bool Last = false;
+		private bool thereWasContact;
+		private bool isAnimationOpen;
+		private bool isAnimationClose ;
+		private bool Control;
+		private bool isLast;
 
 		#endregion Properties
 
 		#region Methods
 
-		// Use this for initialization
 		void Start () 
 		{
-			Text.SetActive (false);
-			DialogueSys.SetActive (false);
-			TextName.SetActive (false);
+			Text.SetActive(false);
+			DialogueSys.SetActive(false);
+			TextName.SetActive(false);
 
-			anim = DialogueSys.GetComponent<Animation> ();
+			dyalogueAnimation = DialogueSys.GetComponent<Animation>();
 		}
-	
-		// Update is called once per frame
-		void Update () 
-		{
-			if (Contact)
-				DialogueControl ();
-		}
+
+		void Update () { if (thereWasContact) DialogueControl(); }
+
+        void FixedUpdate() { AnimationTrigger(); }
 
 		void DialogueControl()
 		{
-			if (Input.GetKeyDown ("k") && !AnimationOpen && !Control && !Last) {
-				AnimationOpen = true;
+			if (Input.GetKeyDown("k") && !isAnimationOpen && !Control && !isLast)
+            {
+				isAnimationOpen = true;
 				Control = true;
-			} else if (Input.GetKeyDown ("k") && Control && !Last) {
-				//Slide ad animazioni fino a Last = true	
-				Last = true;
-			} else if (Input.GetKeyDown ("k") && Last) {
-				AnimationClose = true;
+			}
+            else if (Input.GetKeyDown("k") && Control && !isLast) isLast = true;
+            else if (Input.GetKeyDown("k") && isLast)
+            {
+				isAnimationClose = true;
 				Control = false;
 			}
 		}
 
 		void AnimationTrigger()
 		{
-			if (AnimationOpen && !AnimationClose) 
+			if (isAnimationOpen && !isAnimationClose) 
 			{
-				AnimationOp();
-				AnimationOpen = false;
-			} else if (AnimationClose && Last)
+				AnimateOpen();
+				isAnimationOpen = false;
+			}
+            else if (isAnimationClose && isLast)
 			{
-				AnimationCl();
-				AnimationClose = false;
-				Last = false;
+				AnimateClose();
+				isAnimationClose = false;
+				isLast = false;
 			}
 		}
 		
 		void OnTriggerEnter2D(Collider2D coll)
 		{
-			Contact = true;
-			Text.SetActive (true);
+			thereWasContact = true;
+			Text.SetActive(true);
 		}
 
 		void OnTriggerExit2D(Collider2D coll)
 		{
-			Contact = false;
-			Text.SetActive (false);
+			thereWasContact = false;
+			Text.SetActive(false);
 		}
 
-		void FixedUpdate()
+		void AnimateOpen()
+        {
+			Text.SetActive(false);
+			DialogueSys.SetActive(true);
+			dyalogueAnimation.Play("OpenDialogue");
+			TextName.SetActive(true);
+			TextChat.SetActive(true);
+		}
+
+		void AnimateClose()
 		{
-			AnimationTrigger ();
+			dyalogueAnimation.Play("CloseDialogue");
+			Text.SetActive(true);
 		}
-
-		void AnimationOp(){
-			Text.SetActive (false);
-			DialogueSys.SetActive (true);
-			anim.Play ("OpenDialogue");
-			TextName.SetActive (true);
-			TextChat.SetActive (true);
-		}
-
-		void AnimationCl()
-		{
-			anim.Play ("CloseDialogue");
-			Text.SetActive (true);
-		}
-
-
 
 		#endregion Methods
 	}
