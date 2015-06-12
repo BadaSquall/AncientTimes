@@ -16,6 +16,8 @@ namespace AncientTimes.Assets.Scripts.PG
         private float walkSpeed;
         public Console Dialogue;
 
+		private bool isTriggered;
+
         #endregion Properties
 
         #region Methods
@@ -28,7 +30,8 @@ namespace AncientTimes.Assets.Scripts.PG
 
         void LateUpdate()
         {
-            if (Input.GetKeyDown("k")) Dialogue.Write("ciao");
+			if(isTriggered)
+            	if (Input.GetKeyDown("k")) Dialogue.Write("ciao");
             if (OnStatusChange == null) return;
 
             if (Input.GetKey("right")) OnStatusChange(Status.WalkingRight);
@@ -37,6 +40,11 @@ namespace AncientTimes.Assets.Scripts.PG
             else if (Input.GetKey("up")) OnStatusChange(Status.WalkingUp);
        		else OnStatusChange(Status.Idle);
 		}
+
+		void OnTriggerEnter2D (Collider2D coll){	isTriggered = true; }
+
+		void OnTriggerExit2D (Collider2D coll){	isTriggered = false;	}
+
 
         public void WalkRight()
         {
