@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
-using AncientTimes.Assets.Scripts.System;
+using AncientTimes.Assets.Scripts.GameSystem;
+using AncientTimes.Assets.Scripts.Events;
+using AncientTimes.Assets.Scripts.Events.Actions;
 
 namespace AncientTimes.Assets.Scripts.PG
 {
@@ -16,8 +18,6 @@ namespace AncientTimes.Assets.Scripts.PG
         private float walkSpeed;
         public Console Dialogue;
 
-		private bool isTriggered;
-
         #endregion Properties
 
         #region Methods
@@ -30,8 +30,48 @@ namespace AncientTimes.Assets.Scripts.PG
 
         void LateUpdate()
         {
-			if(isTriggered)
-            	if (Input.GetKeyDown("k")) Dialogue.Write("ciao");
+            if (Input.GetKeyDown(KeyCode.Return)) 
+            {
+                var ge = new GameEvent();
+                ge.Containers.Add(new Container()
+                {
+                    Condition = "IsFirstEncounter"
+                });
+                ge.Containers[0].Actions.Add(new ShowDialogue());
+                (ge.Containers[0].Actions[0] as ShowDialogue).Dialogues.Add(new Dialogue()
+                {
+                    Text = "Hey come stai?"
+                });
+                (ge.Containers[0].Actions[0] as ShowDialogue).Dialogues.Add(new Dialogue()
+                {
+                    Text = "Sapevo saresti venuto"
+                });
+                ge.Containers[0].Actions.Add(new ChangeSwitch()
+                {
+                    Name = "IsFirstEncounter",
+                    Value = false
+                });
+                ge.Containers[0].Actions.Add(new ChangeSwitch()
+                {
+                    Name = "IsSecondEncounter",
+                    Value = true
+                });
+                ge.Containers.Add(new Container()
+                {
+                    Condition = "IsSecondEncounter"
+                });
+                ge.Containers[1].Actions.Add(new ShowDialogue());
+                (ge.Containers[1].Actions[0] as ShowDialogue).Dialogues.Add(new Dialogue()
+                {
+                    Text = "Mia sorella è un uomo :'("
+                });
+
+                Utilities.XMLSerializer.Serialize(ge, @"Assets/Events/Temple/CapoTerra.xml");
+
+                var evt = (GameEvent)Utilities.XMLDeserializer.Deserialize(typeof(GameEvent), @"Assets/Events/Temple/CapoTerra.xml");
+                Debug.Log(evt);
+            }
+
             if (OnStatusChange == null) return;
 
             if (Input.GetKey("right")) OnStatusChange(Status.WalkingRight);
@@ -40,11 +80,6 @@ namespace AncientTimes.Assets.Scripts.PG
             else if (Input.GetKey("up")) OnStatusChange(Status.WalkingUp);
        		else OnStatusChange(Status.Idle);
 		}
-
-		void OnTriggerEnter2D (Collider2D coll){	isTriggered = true; }
-
-		void OnTriggerExit2D (Collider2D coll){	isTriggered = false;	}
-
 
         public void WalkRight()
         {
