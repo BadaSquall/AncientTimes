@@ -10,20 +10,20 @@ namespace AncientTimes.Assets.Scripts.GameSystem
     {
         #region Properties
 
-        public GUISkin Skin;
+        public static GUISkin Skin;
         private float blinkMilliseconds;
         private int blinkTimes;
-        private GameObject consoleBackground;
-        private GameObject nextMessageTriangle;
-        private List<string> text;
+        private static GameObject consoleBackground;
+        private static GameObject nextMessageTriangle;
+        private static List<string> text;
         private const int MaximumWritingSpeed = 5;
         private static event Action messageComplete;
-        private string message;
+        private static string message;
 
         /// <summary>
         /// Occurs when [message complete].
         /// </summary>
-        public event Action MessageComplete
+        public static event Action MessageComplete
         {
             add { messageComplete = messageComplete == null ? new Action(value) : value; }
             remove { if (string.IsNullOrEmpty(message)) return; messageComplete = value; }
@@ -69,9 +69,9 @@ namespace AncientTimes.Assets.Scripts.GameSystem
         /// Writes the specified message.
         /// </summary>
         /// <param name="text">The message.</param>
-        public void Write(string text)
+        public static void Write(string text)
         {
-            this.text.Add(text);
+            Console.text.Add(text);
             consoleBackground.SetActive(true);
         }
 

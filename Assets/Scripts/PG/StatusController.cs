@@ -84,7 +84,7 @@ namespace AncientTimes.Assets.Scripts.PG
         public void WalkRight()
         {
             rigidbody2D.velocity = new Vector2(walkSpeed * Time.deltaTime, 0.0f);
-			animator.SetTrigger ("WalkRight");
+			animator.SetTrigger("WalkRight");
         }
 
         public void WalkLeft()

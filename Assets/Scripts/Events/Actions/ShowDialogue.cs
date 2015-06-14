@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using AncientTimes.Assets.Scripts.GameSystem;
+using System.Collections.Generic;
 
 namespace AncientTimes.Assets.Scripts.Events.Actions
 {
@@ -7,12 +8,18 @@ namespace AncientTimes.Assets.Scripts.Events.Actions
         #region Properties
 
         public List<Dialogue> Dialogues { get; set; }
+        private bool firstExecute;
+        private bool hasFinished;
 
         #endregion Properties
 
         #region Constructor
 
-        public ShowDialogue() { Dialogues = new List<Dialogue>(); }
+        public ShowDialogue()
+        {
+            Dialogues = new List<Dialogue>();
+            firstExecute = true;
+        }
 
         #endregion Constructor
 
@@ -20,11 +27,21 @@ namespace AncientTimes.Assets.Scripts.Events.Actions
 
         public override bool Execute(float deltaTime)
         {
-            var hasFinished = false;
-
-
+            if (firstExecute)
+            {
+                foreach (var dialogue in Dialogues) Console.Write(dialogue.Text);
+                Console.MessageComplete += MessageCompleted;
+                firstExecute = false;
+            }
 
             return hasFinished;
+        }
+
+        void MessageCompleted()
+        {
+            hasFinished = true;
+            firstExecute = true;
+            Console.MessageComplete -= MessageCompleted;
         }
 
         #endregion Methods

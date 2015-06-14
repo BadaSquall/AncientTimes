@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using AncientTimes.Assets.Scripts.Events;
 using AncientTimes.Assets.Scripts.Utilities;
+using System.Linq;
 
 namespace AncientTimes.Assets.Scripts.GameSystem
 {
@@ -18,6 +19,12 @@ namespace AncientTimes.Assets.Scripts.GameSystem
         void Update()
         {
             if (actionContainer == null) return;
+
+            var action = actionContainer.Actions[0];
+
+            if (action.Execute(Time.deltaTime)) actionContainer.Actions.Remove(action);
+
+            if (actionContainer.Actions.Count == 0) actionContainer = null;
         }
 
         public void RegisterEvent(GameEvent evt)
