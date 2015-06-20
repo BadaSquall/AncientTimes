@@ -1,4 +1,5 @@
-﻿using AncientTimes.Assets.Scripts.GameSystem;
+﻿using AncientTimes.Assets.Scripts.Events.Actions.Helpers;
+using AncientTimes.Assets.Scripts.GameSystem;
 using System.Collections.Generic;
 
 namespace AncientTimes.Assets.Scripts.Events.Actions
@@ -45,16 +46,5 @@ namespace AncientTimes.Assets.Scripts.Events.Actions
         }
 
         #endregion Methods
-    }
-
-    public class Dialogue
-    {
-        #region Properties
-
-        public string Name { get; set; }
-        public string ImagePath { get; set; }
-        public string Text { get; set; }
-
-        #endregion Properties
     }
 }

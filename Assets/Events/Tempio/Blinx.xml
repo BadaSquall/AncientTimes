@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="us-ascii"?>
+<SerializableGameEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Containers>
+    <Container>
+      <Condition>Test</Condition>
+      <Actions>
+        <ActionBase xsi:type="ChangeSwitch">
+          <Name>Test</Name>
+          <Value>true</Value>
+        </ActionBase>
+      </Actions>
+    </Container>
+  </Containers>
+</SerializableGameEvent>

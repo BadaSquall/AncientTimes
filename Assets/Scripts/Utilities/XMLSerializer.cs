@@ -11,12 +11,14 @@ namespace AncientTimes.Assets.Scripts.Utilities
     {
         #region Methods
 
-        public static void Serialize(object objectToSerialize, string filePath)
+        public static void Serialize(object objectToSerialize, string directoryName, string fileName)
         {
             var type = objectToSerialize.GetType();
             var serializer = new XmlSerializer(type);
 
-            using (var stream = new StreamWriter(filePath, false, Encoding.GetEncoding("us-ascii"))) { serializer.Serialize(stream, objectToSerialize); }
+            if (!Directory.Exists(directoryName)) Directory.CreateDirectory(directoryName);
+
+            using (var stream = new StreamWriter(File.Create(directoryName + fileName), Encoding.GetEncoding("us-ascii"))) { serializer.Serialize(stream, objectToSerialize); }
         }
 
         #endregion Methods

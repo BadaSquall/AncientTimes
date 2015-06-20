@@ -27,7 +27,7 @@ namespace AncientTimes.Assets.Scripts.GameSystem
             if (actionContainer.Actions.Count == 0) actionContainer = null;
         }
 
-        public void RegisterEvent(GameEvent evt)
+        public void RegisterEvent(SerializableGameEvent evt)
         {
             if (actionContainer != null) return;
 

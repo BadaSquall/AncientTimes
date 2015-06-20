@@ -114,9 +114,9 @@ namespace AncientTimes.Assets.Scripts.PG
                 Text = "Mia sorella è un uomo :'("
             });
 
-            Utilities.XMLSerializer.Serialize(ge, @"Assets/Events/Temple/CapoTerra.xml");
+            //Utilities.XMLSerializer.Serialize(ge, @"Assets/Events/Temple/CapoTerra.xml");
 
-            var evt = (SerializableGameEvent)Utilities.XMLDeserializer.Deserialize(typeof(SerializableGameEvent), @"Assets/Events/Temple/CapoTerra.xml");
+            var evt = (SerializableGameEvent) Utilities.XMLDeserializer.Deserialize(typeof(SerializableGameEvent), @"Assets/Events/Temple/CapoTerra.xml");
             Debug.Log(evt);
         }
 
