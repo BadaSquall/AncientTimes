@@ -5,8 +5,21 @@
       <Condition>Test</Condition>
       <Actions>
         <ActionBase xsi:type="ChangeSwitch">
-          <Name>Test</Name>
+          <Name>TestAction1</Name>
+          <Value>false</Value>
+        </ActionBase>
+        <ActionBase xsi:type="ChangeSwitch">
+          <Name>TestAction2</Name>
           <Value>true</Value>
+        </ActionBase>
+        <ActionBase xsi:type="ShowDialogue">
+          <Dialogues>
+            <Dialogue>
+              <Name />
+              <ImagePath />
+              <Text>Ciao, come stai? E sti cazzi</Text>
+            </Dialogue>
+          </Dialogues>
         </ActionBase>
       </Actions>
     </Container>

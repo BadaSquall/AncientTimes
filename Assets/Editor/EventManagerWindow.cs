@@ -24,6 +24,7 @@ public class EventManagerWindow : EditorWindow
     {
         eventManagers = new List<EventLayoutManagerBase>();
         eventManagers.Add(new ChangeSwitchLayoutManager());
+        eventManagers.Add(new ShowDialogueLayoutManager());
     }
 
     #endregion Constructors
@@ -72,15 +73,17 @@ public class EventManagerWindow : EditorWindow
             
             if (File.Exists(filePath))
             {
-                evt = (SerializableGameEvent)AncientTimes.Assets.Scripts.Utilities.XMLDeserializer.Deserialize(typeof(SerializableGameEvent), filePath);
+                currentEvent.Event = (SerializableGameEvent)AncientTimes.Assets.Scripts.Utilities.XMLDeserializer.Deserialize(typeof(SerializableGameEvent), filePath);
+                evt = currentEvent.Event;
             }
         }
 
         GUILayout.Label("Containers", EditorStyles.boldLabel);
-
+        
         for (var containerIndex = 0; containerIndex < evt.Containers.Count; containerIndex++)
         {
             var container = evt.Containers[containerIndex];
+
             var showContainer = currentEvent.ContainersVisibles[container] = EditorGUILayout.Foldout(currentEvent.ContainersVisibles[container], "Container n° " + containerIndex + ":");
 
             var selectablesTypes = new List<Type>();

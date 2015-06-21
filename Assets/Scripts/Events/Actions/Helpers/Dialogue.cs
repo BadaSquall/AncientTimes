@@ -14,5 +14,16 @@ namespace AncientTimes.Assets.Scripts.Events.Actions.Helpers
         public string Text { get; set; }
 
         #endregion Properties
+
+        #region Constructors
+
+        public Dialogue()
+        {
+            Name = "";
+            ImagePath = "";
+            Text = "";
+        }
+
+        #endregion Constructors
     }
 }

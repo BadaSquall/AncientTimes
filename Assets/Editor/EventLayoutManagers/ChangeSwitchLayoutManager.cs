@@ -8,12 +8,6 @@ using UnityEngine;
 
 public class ChangeSwitchLayoutManager : EventLayoutManagerBase
 {
-    #region Properties
-
-    private int boolIndex;
-
-    #endregion Properties
-
     #region Constructors
 
     public ChangeSwitchLayoutManager() { EventType = typeof(ChangeSwitch); }
@@ -30,16 +24,14 @@ public class ChangeSwitchLayoutManager : EventLayoutManagerBase
         changeSwitch.Name = EditorGUILayout.TextField("   Name:", changeSwitch.Name);
         EditorGUILayout.BeginHorizontal();
         GUILayout.Label("   Value:");
-        boolIndex = EditorGUILayout.Popup(boolIndex, new[] { "true", "false" });
-        if (boolIndex == 0) changeSwitch.Value = true;
+        var value = 0;
+        value = EditorGUILayout.Popup(changeSwitch.Value ? 0 : 1, new[] { "true", "false" });
+        if (value == 0) changeSwitch.Value = true;
         else changeSwitch.Value = false;
         EditorGUILayout.EndHorizontal();
     }
 
-    public override void FreeMemory()
-    {
-        
-    }
+    public override void FreeMemory() { }
 
     #endregion Methods
 }

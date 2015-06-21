@@ -31,7 +31,6 @@ namespace AncientTimes.Assets.Scripts.Events
                         }
                     }
                 }
-
                 return evt;
             }
 
@@ -50,7 +49,6 @@ namespace AncientTimes.Assets.Scripts.Events
             Event = new SerializableGameEvent();
             ContainersVisibles = new Dictionary<Container, bool>();
             ActionsVisibles = new Dictionary<Container, Dictionary<ActionBase, bool>>();
-            Debug.Log("Fregato");
         }
 
         #endregion Constructor
