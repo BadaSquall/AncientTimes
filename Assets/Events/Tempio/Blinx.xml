@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="us-ascii"?>
+<SerializableGameEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Containers>
+    <Container>
+      <Condition>Test</Condition>
+      <Actions>
+        <ActionBase xsi:type="ChangeSwitch">
+          <Name>TestAction1</Name>
+          <Value>false</Value>
+        </ActionBase>
+        <ActionBase xsi:type="ChangeSwitch">
+          <Name>TestAction2</Name>
+          <Value>true</Value>
+        </ActionBase>
+        <ActionBase xsi:type="ShowDialogue">
+          <Dialogues>
+            <Dialogue>
+              <Name />
+              <ImagePath />
+              <Text>Ciao, come stai? E sti cazzi</Text>
+            </Dialogue>
+          </Dialogues>
+        </ActionBase>
+      </Actions>
+    </Container>
+  </Containers>
+</SerializableGameEvent>
