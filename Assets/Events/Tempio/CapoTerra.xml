@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="us-ascii"?>
+<GameEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Containers>
+    <Container>
+      <Condition>IsFirstEncounter</Condition>
+      <Actions>
+        <ActionBase xsi:type="ShowDialogue">
+          <Dialogues>
+            <Dialogue>
+              <Text>Hey come stai?</Text>
+            </Dialogue>
+            <Dialogue>
+              <Text>Sapevo saresti venuto</Text>
+            </Dialogue>
+          </Dialogues>
+        </ActionBase>
+        <ActionBase xsi:type="ChangeSwitch">
+          <Name>IsFirstEncounter</Name>
+          <Value>false</Value>
+        </ActionBase>
+        <ActionBase xsi:type="ChangeSwitch">
+          <Name>IsSecondEncounter</Name>
+          <Value>true</Value>
+        </ActionBase>
+      </Actions>
+    </Container>
+    <Container>
+      <Condition>IsSecondEncounter</Condition>
+      <Actions>
+        <ActionBase xsi:type="ShowDialogue">
+          <Dialogues>
+            <Dialogue>
+              <Text>Mia sorella ? un uomo :'(</Text>
+            </Dialogue>
+          </Dialogues>
+        </ActionBase>
+      </Actions>
+    </Container>
+  </Containers>
+</GameEvent>
