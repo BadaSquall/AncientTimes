@@ -1,7 +1,19 @@
 fileFormatVersion: 2
 guid: f363017e7e1df424d8f23e9c41d51712
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: front_0
+    21300002: front_1
+    21300004: front_2
+    21300006: front_3
+    21300008: front_4
+    21300010: front_5
+    21300012: front_6
+    21300014: front_7
+    21300016: front_8
+    21300018: front_9
+    21300020: front_10
+    21300022: front_11
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -25,13 +37,13 @@ TextureImporter:
   maxTextureSize: 1024
   textureSettings:
     filterMode: -1
-    aniso: -1
+    aniso: 16
     mipBias: -1
-    wrapMode: -1
+    wrapMode: 1
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -42,6 +54,126 @@ TextureImporter:
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
-    sprites: []
+    sprites:
+    - name: front_0
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 17
+        width: 103
+        height: 124
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: front_1
+      rect:
+        serializedVersion: 2
+        x: 238
+        y: 17
+        width: 102
+        height: 131
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: front_2
+      rect:
+        serializedVersion: 2
+        x: 429
+        y: 17
+        width: 102
+        height: 133
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: front_3
+      rect:
+        serializedVersion: 2
+        x: 622
+        y: 17
+        width: 99
+        height: 133
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: front_4
+      rect:
+        serializedVersion: 2
+        x: 814
+        y: 17
+        width: 97
+        height: 133
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: front_5
+      rect:
+        serializedVersion: 2
+        x: 1006
+        y: 16
+        width: 95
+        height: 132
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: front_6
+      rect:
+        serializedVersion: 2
+        x: 1198
+        y: 16
+        width: 93
+        height: 132
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: front_7
+      rect:
+        serializedVersion: 2
+        x: 1390
+        y: 16
+        width: 95
+        height: 132
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: front_8
+      rect:
+        serializedVersion: 2
+        x: 1582
+        y: 16
+        width: 97
+        height: 134
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: front_9
+      rect:
+        serializedVersion: 2
+        x: 1774
+        y: 17
+        width: 99
+        height: 133
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: front_10
+      rect:
+        serializedVersion: 2
+        x: 1966
+        y: 17
+        width: 100
+        height: 133
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: front_11
+      rect:
+        serializedVersion: 2
+        x: 2158
+        y: 17
+        width: 102
+        height: 131
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 
