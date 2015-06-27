@@ -15,6 +15,7 @@ public class EventManagerWindow : EditorWindow
     private int typeIndex;
     private List<EventLayoutManagerBase> eventManagers;
     private GameObject previousGameObject;
+    private bool isPlaying;
 
     #endregion Properties
 
@@ -96,7 +97,7 @@ public class EventManagerWindow : EditorWindow
                 for (var actionIndex = 0; actionIndex < container.Actions.Count; actionIndex++)
                 {
                     var action = container.Actions[actionIndex];
-                    var showAction = currentEvent.ActionsVisibles[container][action] = EditorGUILayout.Foldout(currentEvent.ActionsVisibles[container][action], "Action n° " + actionIndex + ":");
+                    var showAction = currentEvent.ActionsVisibles[container][action] = EditorGUILayout.Foldout(currentEvent.ActionsVisibles[container][action], "Action (" + action.GetType().Name + ") n° " + actionIndex + ":");
 
                     if (showAction)
                     {
@@ -136,6 +137,17 @@ public class EventManagerWindow : EditorWindow
             currentScenePath[currentScenePath.Length - 1] = currentScenePath[currentScenePath.Length - 1].Remove(currentScenePath[currentScenePath.Length - 1].IndexOf(".unity"));
             AncientTimes.Assets.Scripts.Utilities.XMLSerializer.Serialize(evt, @"Assets/Events/" + currentScenePath[currentScenePath.Length - 1] + "/",
                Selection.activeGameObject.name + ".xml");
+        }
+    }
+
+    void Update()
+    {
+        if (EditorApplication.isPlaying) isPlaying = true;
+        else if (isPlaying)
+        {
+            isPlaying = false;
+            previousGameObject = null;
+            Repaint();
         }
     }
 

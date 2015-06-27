@@ -20,6 +20,7 @@ namespace AncientTimes.Assets.Scripts.PG
         private Animator animator;
         private float walkSpeed;
         public Console Dialogue;
+        public EventManager eventManager;
 
         #endregion Properties
 
@@ -29,11 +30,26 @@ namespace AncientTimes.Assets.Scripts.PG
         {
             animator = GetComponent<Animator>();
             walkSpeed = 5.0f;
+            eventManager = GameObject.FindGameObjectWithTag("EventManager").GetComponent<EventManager>();
         }
 
         void LateUpdate()
         {
-            if (Input.GetKeyDown(KeyCode.Return)) SerializeDeserializeEvent();
+            if (Input.GetKeyDown(KeyCode.Z))
+            {
+                var evt = new SerializableGameEvent();
+                evt.Containers.Add(new Container()
+                {
+                    Condition = "Prova"
+                });
+                evt.Containers[0].Actions.Add(new ShowDialogue());
+                (evt.Containers[0].Actions[0] as ShowDialogue).Dialogues.Add(new Events.Actions.Helpers.Dialogue()
+                {
+                    Text = "Ciao come va"
+                });
+                eventManager.RegisterEvent(evt);
+            }
+
 
             if (OnStatusChange == null) return;
 
