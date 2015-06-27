@@ -20,6 +20,7 @@ namespace AncientTimes.Assets.Scripts.PG
         private Animator animator;
         private float walkSpeed;
         public Console Dialogue;
+		public GameEvent FocusedEvent;
 
         #endregion Properties
 
@@ -33,7 +34,7 @@ namespace AncientTimes.Assets.Scripts.PG
 
         void LateUpdate()
         {
-            if (Input.GetKeyDown(KeyCode.Return)) SerializeDeserializeEvent();
+            if (Input.GetKeyDown(KeyCode.Return)) EventManager.RegisterEvent
 
             if (OnStatusChange == null) return;
 
@@ -43,6 +44,7 @@ namespace AncientTimes.Assets.Scripts.PG
             else if (Input.GetKey("up")) OnStatusChange(Status.WalkingUp);
        		else OnStatusChange(Status.Idle);
 		}
+		
 
         public void WalkRight()
         {
@@ -73,6 +75,17 @@ namespace AncientTimes.Assets.Scripts.PG
             rigidbody2D.velocity = Vector2.zero;
             animator.SetTrigger("Idle");
         }
+
+		void OnCollisionEnter2D(Collider2D coll)
+		{
+			var gameevent = coll.GetComponent<GameEvent> ();
+			if (gameevent != null)	FocusedEvent = gameevent;
+		}
+
+		void OnCollisionExit2D(Collider2D coll)
+		{
+				
+		}
 
         #endregion Methods
 
