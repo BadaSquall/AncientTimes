@@ -33,7 +33,7 @@ namespace AncientTimes.Assets.Scripts.GameSystem
 
         #region Constructor
 
-        void Start()
+        void Awake()
         {
             text = new List<string>();
             ClearText();
@@ -58,11 +58,10 @@ namespace AncientTimes.Assets.Scripts.GameSystem
 
         void OnGUI()
         {
-            if (!consoleBackground.activeInHierarchy) return;
-           	 GUI.skin = Skin;
-            var labelPosition = Camera.main.WorldToScreenPoint(new Vector2(consoleBackground.transform.position.x + 0.8f,
-                consoleBackground.transform.position.y - 0.3f));
-            GUI.Label(new Rect(labelPosition.x, Screen.height - labelPosition.y, 50, 50), message, new GUIStyle() { fontSize = 40, normal = new GUIStyleState() { textColor = Color.black } });
+            //if (!consoleBackground.activeInHierarchy) return;
+            //GUI.skin = Skin;
+            //var labelPosition = new Vector2(consoleBackground.transform.position.x + 1.0f, consoleBackground.transform.position.y
+            //GUI.Label(new Rect(labelPosition.x, Screen.height - labelPosition.y, 50, 50), message, new GUIStyle() { fontSize = 40, normal = new GUIStyleState() { textColor = Color.black } });
 		}
 
         /// <summary>

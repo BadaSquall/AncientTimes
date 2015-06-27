@@ -27,11 +27,13 @@ namespace AncientTimes.Assets.Scripts.GameSystem
             if (actionContainer.Actions.Count == 0) actionContainer = null;
         }
 
-        public void RegisterEvent(SerializableGameEvent evt)
+        public void RegisterEvent(GameEvent evt)
         {
+			if (evt == null || evt.Event == null) return;
+
             if (actionContainer != null) return;
 
-            foreach (var container in evt.Containers)
+            foreach (var container in evt.Event.Containers)
             {
                 if (!GameVariables.Switches.ContainsKey(container.Condition)) return;
 

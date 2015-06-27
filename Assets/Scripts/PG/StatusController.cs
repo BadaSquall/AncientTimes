@@ -20,7 +20,10 @@ namespace AncientTimes.Assets.Scripts.PG
         private Animator animator;
         private float walkSpeed;
         public Console Dialogue;
+
 		public GameEvent FocusedEvent;
+
+        public EventManager eventManager;
 
         #endregion Properties
 
@@ -30,11 +33,15 @@ namespace AncientTimes.Assets.Scripts.PG
         {
             animator = GetComponent<Animator>();
             walkSpeed = 5.0f;
+            eventManager = GameObject.FindGameObjectWithTag("EventManager").GetComponent<EventManager>();
         }
 
         void LateUpdate()
         {
-            if (Input.GetKeyDown(KeyCode.Return)) EventManager.RegisterEvent
+
+			if (Input.GetKeyDown (KeyCode.Return))	eventManager.RegisterEvent (FocusedEvent);
+
+
 
             if (OnStatusChange == null) return;
 
