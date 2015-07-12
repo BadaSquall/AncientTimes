@@ -19,9 +19,17 @@ namespace AncientTimes.Assets.Scripts.GameSystem
 
 	    void Pause()
 	    {
-            if (!GameVariables.Switches["IsPaused"]) GameVariables.Switches["IsPaused"] = true;
-            else if (GameVariables.Switches["IsPaused"]) GameVariables.Switches["IsPaused"] = false;
-	    }
+            if (!GameVariables.Switches["IsPaused"])
+            {
+                GameVariables.Switches["IsPaused"] = true;
+                Time.timeScale = 0f;
+            }
+            else if (GameVariables.Switches["IsPaused"])
+            {
+                GameVariables.Switches["IsPaused"] = false;
+                Time.timeScale = 1f;
+            }
+        }
 
 	    void OnGUI()
 	    {
