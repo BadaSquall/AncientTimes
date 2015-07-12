@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using AncientTimes.Assets.Scripts.Utilities;
 
 namespace AncientTimes.Assets.Scripts.PG
 {
@@ -41,6 +42,7 @@ namespace AncientTimes.Assets.Scripts.PG
         void OnStateChange(StatusController.Status newStatus)
         {
             if (AbortDependingOnCurrentState(newStatus)) return;
+            if (AbortDependingOnExternal(newStatus)) return;
 
             switch (newStatus)
             {
@@ -92,6 +94,35 @@ namespace AncientTimes.Assets.Scripts.PG
                     break;
             }
 
+            return hasToAbort;
+        }
+
+        bool AbortDependingOnExternal(StatusController.Status newStatus)
+        {
+            var hasToAbort = false;
+            switch (newStatus)
+            {
+                case StatusController.Status.WalkingLeft:
+                    if (GameVariables.Switches["IsPaused"])
+                        hasToAbort = true;
+                    break;
+                case StatusController.Status.WalkingRight:
+                    if (GameVariables.Switches["IsPaused"])
+                        hasToAbort = true;
+                    break;
+                case StatusController.Status.WalkingDown:
+                    if (GameVariables.Switches["IsPaused"])
+                        hasToAbort = true;
+                    break;
+                case StatusController.Status.WalkingUp:
+                    if (GameVariables.Switches["IsPaused"])
+                        hasToAbort = true;
+                    break;
+                case StatusController.Status.Idle:
+                    if (GameVariables.Switches["IsPaused"])
+                        hasToAbort = true;
+                    break;
+            }
             return hasToAbort;
         }
 
