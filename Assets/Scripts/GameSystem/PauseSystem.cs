@@ -1,50 +1,45 @@
 ﻿using UnityEngine;
 using System.Collections;
+using AncientTimes.Assets.Scripts.Utilities;
 
-public class PauseSystem : MonoBehaviour
+namespace AncientTimes.Assets.Scripts.GameSystem
 {
-	#region Properties
+    public class PauseSystem : MonoBehaviour
+    {
+	    #region Properties
 
-    public GUIStyle ButtonStyle;
-	private bool isPaused = false;
+        public GUIStyle ButtonStyle;
 
-	#endregion Properties
+	    #endregion Properties
 
-	#region Methods
+	    #region Methods
 
-	// Update is called once per frame
-	void Update () { if (Input.GetKeyDown (KeyCode.Escape)) Pause(); }
+	    // Update is called once per frame
+	    void Update () { if (Input.GetKeyDown (KeyCode.Escape)) Pause(); }
 
-	void Pause()
-	{
-		if (!isPaused) 
-		{
-			Time.timeScale = 0.0f;
-			isPaused = true;
-		}
-        else if (isPaused) 
-		{
-			Time.timeScale = 1.0f;
-			isPaused = false;
-		}
-	}
+	    void Pause()
+	    {
+            if (!GameVariables.Switches["IsPaused"]) GameVariables.Switches["IsPaused"] = true;
+            else if (GameVariables.Switches["IsPaused"]) GameVariables.Switches["IsPaused"] = false;
+	    }
 
-	void OnGUI()
-	{
-        if (isPaused)
-        {
-            GUILayout.BeginArea(new Rect(Screen.width/2 -100 , Screen.height/5 -50 , Screen.width, Screen.height));
-            GUILayout.Button("Pokedex", ButtonStyle);
-            GUILayout.Button("Pokemon", ButtonStyle);
-            GUILayout.Button("Zaino", ButtonStyle);
-            GUILayout.Button("Save", ButtonStyle);
+	    void OnGUI()
+	    {
+            if (GameVariables.Switches["IsPaused"])
+            {
+                GUILayout.BeginArea(new Rect(Screen.width/2 -100 , Screen.height/5 -50 , Screen.width, Screen.height));
+                GUILayout.Button("Pokedex", ButtonStyle);
+                GUILayout.Button("Pokemon", ButtonStyle);
+                GUILayout.Button("Zaino", ButtonStyle);
+                GUILayout.Button("Save", ButtonStyle);
 
-            if (GUILayout.Button("Esci dal gioco", ButtonStyle)) Application.Quit();
+                if (GUILayout.Button("Esci dal gioco", ButtonStyle)) Application.Quit();
 
-            GUILayout.EndArea();
-        }
-        else if(!isPaused) GUI.enabled = false;
-	}
+                GUILayout.EndArea();
+            }
+            else if (!GameVariables.Switches["IsPaused"]) GUI.enabled = false;
+	    }   
 
-	#endregion Methods
+	    #endregion Methods
+    }
 }

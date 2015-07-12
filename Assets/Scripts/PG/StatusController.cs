@@ -4,6 +4,7 @@ using AncientTimes.Assets.Scripts.GameSystem;
 using AncientTimes.Assets.Scripts.Events;
 using AncientTimes.Assets.Scripts.Events.Actions;
 using AncientTimes.Assets.Scripts.Events.Actions.Helpers;
+using AncientTimes.Assets.Scripts.Utilities;
 
 namespace AncientTimes.Assets.Scripts.PG
 {
@@ -45,11 +46,13 @@ namespace AncientTimes.Assets.Scripts.PG
 
             if (OnStatusChange == null) return;
 
-            if (Input.GetKey("right")) OnStatusChange(Status.WalkingRight);
-            else if (Input.GetKey("left")) OnStatusChange(Status.WalkingLeft);
-            else if (Input.GetKey("down")) OnStatusChange(Status.WalkingDown);
-            else if (Input.GetKey("up")) OnStatusChange(Status.WalkingUp);
-       		else OnStatusChange(Status.Idle);
+
+                if (Input.GetKey("right")) OnStatusChange(Status.WalkingRight);
+                else if (Input.GetKey("left")) OnStatusChange(Status.WalkingLeft);
+                else if (Input.GetKey("down")) OnStatusChange(Status.WalkingDown);
+                else if (Input.GetKey("up")) OnStatusChange(Status.WalkingUp);
+                else OnStatusChange(Status.Idle);
+
 		}
 		
 
