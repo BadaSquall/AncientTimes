@@ -83,13 +83,13 @@ namespace AncientTimes.Assets.Scripts.PG
             animator.SetTrigger("Idle");
         }
 
-		void OnCollisionEnter2D(Collider2D coll)
+		void OnCollisionEnter2D(Collision2D coll)
 		{
-			var gameevent = coll.GetComponent<GameEvent> ();
+			var gameevent = coll.gameObject.GetComponent<GameEvent> ();
 			if (gameevent != null)	FocusedEvent = gameevent;
 		}
 
-		void OnCollisionExit2D(Collider2D coll)
+		void OnCollisionExit2D(Collision2D coll)
 		{
 				
 		}

@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PauseSystem : MonoBehaviour {
-
+public class PauseSystem : MonoBehaviour
+{
 	#region Properties
 
     public GUIStyle ButtonStyle;
@@ -13,22 +13,18 @@ public class PauseSystem : MonoBehaviour {
 	#region Methods
 
 	// Update is called once per frame
-	void Update () {
-		if (Input.GetKeyDown (KeyCode.Escape)) 
-		{
-			Pause ();
-		}
-	}
+	void Update () { if (Input.GetKeyDown (KeyCode.Escape)) Pause(); }
 
 	void Pause()
 	{
 		if (!isPaused) 
 		{
-			Time.timeScale = 0f;
+			Time.timeScale = 0.0f;
 			isPaused = true;
-		}else if (isPaused) 
+		}
+        else if (isPaused) 
 		{
-			Time.timeScale = 1f;
+			Time.timeScale = 1.0f;
 			isPaused = false;
 		}
 	}
@@ -42,16 +38,13 @@ public class PauseSystem : MonoBehaviour {
             GUILayout.Button("Pokemon", ButtonStyle);
             GUILayout.Button("Zaino", ButtonStyle);
             GUILayout.Button("Save", ButtonStyle);
-            if (GUILayout.Button("Esci dal gioco", ButtonStyle))
-                Application.Quit();
-            GUILayout.EndArea();
-        } else if(!isPaused)
-        {
-            GUI.enabled = false;
-        }
 
+            if (GUILayout.Button("Esci dal gioco", ButtonStyle)) Application.Quit();
+
+            GUILayout.EndArea();
+        }
+        else if(!isPaused) GUI.enabled = false;
 	}
 
 	#endregion Methods
-
 }
