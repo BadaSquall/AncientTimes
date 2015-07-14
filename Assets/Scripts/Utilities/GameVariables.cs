@@ -17,6 +17,7 @@ namespace AncientTimes.Assets.Scripts.Utilities
         static GameVariables()
         {
             Switches = new Dictionary<string, bool>();
+            Switches.Add("IsFirstEncounter", true);
             Switches.Add("IsPaused", false);
             Variables = new Dictionary<string, string>();
         }

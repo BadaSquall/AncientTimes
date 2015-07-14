@@ -2,22 +2,35 @@
 <SerializableGameEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Containers>
     <Container>
-      <Condition>Test</Condition>
+      <Trigger>Interaction</Trigger>
+      <Condition>IsFirstEncounter</Condition>
       <Actions>
+        <ActionBase xsi:type="MoveCharacter">
+          <Distance>2</Distance>
+          <Speed>5</Speed>
+          <Direction>Up</Direction>
+          <ObjectToMove>Blinx</ObjectToMove>
+        </ActionBase>
         <ActionBase xsi:type="ChangeSwitch">
-          <Name>TestAction1</Name>
+          <Name>IsFirstEncounter</Name>
           <Value>false</Value>
         </ActionBase>
         <ActionBase xsi:type="ChangeSwitch">
-          <Name>TestAction2</Name>
+          <Name>IsSecondEncounter</Name>
           <Value>true</Value>
         </ActionBase>
+      </Actions>
+    </Container>
+    <Container>
+      <Trigger>Interaction</Trigger>
+      <Condition>IsSecondEncounter</Condition>
+      <Actions>
         <ActionBase xsi:type="ShowDialogue">
           <Dialogues>
             <Dialogue>
               <Name />
               <ImagePath />
-              <Text>Ciao, come stai? E sti cazzi</Text>
+              <Text>Ciao come stai?</Text>
             </Dialogue>
           </Dialogues>
         </ActionBase>

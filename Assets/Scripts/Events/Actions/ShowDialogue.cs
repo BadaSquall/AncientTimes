@@ -30,12 +30,21 @@ namespace AncientTimes.Assets.Scripts.Events.Actions
         {
             if (firstExecute)
             {
-                foreach (var dialogue in Dialogues) Console.Write(dialogue.Text);
+                Dialogues.ForEach(dialogue => Console.Write(dialogue.Text));
                 Console.MessageComplete += MessageCompleted;
                 firstExecute = false;
             }
 
             return hasFinished;
+        }
+
+        public override ActionBase Clone()
+        {
+            var action = new ShowDialogue();
+
+            Dialogues.ForEach(dialogue => action.Dialogues.Add(dialogue.Clone()));
+
+            return action;
         }
 
         void MessageCompleted()

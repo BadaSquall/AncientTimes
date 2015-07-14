@@ -58,10 +58,11 @@ namespace AncientTimes.Assets.Scripts.GameSystem
 
         void OnGUI()
         {
-            //if (!consoleBackground.activeInHierarchy) return;
-            //GUI.skin = Skin;
-            //var labelPosition = new Vector2(consoleBackground.transform.position.x + 1.0f, consoleBackground.transform.position.y
-            //GUI.Label(new Rect(labelPosition.x, Screen.height - labelPosition.y, 50, 50), message, new GUIStyle() { fontSize = 40, normal = new GUIStyleState() { textColor = Color.black } });
+            if (!consoleBackground.activeInHierarchy) return;
+            GUI.skin = Skin;
+            var labelPosition = new Vector2(gameObject.transform.position.x - 8.2f, gameObject.transform.position.y + 6.5f);
+            labelPosition = Camera.main.WorldToScreenPoint(labelPosition);
+            GUI.Label(new Rect(labelPosition.x, labelPosition.y, 50, 50), message, new GUIStyle() { fontSize = 40, normal = new GUIStyleState() { textColor = Color.black } });
 		}
 
         /// <summary>
