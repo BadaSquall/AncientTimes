@@ -39,22 +39,18 @@ namespace AncientTimes.Assets.Scripts.PG
 
         void LateUpdate()
         {
-
-			if (Input.GetKeyDown (KeyCode.Return))	eventManager.RegisterEvent (FocusedEvent);
-
-
+            if (Input.GetKeyDown(KeyCode.K)) SerializeDeserializeEvent();
+            if (Input.GetKeyDown(KeyCode.A)) LookAt(Direction.Left);
+            //if (Input.GetKeyDown(KeyCode.Return)) eventManager.RegisterEvent(FocusedEvent);
 
             if (OnStatusChange == null) return;
 
-
-                if (Input.GetKey("right")) OnStatusChange(Status.WalkingRight);
-                else if (Input.GetKey("left")) OnStatusChange(Status.WalkingLeft);
-                else if (Input.GetKey("down")) OnStatusChange(Status.WalkingDown);
-                else if (Input.GetKey("up")) OnStatusChange(Status.WalkingUp);
-                else OnStatusChange(Status.Idle);
-
+            if (Input.GetKey("right")) OnStatusChange(Status.WalkingRight);
+            else if (Input.GetKey("left")) OnStatusChange(Status.WalkingLeft);
+            else if (Input.GetKey("down")) OnStatusChange(Status.WalkingDown);
+            else if (Input.GetKey("up")) OnStatusChange(Status.WalkingUp);
+            else OnStatusChange(Status.Idle);
 		}
-		
 
         public void WalkRight()
         {
@@ -88,7 +84,7 @@ namespace AncientTimes.Assets.Scripts.PG
 
 		void OnCollisionEnter2D(Collision2D coll)
 		{
-			var gameevent = coll.gameObject.GetComponent<GameEvent> ();
+			var gameevent = coll.gameObject.GetComponent<GameEvent>();
 			if (gameevent != null)	FocusedEvent = gameevent;
 		}
 
@@ -97,50 +93,102 @@ namespace AncientTimes.Assets.Scripts.PG
 				
 		}
 
+        public void LookAt(GameObject egocentric)
+        {
+            if (egocentric.transform.position.x > transform.position.x) LookAt(Direction.Right);
+            if (egocentric.transform.position.x < transform.position.x) LookAt(Direction.Left);
+            if (egocentric.transform.position.y > transform.position.y) LookAt(Direction.Up);
+            if (egocentric.transform.position.y < transform.position.y) LookAt(Direction.Down);
+        }
+
+        public void LookAt(Direction direction)
+        {
+            switch (direction)
+            {
+                case Direction.Right:
+                    animator.SetTrigger("IdleRight");
+                    break;
+                case Direction.Left:
+                    animator.SetTrigger("IdleLeft");
+                    break;
+                case Direction.Up:
+                    animator.SetTrigger("IdleUp");
+                    break;
+                case Direction.Down:
+                    animator.SetTrigger("IdleDown");
+                    break;
+            }
+        }
+
         #endregion Methods
 
         #region JustForTest
 
         private void SerializeDeserializeEvent()
         {
-            var ge = new SerializableGameEvent();
-            ge.Containers.Add(new Container()
+            var test = new GameObject();
+            test.AddComponent<GameEvent>();
+            var ge = test.GetComponent<GameEvent>();
+            ge.Event = new SerializableGameEvent();
+            ge.Event.Containers.Add(new Container()
             {
                 Condition = "IsFirstEncounter"
             });
-            ge.Containers[0].Actions.Add(new ShowDialogue());
-            (ge.Containers[0].Actions[0] as ShowDialogue).Dialogues.Add(new Dialogue()
+            ge.Event.Containers[0].Actions.Add(new ShowDialogue());
+            (ge.Event.Containers[0].Actions[0] as ShowDialogue).Dialogues.Add(new Dialogue()
             {
                 Text = "Hey come stai?"
             });
-            (ge.Containers[0].Actions[0] as ShowDialogue).Dialogues.Add(new Dialogue()
+            (ge.Event.Containers[0].Actions[0] as ShowDialogue).Dialogues.Add(new Dialogue()
             {
                 Text = "Sapevo saresti venuto"
             });
-            ge.Containers[0].Actions.Add(new ChangeSwitch()
+            ge.Event.Containers[0].Actions.Add(new ChangeSwitch()
             {
                 Name = "IsFirstEncounter",
                 Value = false
             });
-            ge.Containers[0].Actions.Add(new ChangeSwitch()
+            ge.Event.Containers[0].Actions.Add(new ChangeSwitch()
             {
                 Name = "IsSecondEncounter",
                 Value = true
             });
-            ge.Containers.Add(new Container()
+            ge.Event.Containers.Add(new Container()
             {
                 Condition = "IsSecondEncounter"
             });
-            ge.Containers[1].Actions.Add(new ShowDialogue());
-            (ge.Containers[1].Actions[0] as ShowDialogue).Dialogues.Add(new Dialogue()
+            ge.Event.Containers[1].Actions.Add(new ShowDialogue());
+            (ge.Event.Containers[1].Actions[0] as ShowDialogue).Dialogues.Add(new Dialogue()
             {
                 Text = "Mia sorella è un uomo :'("
             });
-
+            ge.Event.Containers[1].Actions.Add(new ChangeSwitch()
+            {
+                Name = "IsSecondEncounter",
+                Value = false
+            });
+            ge.Event.Containers[1].Actions.Add(new ChangeSwitch()
+            {
+                Name = "IsThirdEncounter",
+                Value = true
+            });
+            ge.Event.Containers.Add(new Container()
+            {
+                Condition = "IsThirdEncounter"
+            });
+            ge.Event.Containers[2].Actions.Add(new MoveCharacter()
+            {
+                Direction = Direction.Right,
+                ObjectToMove = "CapoTerra"
+            });
+            ge.Event.Containers[2].Actions.Add(new MoveCharacter()
+            {
+                Direction = Direction.Down,
+                ObjectToMove = "CapoTerra"
+            });
             //Utilities.XMLSerializer.Serialize(ge, @"Assets/Events/Temple/CapoTerra.xml");
 
-            var evt = (SerializableGameEvent) Utilities.XMLDeserializer.Deserialize(typeof(SerializableGameEvent), @"Assets/Events/Temple/CapoTerra.xml");
-            Debug.Log(evt);
+            eventManager.RegisterEvent(ge);
         }
 
         #endregion JustForTest

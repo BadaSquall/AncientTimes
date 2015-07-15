@@ -22,6 +22,17 @@ namespace AncientTimes.Assets.Scripts.Events.Actions
             return true;
         }
 
+        public override ActionBase Clone()
+        {
+            var action = new ChangeSwitch()
+            {
+                Name = this.Name,
+                Value = this.Value
+            };
+
+            return action;
+        }
+
         #endregion Methods
     }
 }

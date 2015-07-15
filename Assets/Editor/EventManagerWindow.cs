@@ -7,13 +7,15 @@ using System;
 using System.Linq;
 using AncientTimes.Assets.Scripts.Events.Actions;
 using System.IO;
+using AncientTimes.Assets.Scripts.Utilities;
 
 public class EventManagerWindow : EditorWindow
 {
     #region Properties
 
-    private int typeIndex;
+    private int actionTypeIndex;
     private List<EventLayoutManagerBase> eventManagers;
+    
     private GameObject previousGameObject;
     private bool isPlaying;
 
@@ -26,6 +28,7 @@ public class EventManagerWindow : EditorWindow
         eventManagers = new List<EventLayoutManagerBase>();
         eventManagers.Add(new ChangeSwitchLayoutManager());
         eventManagers.Add(new ShowDialogueLayoutManager());
+        eventManagers.Add(new MoveCharacterLayoutManager());
     }
 
     #endregion Constructors
@@ -91,6 +94,14 @@ public class EventManagerWindow : EditorWindow
 
             if (showContainer)
             {
+                var selectableTriggers = new List<string>();
+                var triggers = Enum.GetValues(typeof(EventTrigger));
+
+                foreach (var trigger in triggers) selectableTriggers.Add(trigger.ToString());
+
+                currentEvent.TriggerIndexes[container] = EditorGUILayout.Popup(currentEvent.TriggerIndexes[container], selectableTriggers.ToArray());
+
+                //container.Trigger = (EventTrigger)Enum.Parse(typeof(EventTrigger), EditorGUILayout.TextField("    Trigger: ", container.Trigger.ToString()));
                 container.Condition = EditorGUILayout.TextField("   Condition:", container.Condition);
                 GUILayout.Label("   Actions", EditorStyles.boldLabel);
 
@@ -119,12 +130,12 @@ public class EventManagerWindow : EditorWindow
                 foreach (var type in selectablesTypes)
                     selectable.Add(type.Name);
 
-                typeIndex = EditorGUILayout.Popup(typeIndex, selectable.ToArray());
+                actionTypeIndex = EditorGUILayout.Popup(actionTypeIndex, selectable.ToArray());
             }
 
             if (GUILayout.Button("Add action"))
             {
-                var actionInstantiated = Activator.CreateInstance(selectablesTypes[typeIndex]);
+                var actionInstantiated = Activator.CreateInstance(selectablesTypes[actionTypeIndex]);
 
                 container.Actions.Add(actionInstantiated as ActionBase);
             }

@@ -15,7 +15,7 @@ namespace AncientTimes.Assets.Scripts.GameSystem
         #endregion Properties
 
         #region Methods
-
+        
         void Update()
         {
             if (actionContainer == null) return;
@@ -30,8 +30,9 @@ namespace AncientTimes.Assets.Scripts.GameSystem
         public void RegisterEvent(GameEvent evt)
         {
 			if (evt == null || evt.Event == null) return;
-
             if (actionContainer != null) return;
+
+            Debug.Log(evt.Event.Containers);
 
             foreach (var container in evt.Event.Containers)
             {
@@ -39,7 +40,7 @@ namespace AncientTimes.Assets.Scripts.GameSystem
 
                 if (GameVariables.Switches[container.Condition])
                 {
-                    actionContainer = container;
+                    actionContainer = container.Clone();
                     return;
                 }
             }
