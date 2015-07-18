@@ -18,6 +18,7 @@ public class EventManagerWindow : EditorWindow
     
     private GameObject previousGameObject;
     private bool isPlaying;
+    private Vector2 scrollPosition;
 
     #endregion Properties
 
@@ -42,113 +43,129 @@ public class EventManagerWindow : EditorWindow
 
     void OnGUI()
     {
-        if (!Selection.activeGameObject) return;
-
-        bool gameObjectChanged = false;
-
-        if (Selection.activeGameObject != previousGameObject)
+        scrollPosition = EditorGUILayout.BeginScrollView(scrollPosition);
         {
-            gameObjectChanged = true;
+            if (!Selection.activeGameObject) return;
 
-            foreach (var manager in eventManagers) manager.FreeMemory();
+            bool gameObjectChanged = false;
 
-            previousGameObject = Selection.activeGameObject;
-        }
-
-        var currentEvent = Selection.activeGameObject.GetComponent<GameEvent>();
-
-        if (!currentEvent)
-        {
-            if (GUILayout.Button("Create event"))
+            if (Selection.activeGameObject != previousGameObject)
             {
-                Selection.activeGameObject.AddComponent(typeof(GameEvent));
-                currentEvent = Selection.activeGameObject.GetComponent<GameEvent>();
+                gameObjectChanged = true;
+
+                foreach (var manager in eventManagers) manager.FreeMemory();
+
+                previousGameObject = Selection.activeGameObject;
             }
-            else return;
-        };
 
-        var evt = currentEvent.Event;
+            var currentEvent = Selection.activeGameObject.GetComponent<GameEvent>();
 
-        if (gameObjectChanged)
-        {
-            var currentScenePath = UnityEditor.EditorApplication.currentScene.Split('/');
-            currentScenePath[currentScenePath.Length - 1] = currentScenePath[currentScenePath.Length - 1].Remove(currentScenePath[currentScenePath.Length - 1].IndexOf(".unity"));
-            var filePath = @"Assets/Events/" + currentScenePath[currentScenePath.Length - 1] + "/" + Selection.activeGameObject.name + ".xml";
-            
-            if (File.Exists(filePath))
+            if (!currentEvent)
             {
-                currentEvent.Event = (SerializableGameEvent)AncientTimes.Assets.Scripts.Utilities.XMLDeserializer.Deserialize(typeof(SerializableGameEvent), filePath);
-                evt = currentEvent.Event;
-            }
-        }
-
-        GUILayout.Label("Containers", EditorStyles.boldLabel);
-        
-        for (var containerIndex = 0; containerIndex < evt.Containers.Count; containerIndex++)
-        {
-            var container = evt.Containers[containerIndex];
-
-            var showContainer = currentEvent.ContainersVisibles[container] = EditorGUILayout.Foldout(currentEvent.ContainersVisibles[container], "Container n° " + containerIndex + ":");
-
-            var selectablesTypes = new List<Type>();
-
-            if (showContainer)
-            {
-                var selectableTriggers = new List<string>();
-                var triggers = Enum.GetValues(typeof(EventTrigger));
-
-                foreach (var trigger in triggers) selectableTriggers.Add(trigger.ToString());
-
-                currentEvent.TriggerIndexes[container] = EditorGUILayout.Popup(currentEvent.TriggerIndexes[container], selectableTriggers.ToArray());
-
-                //container.Trigger = (EventTrigger)Enum.Parse(typeof(EventTrigger), EditorGUILayout.TextField("    Trigger: ", container.Trigger.ToString()));
-                container.Condition = EditorGUILayout.TextField("   Condition:", container.Condition);
-                GUILayout.Label("   Actions", EditorStyles.boldLabel);
-
-                for (var actionIndex = 0; actionIndex < container.Actions.Count; actionIndex++)
+                if (GUILayout.Button("Create event"))
                 {
-                    var action = container.Actions[actionIndex];
-                    var showAction = currentEvent.ActionsVisibles[container][action] = EditorGUILayout.Foldout(currentEvent.ActionsVisibles[container][action], "Action (" + action.GetType().Name + ") n° " + actionIndex + ":");
+                    Selection.activeGameObject.AddComponent(typeof(GameEvent));
+                    currentEvent = Selection.activeGameObject.GetComponent<GameEvent>();
+                }
+                else return;
+            };
 
-                    if (showAction)
+            var evt = currentEvent.Event;
+
+            if (gameObjectChanged)
+            {
+                var currentScenePath = UnityEditor.EditorApplication.currentScene.Split('/');
+                currentScenePath[currentScenePath.Length - 1] = currentScenePath[currentScenePath.Length - 1].Remove(currentScenePath[currentScenePath.Length - 1].IndexOf(".unity"));
+                var filePath = @"Assets/Events/" + currentScenePath[currentScenePath.Length - 1] + "/" + Selection.activeGameObject.name + ".xml";
+
+                if (File.Exists(filePath))
+                {
+                    currentEvent.Event = (SerializableGameEvent)AncientTimes.Assets.Scripts.Utilities.XMLDeserializer.Deserialize(typeof(SerializableGameEvent), filePath);
+                    evt = currentEvent.Event;
+                }
+            }
+
+            GUILayout.Label("Containers", EditorStyles.boldLabel);
+
+            var containerIndexes = new List<int>();
+
+            for (var containerIndex = 0; containerIndex < evt.Containers.Count; containerIndex++)
+            {
+                var container = evt.Containers[containerIndex];
+
+                var showContainer = currentEvent.ContainersVisibles[container] = EditorGUILayout.Foldout(currentEvent.ContainersVisibles[container], "Container n° " + containerIndex + ":");
+
+                var selectablesTypes = new List<Type>();
+
+                if (showContainer)
+                {
+                    var selectableTriggers = new List<string>();
+                    var triggers = Enum.GetValues(typeof(EventTrigger));
+
+                    foreach (var trigger in triggers) selectableTriggers.Add(trigger.ToString());
+
+                    currentEvent.TriggerIndexes[container] = EditorGUILayout.Popup(currentEvent.TriggerIndexes[container], selectableTriggers.ToArray());
+
+                    //container.Trigger = (EventTrigger)Enum.Parse(typeof(EventTrigger), EditorGUILayout.TextField("    Trigger: ", container.Trigger.ToString()));
+                    container.Condition = EditorGUILayout.TextField("   Condition:", container.Condition);
+                    GUILayout.Label("   Actions", EditorStyles.boldLabel);
+
+                    var actionIndexes = new List<int>();
+
+                    for (var actionIndex = 0; actionIndex < container.Actions.Count; actionIndex++)
                     {
-                        foreach (var manager in eventManagers)
+                        var action = container.Actions[actionIndex];
+                        var showAction = currentEvent.ActionsVisibles[container][action] = EditorGUILayout.Foldout(currentEvent.ActionsVisibles[container][action], "Action (" + action.GetType().Name + ") n° " + actionIndex + ":");
+
+                        if (showAction)
                         {
-                            var actionType = action.GetType();
-                            if (manager.EventType == actionType)
-                                manager.OnGUI(action);
+                            foreach (var manager in eventManagers)
+                            {
+                                var actionType = action.GetType();
+                                if (manager.EventType == actionType)
+                                    manager.OnGUI(action);
+                            }
                         }
+
+                        if (GUILayout.Button("Remove action")) actionIndexes.Add(actionIndex);
                     }
+
+                    actionIndexes.ForEach(i => container.Actions.Remove(container.Actions[i]));
+
+                    foreach (var type in Assembly.GetAssembly(typeof(ActionBase)).GetTypes().Where(t => string.Equals(t.Namespace, "AncientTimes.Assets.Scripts.Events.Actions", StringComparison.Ordinal)).ToArray())
+                        selectablesTypes.Add(type);
+
+                    selectablesTypes.Remove(selectablesTypes.Where(x => x.Name == "ActionBase").FirstOrDefault());
+
+                    var selectable = new List<string>();
+                    foreach (var type in selectablesTypes)
+                        selectable.Add(type.Name);
+
+                    actionTypeIndex = EditorGUILayout.Popup(actionTypeIndex, selectable.ToArray());
                 }
 
-                foreach (var type in Assembly.GetAssembly(typeof(ActionBase)).GetTypes().Where(t => string.Equals(t.Namespace, "AncientTimes.Assets.Scripts.Events.Actions", StringComparison.Ordinal)).ToArray())
-                    selectablesTypes.Add(type);
+                if (GUILayout.Button("Add action"))
+                {
+                    var actionInstantiated = Activator.CreateInstance(selectablesTypes[actionTypeIndex]);
 
-                selectablesTypes.Remove(selectablesTypes.Where(x => x.Name == "ActionBase").FirstOrDefault());
+                    container.Actions.Add(actionInstantiated as ActionBase);
+                }
 
-                var selectable = new List<string>();
-                foreach (var type in selectablesTypes)
-                    selectable.Add(type.Name);
-
-                actionTypeIndex = EditorGUILayout.Popup(actionTypeIndex, selectable.ToArray());
+                if (GUILayout.Button("Remove container")) containerIndexes.Add(containerIndex);
             }
 
-            if (GUILayout.Button("Add action"))
+            containerIndexes.ForEach(i => currentEvent.Event.Containers.Remove(currentEvent.Event.Containers[i]));
+
+            if (GUILayout.Button("Add container")) evt.Containers.Add(new Container());
+            if (GUILayout.Button("Save"))
             {
-                var actionInstantiated = Activator.CreateInstance(selectablesTypes[actionTypeIndex]);
-
-                container.Actions.Add(actionInstantiated as ActionBase);
+                var currentScenePath = EditorApplication.currentScene.Split('/');
+                currentScenePath[currentScenePath.Length - 1] = currentScenePath[currentScenePath.Length - 1].Remove(currentScenePath[currentScenePath.Length - 1].IndexOf(".unity"));
+                AncientTimes.Assets.Scripts.Utilities.XMLSerializer.Serialize(evt, @"Assets/Events/" + currentScenePath[currentScenePath.Length - 1] + "/",
+                   Selection.activeGameObject.name + ".xml");
             }
         }
-
-        if (GUILayout.Button("Add container")) evt.Containers.Add(new Container());
-        if (GUILayout.Button("Save"))
-        {
-            var currentScenePath = EditorApplication.currentScene.Split('/');
-            currentScenePath[currentScenePath.Length - 1] = currentScenePath[currentScenePath.Length - 1].Remove(currentScenePath[currentScenePath.Length - 1].IndexOf(".unity"));
-            AncientTimes.Assets.Scripts.Utilities.XMLSerializer.Serialize(evt, @"Assets/Events/" + currentScenePath[currentScenePath.Length - 1] + "/",
-               Selection.activeGameObject.name + ".xml");
-        }
+        EditorGUILayout.EndScrollView();
     }
 
     void Update()
@@ -163,6 +180,8 @@ public class EventManagerWindow : EditorWindow
     }
 
     void OnInspectorUpdate() { Repaint(); }
+
+    void OnSelectionChange() { Repaint(); }
 
     #endregion Methods
 }
