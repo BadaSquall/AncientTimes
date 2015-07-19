@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections.Generic;
 
 namespace AncientTimes.Assets.Scripts.NPCs.Pokemons.Volern
 {
@@ -20,9 +19,9 @@ namespace AncientTimes.Assets.Scripts.NPCs.Pokemons.Volern
 
         #region Methods
 
-        void Start() { animator = gameObject.GetComponent<Animator>(); }
+        private void Start() { animator = gameObject.GetComponent<Animator>(); }
 
-        void OnTriggerEnter2D(Collider2D colliderObject)
+        private void OnTriggerEnter2D(Collider2D colliderObject)
         {
             switch (colliderObject.tag)
             {
@@ -41,7 +40,7 @@ namespace AncientTimes.Assets.Scripts.NPCs.Pokemons.Volern
             }
         }
 
-        void Update()
+        private void Update()
         {
             if (hasToFlyAway)
             {
@@ -52,17 +51,20 @@ namespace AncientTimes.Assets.Scripts.NPCs.Pokemons.Volern
                 return;
             }
 
-            switch(Random.Range(0, 100))
+            switch (Random.Range(0, 100))
             {
                 case 0:
                     animator.SetTrigger("PeckFront");
                     break;
+
                 case 1:
                     animator.SetTrigger("FrontIdle");
                     break;
+
                 case 2:
                     animator.SetTrigger("PeckRear");
                     break;
+
                 case 3:
                     animator.SetTrigger("RearIdle");
                     break;

@@ -25,5 +25,19 @@ namespace AncientTimes.Assets.Scripts.Events.Actions.Helpers
         }
 
         #endregion Constructors
+
+        #region Methods
+
+        public Dialogue Clone()
+        {
+            return new Dialogue()
+            {
+                Name = this.Name,
+                ImagePath = this.ImagePath,
+                Text = this.Text
+            };
+        }
+
+        #endregion Methods
     }
 }

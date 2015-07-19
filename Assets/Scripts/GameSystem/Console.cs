@@ -33,9 +33,10 @@ namespace AncientTimes.Assets.Scripts.GameSystem
 
         #region Constructor
 
-        void Start()
+        void Awake()
         {
             text = new List<string>();
+ 
             ClearText();
 
             foreach (Transform child in transform)
@@ -59,10 +60,10 @@ namespace AncientTimes.Assets.Scripts.GameSystem
         void OnGUI()
         {
             if (!consoleBackground.activeInHierarchy) return;
-           	 GUI.skin = Skin;
-            var labelPosition = Camera.main.WorldToScreenPoint(new Vector2(consoleBackground.transform.position.x + 0.8f,
-                consoleBackground.transform.position.y - 0.3f));
-            GUI.Label(new Rect(labelPosition.x, Screen.height - labelPosition.y, 50, 50), message, new GUIStyle() { fontSize = 40, normal = new GUIStyleState() { textColor = Color.black } });
+            GUI.skin = Skin;
+            var labelPosition = new Vector2(gameObject.transform.position.x - 8.2f, gameObject.transform.position.y + 6.5f);
+            labelPosition = Camera.main.WorldToScreenPoint(labelPosition);
+            GUI.Label(new Rect(labelPosition.x, labelPosition.y, 50, 50), message, new GUIStyle() { fontSize = 40, normal = new GUIStyleState() { textColor = Color.black } });
 		}
 
         /// <summary>
@@ -86,23 +87,23 @@ namespace AncientTimes.Assets.Scripts.GameSystem
         /// <param name="gameTime">The game time.</param>
         void Update()
         {
-            	if (text.Count != 0 && text.First() != message) { TypeMessage(); return; }
+            if (text.Count != 0 && text.First() != message) { TypeMessage(); return; }
 
-            	if (text.Count == 0) return;
+            if (text.Count == 0) return;
 
-            	if (!TriangleBlink()) return;
+            if (!TriangleBlink()) return;
             
-            	if (!Input.GetKeyDown(KeyCode.Return)) return;
+            if (!Input.GetKeyDown(KeyCode.Return)) return;
 
-            	blinkMilliseconds = 0;
-            	blinkTimes = 0;
-            	text.Remove(text.First());
+            blinkMilliseconds = 0;
+            blinkTimes = 0;
+            text.Remove(text.First());
 
-            	if (text.Count == 0 && messageComplete != null) messageComplete();
+            if (text.Count == 0 && messageComplete != null) messageComplete();
 
-            	ClearText();
-            	if (text.Count == 0) consoleBackground.SetActive(false);
-            	nextMessageTriangle.SetActive(false);
+            ClearText();
+            if (text.Count == 0) consoleBackground.SetActive(false);
+            nextMessageTriangle.SetActive(false);
         }
 
         /// <summary>

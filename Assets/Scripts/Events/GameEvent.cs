@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using AncientTimes.Assets.Scripts.Events.Actions;
 using System.IO;
+using AncientTimes.Assets.Scripts.GameSystem;
 
 namespace AncientTimes.Assets.Scripts.Events
 {
+    [RequireComponent(typeof(BoxCollider2D))]
     public class GameEvent : MonoBehaviour
     {
         #region Properties
@@ -18,6 +20,7 @@ namespace AncientTimes.Assets.Scripts.Events
                 foreach (var container in evt.Containers)
                 {
                     if (!ContainersVisibles.ContainsKey(container)) ContainersVisibles.Add(container, true);
+                    if (!TriggerIndexes.ContainsKey(container)) TriggerIndexes.Add(container, 0);
 
                     foreach (var action in container.Actions)
                     {
@@ -39,6 +42,7 @@ namespace AncientTimes.Assets.Scripts.Events
 
         public Dictionary<Container, bool> ContainersVisibles { get; private set; }
         public Dictionary<Container, Dictionary<ActionBase, bool>> ActionsVisibles { get; private set; }
+        public Dictionary<Container, int> TriggerIndexes { get; private set; }
 
         #endregion Properties
 
@@ -49,6 +53,7 @@ namespace AncientTimes.Assets.Scripts.Events
             Event = new SerializableGameEvent();
             ContainersVisibles = new Dictionary<Container, bool>();
             ActionsVisibles = new Dictionary<Container, Dictionary<ActionBase, bool>>();
+            TriggerIndexes = new Dictionary<Container, int>();
         }
 
         #endregion Constructor
@@ -59,6 +64,15 @@ namespace AncientTimes.Assets.Scripts.Events
         {
             var filePath = @"Assets/Events/" + Application.loadedLevelName + "/" + name + ".xml";
             if (File.Exists(filePath)) Event = (SerializableGameEvent)Utilities.XMLDeserializer.Deserialize(typeof(SerializableGameEvent), filePath);
+        }
+
+        void OnTriggerStay2D(Collider2D collider)
+        {
+            if (Input.GetKeyDown(KeyCode.Return))
+            {
+                GameObject.FindWithTag("Player").SendMessage("LookAt", gameObject);
+                GameObject.FindGameObjectWithTag("EventManager").GetComponent<EventManager>().RegisterEvent(this);
+            }
         }
 
         #endregion Methods

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="us-ascii"?>
+<SerializableGameEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Containers>
+    <Container>
+      <Trigger>Interaction</Trigger>
+      <Condition>IsFirstEncounter</Condition>
+      <Actions>
+        <ActionBase xsi:type="MoveCharacter">
+          <Distance>5</Distance>
+          <Speed>5</Speed>
+          <Direction>Right</Direction>
+          <ObjectToMove>CapoTerra</ObjectToMove>
+        </ActionBase>
+      </Actions>
+    </Container>
+  </Containers>
+</SerializableGameEvent>
