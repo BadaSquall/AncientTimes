@@ -19,7 +19,10 @@ namespace AncientTimes.Assets.Scripts.Utilities
             Switches = new Dictionary<string, bool>();
             Switches.Add("IsFirstEncounter", true);
             Switches.Add("IsPaused", false);
+            Switches.Add("IsMan", false);
+            Switches.Add("IsChosen", false);
             Variables = new Dictionary<string, string>();
+            Variables.Add("Name", "PG");
         }
 
         #endregion Constructor
