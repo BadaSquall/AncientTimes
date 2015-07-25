@@ -35,11 +35,12 @@ namespace AncientTimes.Assets.Scripts.PG
             animator = GetComponent<Animator>();
             walkSpeed = 5.0f;
             eventManager = GameObject.FindGameObjectWithTag("EventManager").GetComponent<EventManager>();
+            Console.MessageComplete += () => Debug.Log("Ci sono");
         }
 
         void LateUpdate()
         {
-            if (Input.GetKeyDown(KeyCode.K)) SerializeDeserializeEvent();
+            if (Input.GetKeyDown(KeyCode.K)) Console.Write("Ciao"); //SerializeDeserializeEvent();
             if (Input.GetKeyDown(KeyCode.A)) LookAt(Direction.Left);
             //if (Input.GetKeyDown(KeyCode.Return)) eventManager.RegisterEvent(FocusedEvent);
 

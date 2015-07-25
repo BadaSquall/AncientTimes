@@ -32,8 +32,6 @@ namespace AncientTimes.Assets.Scripts.GameSystem
 			if (evt == null || evt.Event == null) return;
             if (actionContainer != null) return;
 
-            Debug.Log(evt.Event.Containers);
-
             foreach (var container in evt.Event.Containers)
             {
                 if (!GameVariables.Switches.ContainsKey(container.Condition)) return;
