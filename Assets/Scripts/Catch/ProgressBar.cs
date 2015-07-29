@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Assets.Scripts.Catch
 {
@@ -29,7 +30,7 @@ namespace Assets.Scripts.Catch
 
             GUI.EndGroup();
 
-            GUI.Label(new Rect(5, 0, 30, 30), ((int)timer).ToString());
+            GUI.Label(new Rect(5, 0, 30, 30), (Math.Round(timer, 2)).ToString());
         }
 
         private void Start()
@@ -41,7 +42,7 @@ namespace Assets.Scripts.Catch
             barPercentage = 0;
             count = 0;
             pressuresNeeded = CatchHUDManager.GetMaxPressures();
-            timer = 5;
+            timer = 3;
         }
 
         private void Update()
