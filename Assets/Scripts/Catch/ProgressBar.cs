@@ -20,7 +20,8 @@ namespace Assets.Scripts.Catch
             GUI.Box(new Rect(0, 0, size.x, size.y), bar, style);
 
             // draw the filled-in part:
-            //GUI.BeginGroup(new Rect(0, 0, size.x * GameStatus.Balance / 30.0f, size.y), style);
+            var Balance = CatchHUDManager.GetPressures()/10;
+            GUI.BeginGroup(new Rect(0, 0, size.x * Balance / 30.0f, size.y), style);
             GUI.Box(new Rect(0, 0, size.x, size.y), barFull, style);
             GUI.EndGroup();
 
