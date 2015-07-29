@@ -6,12 +6,15 @@ namespace Assets.Scripts.Catch
     {
         //public GameStatus GameStatus;
         public Texture2D bar;
-
         public Texture2D barFull;
-        private Vector2 pos = new Vector2(20, 40);
+        private Vector2 pos = new Vector2(10, 130);
         private Vector2 size = new Vector2(180, 60);
         private GUIStyle style;
         private Texture2D transparent;
+        private float barPercentage;
+        private int count;
+        private int pressuresNeeded;
+        private float timer;
 
         private void OnGUI()
         {
@@ -20,8 +23,7 @@ namespace Assets.Scripts.Catch
             GUI.Box(new Rect(0, 0, size.x, size.y), bar, style);
 
             // draw the filled-in part:
-            var Balance = CatchHUDManager.GetPressures()/10;
-            GUI.BeginGroup(new Rect(0, 0, size.x * Balance / 30.0f, size.y), style);
+            GUI.BeginGroup(new Rect(0, 0, (float)size.x * (float)barPercentage, size.y), style);
             GUI.Box(new Rect(0, 0, size.x, size.y), barFull, style);
             GUI.EndGroup();
 
@@ -34,6 +36,23 @@ namespace Assets.Scripts.Catch
             transparent.SetPixels(new[] { new Color(0.0f, 0.0f, 0.0f, 0.0f) });
             transparent.Apply();
             style = new GUIStyle { normal = new GUIStyleState { background = transparent } };
+            barPercentage = 0;
+            count = 0;
+            pressuresNeeded = CatchHUDManager.GetMaxPressures();
+            timer = 5;
+        }
+
+        private void Update()
+        {
+            timer -= Time.deltaTime;
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                count++;
+                barPercentage = (float)count/(float)pressuresNeeded;   
+            }
+            if (timer <= 0 || count == pressuresNeeded)
+                Application.LoadLevel("");
+            
         }
     }
 }
