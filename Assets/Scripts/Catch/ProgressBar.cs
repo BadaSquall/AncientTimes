@@ -28,6 +28,8 @@ namespace Assets.Scripts.Catch
             GUI.EndGroup();
 
             GUI.EndGroup();
+
+            GUI.Label(new Rect(5, 0, 30, 30), ((int)timer).ToString());
         }
 
         private void Start()
@@ -50,7 +52,7 @@ namespace Assets.Scripts.Catch
                 count++;
                 barPercentage = (float)count/(float)pressuresNeeded;   
             }
-            if (timer <= 0 || count == pressuresNeeded)
+            if (timer <= 0 || count >= pressuresNeeded)
                 Application.LoadLevel("");
             
         }
