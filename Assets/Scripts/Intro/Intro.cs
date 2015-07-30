@@ -17,6 +17,7 @@ namespace AncientTimes.Assets.Scripts.Intro
         private string Nome = "Gimmy";
         private GameObject male;
         private GameObject female;
+        private Animator SexAnim;
 
 
         #endregion Properties
@@ -24,6 +25,7 @@ namespace AncientTimes.Assets.Scripts.Intro
         #region Methods
         void Start()
         {
+            SexAnim = GameObject.Find("Sex").GetComponent<Animator>();
             Kerneth = GameObject.Find("KernethSprite");
             KShadow = GameObject.Find("KShadow");
             animator = Kerneth.GetComponent<Animator>();
@@ -124,6 +126,7 @@ namespace AncientTimes.Assets.Scripts.Intro
             female.SetActive(isActive);
             if (isActive)
             {
+                SexAnim.SetBool("IsStatic", isActive);
                 Kerneth.SetActive(false);
                 KShadow.SetActive(false);
             }

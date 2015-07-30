@@ -23,6 +23,7 @@ namespace AncientTimes.Assets.Scripts.Utilities
             Switches.Add("IsChosen", false);
             Variables = new Dictionary<string, string>();
             Variables.Add("Name", "PG");
+            Variables.Add("CurrentMap", "Altaquercia");
         }
 
         #endregion Constructor
