@@ -34,7 +34,7 @@ namespace AncientTimes.Assets.Scripts.PG
         {
             animator = GetComponent<Animator>();
             walkSpeed = 5.0f;
-            eventManager = GameObject.FindGameObjectWithTag("EventManager").GetComponent<EventManager>();
+          /*  eventManager = GameObject.FindGameObjectWithTag("EventManager").GetComponent<EventManager>(); */
             Console.MessageComplete += () => Debug.Log("Ci sono");
         }
 
