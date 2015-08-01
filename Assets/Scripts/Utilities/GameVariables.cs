@@ -17,8 +17,9 @@ namespace AncientTimes.Assets.Scripts.Utilities
         static GameVariables()
         {
             switches = new Dictionary<string, bool>();
-            switches.Add("IsFirstEncounter", true);
+            UpdateSwitch("IsFirstEncounter", true);
             variables = new Dictionary<string, string>();
+            UpdateVariable("CurrentMap", "Altaquercia");
         }
 
         #endregion Constructor

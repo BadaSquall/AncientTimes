@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="us-ascii"?>
 <WildPokemonMap xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <percentageAppearance>30</percentageAppearance>
+  <PercentageAppearance>40</PercentageAppearance>
   <tallGrass>
     <WildPokemon>
       <pokemonName>Kankakazzo</pokemonName>
@@ -53,4 +53,31 @@
       <levelMax>30</levelMax>
     </WildPokemon>
   </tallGrass>
+  <sea>
+    <WildPokemon>
+      <pokemonName>Magikarp</pokemonName>
+      <levelMin>20</levelMin>
+      <levelMax>30</levelMax>
+    </WildPokemon>
+    <WildPokemon>
+      <pokemonName>Magikarp</pokemonName>
+      <levelMin>21</levelMin>
+      <levelMax>33</levelMax>
+    </WildPokemon>
+    <WildPokemon>
+      <pokemonName>Magikarp</pokemonName>
+      <levelMin>21</levelMin>
+      <levelMax>33</levelMax>
+    </WildPokemon>
+    <WildPokemon>
+      <pokemonName>Gyrados</pokemonName>
+      <levelMin>21</levelMin>
+      <levelMax>33</levelMax>
+    </WildPokemon>
+    <WildPokemon>
+      <pokemonName>Kyogre</pokemonName>
+      <levelMin>50</levelMin>
+      <levelMax>55</levelMax>
+    </WildPokemon>
+  </sea>
 </WildPokemonMap>

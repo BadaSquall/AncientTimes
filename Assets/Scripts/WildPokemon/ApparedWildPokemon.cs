@@ -13,17 +13,13 @@ namespace AncientTimes.Assets.Scripts.WildPokemon
     {
         #region Properties
 
-    private bool isInside;
-    private WildPokemonMap mapReader;
-    private int percentageAppearance;
-    private List<WildPokemon> tallGrass;
-    private int pokemonSelected;
-    private String namePokemonSelected;
-    private int levelPokemonSelected;
-    private float timeToAppared = 0.0F;
-    private float TimeToApparedRate = 1.0F;
+        private bool isInside;
+        private WildPokemonMap mapReader;
+        private WildPokemon wildPokemonSelected;
+        private float timeToAppared = 0.0F;
+        private float TimeToApparedRate = 1.5F;
 
-    #endregion Properties
+        #endregion Properties
 
         #region Methods
 
@@ -44,20 +40,49 @@ namespace AncientTimes.Assets.Scripts.WildPokemon
                     timeToAppared = Time.time + TimeToApparedRate;
                     if (Random.Range(1, 100) < mapReader.percentageAppearance)
                     {
-                        pokemonSelected = Random.Range(1, mapReader.tallGrass.Count);
-                        namePokemonSelected = mapReader.tallGrass[pokemonSelected].pokemonName.ToString();
-                        levelPokemonSelected = Random.Range(mapReader.tallGrass[pokemonSelected].levelMin,
-                            mapReader.tallGrass[pokemonSelected].levelMax);
+                        try
+                        {
+                            wildPokemonSelected = GetWildPokemon(gameObject.tag);
 
-                        //TODO: add a interface to create an Pokemon Object
-                        // Pokemon p = new Pokemon(namePokemonSelected, levelPokemonSelected);
+                            //TODO: add a interface to create an Pokemon Object
+                            // Pokemon p = new Pokemon(wildPokemonSelected.pokemonName, wildPokemonSelected.level);
 
-                        //TODO: add an interface to Run a Pokèmon Battle
-                        // Battle.GoBattle (p);
+                            //TODO: add an interface to Run a Pokèmon Battle
+                            // Battle.GoBattle (p);
+                        }
+                        catch (NullReferenceException exception)
+                        {
+                            Debug.Log("tag Name of field is not insert correctly");
+                            throw;
+                        } 
                     }
                 }
             }
 
+        }
+
+        WildPokemon GetWildPokemon(string field)
+        {
+            WildPokemon wildPokemon;
+            switch (field)
+            {
+                case "tallGrass":
+                    wildPokemon = new WildPokemon(mapReader.tallGrass);
+                    return wildPokemon;
+                    break;
+
+                case "sea":
+
+                    wildPokemon = new WildPokemon(mapReader.sea);
+                    return wildPokemon;
+                    break;
+
+                case "cave":
+                    wildPokemon = new WildPokemon(mapReader.cave);
+                    return wildPokemon;
+                    break;
+            }
+            return null;
         }
 
         void OnTriggerEnter2D(Collider2D other)
