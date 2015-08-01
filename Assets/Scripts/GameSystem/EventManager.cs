@@ -34,9 +34,7 @@ namespace AncientTimes.Assets.Scripts.GameSystem
 
             foreach (var container in evt.Event.Containers)
             {
-                if (!GameVariables.Switches.ContainsKey(container.Condition)) return;
-
-                if (GameVariables.Switches[container.Condition])
+                if (GameVariables.GetSwitch(container.Condition))
                 {
                     actionContainer = container.Clone();
                     return;

@@ -35,12 +35,12 @@ namespace AncientTimes.Assets.Scripts.PG
             animator = GetComponent<Animator>();
             walkSpeed = 5.0f;
             eventManager = GameObject.FindGameObjectWithTag("EventManager").GetComponent<EventManager>();
-            Console.MessageComplete += () => Debug.Log("Ci sono");
+            Console.MessageComplete += () => Debug.Log(GameVariables.GetVariable("CharacterName"));
         }
 
         void LateUpdate()
         {
-            if (Input.GetKeyDown(KeyCode.K)) Console.Write("Ciao"); //SerializeDeserializeEvent();
+            if (Input.GetKeyDown(KeyCode.K)) Console.Write("Come ti chiami?", true, "CharacterName", "terra", "Expressions/CapoTerra/sad"); //SerializeDeserializeEvent();
             if (Input.GetKeyDown(KeyCode.A)) LookAt(Direction.Left);
             //if (Input.GetKeyDown(KeyCode.Return)) eventManager.RegisterEvent(FocusedEvent);
 

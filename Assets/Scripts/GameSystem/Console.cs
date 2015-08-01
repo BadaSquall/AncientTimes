@@ -3,11 +3,23 @@ using System.Collections.Generic;
 using System;
 using System.Linq;
 using UnityEngine.UI;
+using AncientTimes.Assets.Scripts.Utilities;
 
 namespace AncientTimes.Assets.Scripts.GameSystem
 {
     public class Console : MonoBehaviour
     {
+        #region Inner Structs
+
+        public struct MessageComposition
+        {
+            public string Text { get; set; }
+            public string Name { get; set; }
+            public GameObject Image { get; set; }
+        }
+
+        #endregion
+
         #region Properties
 
         public static GUISkin Skin;
@@ -15,10 +27,13 @@ namespace AncientTimes.Assets.Scripts.GameSystem
         private int blinkTimes;
         private static GameObject consoleBackground;
         private static GameObject nextMessageTriangle;
-        private static List<string> text;
+        private static List<MessageComposition> compositions;
         private const int MaximumWritingSpeed = 5;
         private static event Action messageComplete;
         private static string message;
+        private static bool waitForInsert;
+        private static string messageInserted;
+        private static string variable;
 
         /// <summary>
         /// Occurs when [message complete].
@@ -35,7 +50,7 @@ namespace AncientTimes.Assets.Scripts.GameSystem
 
         void Awake()
         {
-            text = new List<string>();
+            compositions = new List<MessageComposition>();
  
             ClearText();
 
@@ -63,23 +78,46 @@ namespace AncientTimes.Assets.Scripts.GameSystem
             GUI.skin = Skin;
             var labelPosition = new Vector2(gameObject.transform.position.x - 8.2f, gameObject.transform.position.y + 6.5f);
             labelPosition = Camera.main.WorldToScreenPoint(labelPosition);
-            GUI.Label(new Rect(labelPosition.x, labelPosition.y, 50, 50), message, new GUIStyle() { fontSize = 40, normal = new GUIStyleState() { textColor = Color.black } });
+            GUI.Label(new Rect(labelPosition.x, labelPosition.y, 50, 50), message + '\n' +  messageInserted, new GUIStyle() { fontSize = 40, normal = new GUIStyleState() { textColor = Color.black } });
 		}
 
         /// <summary>
         /// Writes the specified message.
         /// </summary>
         /// <param name="text">The message.</param>
-        public static void Write(string text)
+        public static void Write(string text, string name = "", string imagePath = "")
         {
-            Console.text.Add(text);
+            var composition = new MessageComposition() { Text = text, Name = name };
+
+            if (imagePath != null)
+            {
+                SpriteRenderer renderer;
+                (renderer = (composition.Image = new GameObject()).AddComponent<SpriteRenderer>()).sprite = Resources.Load<Sprite>(imagePath);
+                renderer.sortingLayerName = "Default";
+                renderer.sortingOrder = 12;
+                composition.Image.transform.parent = GameObject.FindGameObjectWithTag("Player").transform;
+                composition.Image.transform.localPosition = Vector3.zero;
+            }
+
+            Console.compositions.Add(composition);
             consoleBackground.SetActive(true);
+        }
+
+        public static void Write(string text, bool waitInsert, string variable, string name = "", string imagePath = "")
+        {
+            waitForInsert = waitInsert;
+            Console.variable = variable;
+            Write(text, name, imagePath);
         }
 
         /// <summary>
         /// Clears the message.
         /// </summary>
-        private void ClearText() { message = ""; }
+        private void ClearText()
+        {
+            message = "";
+            messageInserted = "";
+        }
 
         /// <summary>
         /// Updates the Console.
@@ -87,22 +125,25 @@ namespace AncientTimes.Assets.Scripts.GameSystem
         /// <param name="gameTime">The game time.</param>
         void Update()
         {
-            if (text.Count != 0 && text.First() != message) { TypeMessage(); return; }
+            if (compositions.Count != 0 && compositions.First().Text != message) { TypeMessage(); return; }
 
-            if (text.Count == 0) return;
+            if (compositions.Count == 0) return;
 
             if (!TriangleBlink()) return;
-            
+
+            if (ListenToInsert()) return;
+
             if (!Input.GetKeyDown(KeyCode.Return)) return;
 
             blinkMilliseconds = 0;
             blinkTimes = 0;
-            text.Remove(text.First());
+            if (compositions.First().Image != null) Destroy(compositions.First().Image);
+            compositions.Remove(compositions.First());
 
-            if (text.Count == 0 && messageComplete != null) messageComplete();
+            if (compositions.Count == 0 && messageComplete != null) messageComplete();
 
             ClearText();
-            if (text.Count == 0) consoleBackground.SetActive(false);
+            if (compositions.Count == 0) consoleBackground.SetActive(false);
             nextMessageTriangle.SetActive(false);
         }
 
@@ -115,8 +156,29 @@ namespace AncientTimes.Assets.Scripts.GameSystem
 
             if (Input.GetKeyDown(KeyCode.Return)) numberOfLetters = MaximumWritingSpeed;
 
-            numberOfLetters = numberOfLetters == 1 || text.First().Length - message.Length < MaximumWritingSpeed ? 1 : MaximumWritingSpeed;
-            message = text.First().Substring(0, message.Length + numberOfLetters);
+            numberOfLetters = numberOfLetters == 1 || compositions.First().Text.Length - message.Length < MaximumWritingSpeed ? 1 : MaximumWritingSpeed;
+            message = compositions.First().Text.Substring(0, message.Length + numberOfLetters);
+        }
+
+        private bool ListenToInsert()
+        {
+            foreach (var c in Input.inputString)
+            {
+                if (c == "\b"[0])
+                {
+                    if (messageInserted.Length != 0) messageInserted = messageInserted.Substring(0, messageInserted.Length - 1);
+                }
+
+                else
+                    if (c == "\n"[0] || c == "\r"[0])
+                    {
+                        GameVariables.UpdateVariable(variable, messageInserted);
+                        waitForInsert = false;
+                    }
+                    else messageInserted += c;
+            }
+
+            return waitForInsert;
         }
 
         /// <summary>

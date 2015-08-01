@@ -7,8 +7,8 @@ namespace AncientTimes.Assets.Scripts.Utilities
     {
         #region Properties
 
-        public static Dictionary<string, bool> Switches;
-        public static Dictionary<string, string> Variables;
+        private static Dictionary<string, bool> switches;
+        private static Dictionary<string, string> variables;
 
         #endregion Properties
 
@@ -16,12 +16,39 @@ namespace AncientTimes.Assets.Scripts.Utilities
 
         static GameVariables()
         {
-            Switches = new Dictionary<string, bool>();
-            Switches.Add("IsFirstEncounter", true);
-            Switches.Add("IsPaused", false);
-            Variables = new Dictionary<string, string>();
+            switches = new Dictionary<string, bool>();
+            switches.Add("IsFirstEncounter", true);
+            variables = new Dictionary<string, string>();
         }
 
         #endregion Constructor
+
+        #region Methods
+
+        public static void UpdateSwitch(string switchName, bool value)
+        {
+            if (!switches.ContainsKey(switchName)) switches.Add(switchName, value);
+            else switches[switchName] = value;
+        }
+
+        public static bool GetSwitch(string switchName)
+        {
+            if (!switches.ContainsKey(switchName)) return false;
+            else return switches[switchName];
+        }
+
+        public static void UpdateVariable(string variableName, string value)
+        {
+            if (!variables.ContainsKey(variableName)) variables.Add(variableName, value);
+            else variables[variableName] = value;
+        }
+
+        public static string GetVariable(string variableName)
+        {
+            if (!variables.ContainsKey(variableName)) return "";
+            else return variables[variableName];
+        }
+
+        #endregion Methods
     }
 }
