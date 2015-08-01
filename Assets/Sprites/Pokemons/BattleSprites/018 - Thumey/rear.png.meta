@@ -1,7 +1,14 @@
 fileFormatVersion: 2
 guid: f7bf87ea886bc12458bf74eae3bd5d2e
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: rear_0
+    21300002: rear_1
+    21300004: rear_2
+    21300006: rear_3
+    21300008: rear_4
+    21300010: rear_5
+    21300012: rear_6
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -25,13 +32,13 @@ TextureImporter:
   maxTextureSize: 1024
   textureSettings:
     filterMode: -1
-    aniso: -1
+    aniso: 16
     mipBias: -1
-    wrapMode: -1
+    wrapMode: 1
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -42,6 +49,76 @@ TextureImporter:
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
-    sprites: []
+    sprites:
+    - name: rear_0
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 11
+        width: 155
+        height: 154
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: rear_1
+      rect:
+        serializedVersion: 2
+        x: 275
+        y: 11
+        width: 153
+        height: 151
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: rear_2
+      rect:
+        serializedVersion: 2
+        x: 517
+        y: 11
+        width: 149
+        height: 149
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: rear_3
+      rect:
+        serializedVersion: 2
+        x: 757
+        y: 11
+        width: 154
+        height: 151
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: rear_4
+      rect:
+        serializedVersion: 2
+        x: 999
+        y: 11
+        width: 156
+        height: 154
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: rear_5
+      rect:
+        serializedVersion: 2
+        x: 1242
+        y: 10
+        width: 155
+        height: 157
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: rear_6
+      rect:
+        serializedVersion: 2
+        x: 1481
+        y: 11
+        width: 155
+        height: 154
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 
