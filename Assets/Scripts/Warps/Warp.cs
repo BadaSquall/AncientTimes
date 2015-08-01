@@ -9,13 +9,18 @@ namespace AncientTimes.Assets.Scripts.Warps
         #region Properties
 
         public GameObject InB;
-        public GameObject Player;
+        private GameObject Player;
         private bool IsIn = false;
 
         #endregion Properties
 
         #region Methods
 
+
+        void Start()
+        {
+            Player = GameObject.FindGameObjectWithTag("Player");
+        }
         // Update is called once per frame
         void Update()
         {
