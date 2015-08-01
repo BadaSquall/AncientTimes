@@ -14,20 +14,11 @@ namespace AncientTimes.Assets.Scripts.WildPokemon
         {
             Places = GameObject.Find("Places");
             Destroy(GameObject.FindGameObjectWithTag("Places"));
-            currentNameMap = GameVariables.Variables["CurrentMap"];
+            currentNameMap = GameVariables.GetVariable("CurrentMap");
             Debug.Log(currentNameMap);
             GameObject instance = Instantiate(Resources.Load(  "Maps/"+ currentNameMap, typeof(GameObject))) as GameObject;
             instance.transform.parent = Places.transform;
             instance.transform.localPosition = new Vector3(0, 0, 0);
-
         }
-
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
-
     }
-
 }
