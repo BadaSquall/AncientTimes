@@ -20,6 +20,7 @@ namespace AncientTimes.Assets.Scripts.Utilities
             Switches.Add("IsFirstEncounter", true);
             Switches.Add("IsPaused", false);
             Variables = new Dictionary<string, string>();
+            Variables.Add("CurrentMap", "Altaquercia");
         }
 
         #endregion Constructor
