@@ -1,4 +1,4 @@
-﻿using AncientTimes.Assets.Scripts.Utilities;
+using AncientTimes.Assets.Scripts.Utilities;
 using UnityEngine;
 using System.Collections;
 
