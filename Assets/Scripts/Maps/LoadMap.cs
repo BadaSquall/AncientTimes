@@ -13,9 +13,7 @@ namespace AncientTimes.Assets.Scripts.WildPokemon
         {
             currentNameMap = GameVariables.Variables["CurrentMap"];
             Debug.Log(currentNameMap);
-            //GameObject instance = Instantiate(Resources.Load( @"Assets/Prefab/Maps/"+ currentNameMap, typeof(GameObject))) as GameObject;
-            GameObject prefab = Resources.Load<GameObject>(@"Assets/Prefab/Maps/" + currentNameMap + ".prefab");
-            GameObject newMap = (GameObject)Instantiate(prefab);
+            GameObject instance = Instantiate(Resources.Load(currentNameMap, typeof(GameObject))) as GameObject;
         }
 
         // Update is called once per frame
