@@ -33,6 +33,7 @@ namespace AncientTimes.Assets.Scripts.PG
         void Start()
         {
             animator = GetComponent<Animator>();
+            walkSpeed = 5.0f;
             eventManager = GameObject.FindGameObjectWithTag("EventManager").GetComponent<EventManager>();
             //Console.MessageComplete += () => Debug.Log(GameVariables.GetVariable("CharacterName"));
         }
