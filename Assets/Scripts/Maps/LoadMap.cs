@@ -19,8 +19,7 @@ namespace AncientTimes.Assets.Scripts.WildPokemon
             GameObject instance = Instantiate(Resources.Load(  "Maps/"+ currentNameMap, typeof(GameObject))) as GameObject;
             instance.transform.parent = Places.transform;
             instance.transform.localPosition = new Vector3(0, 0, 0);
-            /*GameObject prefab = Resources.Load<GameObject>( currentNameMap );
-            GameObject newMap = (GameObject)Instantiate(prefab);*/
+
         }
 
         // Update is called once per frame
