@@ -31,11 +31,6 @@ namespace AncientTimes.Assets.Scripts.Intro
             }
         }
 
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
 
         void OnMouseEnter()
         {
@@ -49,7 +44,7 @@ namespace AncientTimes.Assets.Scripts.Intro
                 if (name == "male")
                 {
                     GameVariables.UpdateSwitch("IsMan", true);
-                    GameVariables.UpdateSwitch("IsChoosen", true);
+                    GameVariables.UpdateSwitch("IsChosen", true);
                     GameObject.Find("female").SetActive(false);
                     this.gameObject.SetActive(false);
                 }

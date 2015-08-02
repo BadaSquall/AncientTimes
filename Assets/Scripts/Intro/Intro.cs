@@ -62,6 +62,9 @@ namespace AncientTimes.Assets.Scripts.Intro
                 case IntroState.Sex:
                     Sex();
                     break;
+                case IntroState.EndSex:
+                    EndSex();
+                    break;
                 case IntroState.Name:
                     Name();
                     break;
@@ -115,8 +118,9 @@ namespace AncientTimes.Assets.Scripts.Intro
             NextState();
         }
 
-        void SexConfirmed()
+        public void SexConfirmed()
         {
+            
             NextState();
         }
 
@@ -146,13 +150,14 @@ namespace AncientTimes.Assets.Scripts.Intro
 
         void EndSex()
         {
-            if (GameVariables.GetSwitch("IsChoosen"))
+            if (GameVariables.GetSwitch("IsChosen"))
             {
                 Kerneth.SetActive(true);
                 KShadow.SetActive(true);
                 if (GameVariables.GetSwitch("IsMan")) Console.Write("Sei un ragazzo");
                 else Console.Write("Sei una ragazza");  
             }
+            NextState();
         }
 
         #endregion Methods
@@ -171,6 +176,7 @@ internal enum IntroState
     WaitExplanation,
     Sex,
     WaitSexSelection,
+    EndSex,
     Name,
     WaitForNameTyping,
     NameConfirmation
