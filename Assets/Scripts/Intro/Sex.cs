@@ -14,7 +14,6 @@ namespace AncientTimes.Assets.Scripts.Intro
 
         #region Methods
 
-
         // Use this for initialization
         void Start()
         {
@@ -50,19 +49,19 @@ namespace AncientTimes.Assets.Scripts.Intro
                 if (name == "male")
                 {
                     GameVariables.UpdateSwitch("IsMan", true);
-                    GameVariables.UpdateSwitch("IsChosen", true);
+                    GameVariables.UpdateSwitch("IsChoosen", true);
                     GameObject.Find("female").SetActive(false);
                     this.gameObject.SetActive(false);
                 }
                 else if (name == "female")
                 {
                     GameVariables.UpdateSwitch("IsMan", false);
-                    GameVariables.UpdateSwitch("IsChosen",true);
+                    GameVariables.UpdateSwitch("IsChosen", true);
                     GameObject.Find("male").SetActive(false);
                     this.gameObject.SetActive(false);
                 }
 
-                
+                GameObject.Find("Intro").GetComponent<Intro>().SendMessage("SexConfirmed");
             }
         }
 
