@@ -25,6 +25,8 @@ namespace AncientTimes.Assets.Scripts.Intro
         #region Methods
         void Start()
         {
+            GameVariables.UpdateSwitch("IsChosen", false);
+            GameVariables.UpdateSwitch("IsMan", false);
             SexAnim = GameObject.Find("Sex").GetComponent<Animator>();
             Kerneth = GameObject.Find("KernethSprite");
             KShadow = GameObject.Find("KShadow");
@@ -106,10 +108,8 @@ namespace AncientTimes.Assets.Scripts.Intro
 
         void Name()
         {
-            Console.Write("Come ti chiami?");
-           
-            GameVariables.Variables["Name"] = Nome;
-            Console.Write("Sei sicuro di chiamarti " + Nome + "?");
+            Console.Write("Come ti chiami?", true, "CharacterName" );
+            Console.MessageComplete += () => Console.Write("Sei sicuro di chiamarti " + GameVariables.GetVariable("CharacterName") + "?");
             NextState();
         }
 
@@ -134,11 +134,11 @@ namespace AncientTimes.Assets.Scripts.Intro
 
         void EndSex()
         {
-            if (GameVariables.Switches["IsChosen"] == true)
+            if (GameVariables.GetSwitch("IsChosen"))
             {
                 Kerneth.SetActive(true);
                 KShadow.SetActive(true);
-                if (GameVariables.Switches["IsMan"])
+                if (GameVariables.GetSwitch("IsMan"))
                     Console.Write("Sei un ragazzo");
                 else
                     Console.Write("Sei una ragazza");

@@ -49,15 +49,15 @@ namespace AncientTimes.Assets.Scripts.Intro
             {
                 if (name == "male")
                 {
-                    GameVariables.Switches["IsMan"] = true;
-                    GameVariables.Switches["IsChosen"] = true;
+                    GameVariables.UpdateSwitch("IsMan", true);
+                    GameVariables.UpdateSwitch("IsChosen", true);
                     GameObject.Find("female").SetActive(false);
                     this.gameObject.SetActive(false);
                 }
                 else if (name == "female")
                 {
-                    GameVariables.Switches["IsMan"] = false;
-                    GameVariables.Switches["IsChosen"] = true;
+                    GameVariables.UpdateSwitch("IsMan", false);
+                    GameVariables.UpdateSwitch("IsChosen",true);
                     GameObject.Find("male").SetActive(false);
                     this.gameObject.SetActive(false);
                 }
