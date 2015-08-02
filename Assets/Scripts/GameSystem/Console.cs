@@ -93,8 +93,8 @@ namespace AncientTimes.Assets.Scripts.GameSystem
             {
                 SpriteRenderer renderer;
                 (renderer = (composition.Image = new GameObject()).AddComponent<SpriteRenderer>()).sprite = Resources.Load<Sprite>(imagePath);
-                renderer.sortingLayerName = "Default";
-                renderer.sortingOrder = 12;
+                renderer.sortingLayerName = "Foreground";
+                renderer.sortingOrder = 49;
                 composition.Image.transform.parent = GameObject.FindGameObjectWithTag("Player").transform;
                 composition.Image.transform.localPosition = Vector3.zero;
             }
@@ -133,7 +133,7 @@ namespace AncientTimes.Assets.Scripts.GameSystem
 
             if (ListenToInsert()) return;
 
-            if (!Input.GetKeyDown(KeyCode.Return)) return;
+            if (!Input.GetButtonDown("Submit")) return;
 
             blinkMilliseconds = 0;
             blinkTimes = 0;
@@ -154,7 +154,7 @@ namespace AncientTimes.Assets.Scripts.GameSystem
         {
             var numberOfLetters = 1;
 
-            if (Input.GetKeyDown(KeyCode.Return)) numberOfLetters = MaximumWritingSpeed;
+            if (Input.GetButtonDown("Submit")) numberOfLetters = MaximumWritingSpeed;
 
             numberOfLetters = numberOfLetters == 1 || compositions.First().Text.Length - message.Length < MaximumWritingSpeed ? 1 : MaximumWritingSpeed;
             message = compositions.First().Text.Substring(0, message.Length + numberOfLetters);

@@ -29,6 +29,7 @@ public class EventManagerWindow : EditorWindow
         eventManagers.Add(new ChangeSwitchLayoutManager());
         eventManagers.Add(new ShowDialogueLayoutManager());
         eventManagers.Add(new MoveCharacterLayoutManager());
+        eventManagers.Add(new PlayAnimationLayoutManager());
     }
 
     #endregion Constructors

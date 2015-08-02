@@ -66,14 +66,14 @@ namespace AncientTimes.Assets.Scripts.Events
             if (File.Exists(filePath)) Event = (SerializableGameEvent)Utilities.XMLDeserializer.Deserialize(typeof(SerializableGameEvent), filePath);
         }
 
-        void OnTriggerStay2D(Collider2D collider)
-        {
-            if (Input.GetKeyDown(KeyCode.Return))
-            {
-                GameObject.FindWithTag("Player").SendMessage("LookAt", gameObject);
-                GameObject.FindGameObjectWithTag("EventManager").GetComponent<EventManager>().RegisterEvent(this);
-            }
-        }
+        //void OnTriggerStay2D(Collider2D collider)
+        //{
+        //    if (Input.GetButtonDown("Submit"))
+        //    {
+        //        GameObject.FindWithTag("Player").SendMessage("LookAt", gameObject);
+        //        GameObject.FindGameObjectWithTag("EventManager").GetComponent<EventManager>().RegisterEvent(this);
+        //    }
+        //}
 
         #endregion Methods
     }
