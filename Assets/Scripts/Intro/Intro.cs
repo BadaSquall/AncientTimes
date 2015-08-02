@@ -109,7 +109,7 @@ namespace AncientTimes.Assets.Scripts.Intro
         void Name()
         {
             Console.Write("Come ti chiami?", true, "CharacterName" );
-            Console.MessageComplete += () => Console.Write("Sei sicuro di chiamarti " + GameVariables.GetVariable("CharacterName") + "?");
+            Console.Write("Sei sicuro di chiamarti " + GameVariables.GetVariable("CharacterName") + "?");
             NextState();
         }
 
