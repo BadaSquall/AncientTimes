@@ -32,13 +32,9 @@ namespace AncientTimes.Assets.Scripts.GameSystem
 			if (evt == null || evt.Event == null) return;
             if (actionContainer != null) return;
 
-            Debug.Log(evt.Event.Containers);
-
             foreach (var container in evt.Event.Containers)
             {
-                if (!GameVariables.Switches.ContainsKey(container.Condition)) return;
-
-                if (GameVariables.Switches[container.Condition])
+                if (GameVariables.GetSwitch(container.Condition))
                 {
                     actionContainer = container.Clone();
                     return;

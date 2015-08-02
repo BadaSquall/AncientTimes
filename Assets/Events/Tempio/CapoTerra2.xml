@@ -3,16 +3,13 @@
   <Containers>
     <Container>
       <Trigger>Interaction</Trigger>
-      <Condition />
+      <Condition>IsFirstEncounter</Condition>
       <Actions>
-        <ActionBase xsi:type="ShowDialogue">
-          <Dialogues>
-            <Dialogue>
-              <Name />
-              <ImagePath />
-              <Text>Ciao testa di minchia!</Text>
-            </Dialogue>
-          </Dialogues>
+        <ActionBase xsi:type="MoveCharacter">
+          <Distance>5</Distance>
+          <Speed>5</Speed>
+          <Direction>Right</Direction>
+          <ObjectToMove>CapoTerra</ObjectToMove>
         </ActionBase>
       </Actions>
     </Container>

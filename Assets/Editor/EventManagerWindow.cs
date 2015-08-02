@@ -83,7 +83,9 @@ public class EventManagerWindow : EditorWindow
         }
 
         GUILayout.Label("Containers", EditorStyles.boldLabel);
-        
+
+        var containerIndexes = new List<int>();
+
         for (var containerIndex = 0; containerIndex < evt.Containers.Count; containerIndex++)
         {
             var container = evt.Containers[containerIndex];
@@ -105,6 +107,8 @@ public class EventManagerWindow : EditorWindow
                 container.Condition = EditorGUILayout.TextField("   Condition:", container.Condition);
                 GUILayout.Label("   Actions", EditorStyles.boldLabel);
 
+                var actionIndexes = new List<int>();
+
                 for (var actionIndex = 0; actionIndex < container.Actions.Count; actionIndex++)
                 {
                     var action = container.Actions[actionIndex];
@@ -119,7 +123,11 @@ public class EventManagerWindow : EditorWindow
                                 manager.OnGUI(action);
                         }
                     }
+
+                    if (GUILayout.Button("Remove action")) actionIndexes.Add(actionIndex);
                 }
+
+                actionIndexes.ForEach(i => container.Actions.Remove(container.Actions[i]));
 
                 foreach (var type in Assembly.GetAssembly(typeof(ActionBase)).GetTypes().Where(t => string.Equals(t.Namespace, "AncientTimes.Assets.Scripts.Events.Actions", StringComparison.Ordinal)).ToArray())
                     selectablesTypes.Add(type);
@@ -139,7 +147,11 @@ public class EventManagerWindow : EditorWindow
 
                 container.Actions.Add(actionInstantiated as ActionBase);
             }
+
+            if (GUILayout.Button("Remove container")) containerIndexes.Add(containerIndex);
         }
+
+        containerIndexes.ForEach(i => currentEvent.Event.Containers.Remove(currentEvent.Event.Containers[i]));
 
         if (GUILayout.Button("Add container")) evt.Containers.Add(new Container());
         if (GUILayout.Button("Save"))
@@ -147,7 +159,7 @@ public class EventManagerWindow : EditorWindow
             var currentScenePath = EditorApplication.currentScene.Split('/');
             currentScenePath[currentScenePath.Length - 1] = currentScenePath[currentScenePath.Length - 1].Remove(currentScenePath[currentScenePath.Length - 1].IndexOf(".unity"));
             AncientTimes.Assets.Scripts.Utilities.XMLSerializer.Serialize(evt, @"Assets/Events/" + currentScenePath[currentScenePath.Length - 1] + "/",
-               Selection.activeGameObject.name + ".xml");
+                Selection.activeGameObject.name + ".xml");
         }
     }
 
@@ -163,6 +175,8 @@ public class EventManagerWindow : EditorWindow
     }
 
     void OnInspectorUpdate() { Repaint(); }
+
+    void OnSelectionChange() { Repaint(); }
 
     #endregion Methods
 }
