@@ -14,7 +14,6 @@ namespace AncientTimes.Assets.Scripts.Intro
         private GameObject KShadow;
         private float timeElapsed = 0;
         private IntroState state;
-        private string Nome = "Gimmy";
         private GameObject male;
         private GameObject female;
         private Animator SexAnim;
@@ -25,24 +24,23 @@ namespace AncientTimes.Assets.Scripts.Intro
         #region Methods
         void Start()
         {
-            GameVariables.UpdateSwitch("IsChosen", false);
-            GameVariables.UpdateSwitch("IsMan", false);
             SexAnim = GameObject.Find("Sex").GetComponent<Animator>();
             Kerneth = GameObject.Find("KernethSprite");
             KShadow = GameObject.Find("KShadow");
             animator = Kerneth.GetComponent<Animator>();
             male = GameObject.Find("male");
             female = GameObject.Find("female");
+            Console.MessageComplete += () => NextState();
             ActiveSex(false);
         }
 
         void Update()
         {
             CheckState();
-            if (Input.GetKeyDown(KeyCode.Escape))
-                Application.Quit();
-            EndSex();
-            
+
+            if (Input.GetKeyDown(KeyCode.Escape)) Application.Quit();
+
+            //EndSex(); 
         }
 
         void CheckState()
@@ -61,11 +59,14 @@ namespace AncientTimes.Assets.Scripts.Intro
                 case IntroState.Explanation:
                     Explanation();
                     break;
+                case IntroState.Sex:
+                    Sex();
+                    break;
                 case IntroState.Name:
                     Name();
                     break;
-                case IntroState.Sex:
-                    Sex();
+                case IntroState.NameConfirmation:
+                    NameConfirmation();
                     break;
             }
         }
@@ -82,12 +83,12 @@ namespace AncientTimes.Assets.Scripts.Intro
             }
         }
 
-        void StartExplanation(){
+        void StartExplanation()
+        {
 	        Console.Write("Ben arrivato!");
 	        Console.Write("Benvenuto in questo mondo popolato dai Pokémon!");
 	        Console.Write("Io sono Kerneth ma tutti mi chiamano 'vecchio saggio' perché ho\n\ndedicato tutta la mia vita allo studio e al rispetto dei Pokémon!");
             Console.Write("Forse ti sarai chiesto che cosa siano i Pokémon di cui tanto parlo:\n\ntoh, eccone uno, quando si dice la coincidenza.");
-            Console.MessageComplete += () => NextState();
             NextState();
         }
 
@@ -97,7 +98,8 @@ namespace AncientTimes.Assets.Scripts.Intro
             NextState();
         }
 
-        void Explanation(){
+        void Explanation()
+        {
             Console.Write("Su questo pianeta viviamo in simbiosi con creature che chiamiamo\n\nPokémon!\n\nSono davvero amici fedeli sai?");
             Console.Write("A volte persino preziosi alleati!");
             Console.Write("Nonostante ciò non sappiamo ancora tutto su queste meraviglie della\n\nnatura.");
@@ -106,17 +108,27 @@ namespace AncientTimes.Assets.Scripts.Intro
             NextState();
         }
 
-        void Name()
-        {
-            Console.Write("Come ti chiami?", true, "CharacterName" );
-            Console.Write("Sei sicuro di chiamarti " + GameVariables.GetVariable("CharacterName") + "?");
-            NextState();
-        }
-
         void Sex()
         {
             Console.Write("Sei un maschio o una femmina?");
             Console.MessageComplete += () => ActiveSex(true);
+            NextState();
+        }
+
+        void SexConfirmed()
+        {
+            NextState();
+        }
+
+        void Name()
+        {
+            Console.Write("Come ti chiami?", true, "CharacterName");
+            NextState();
+        }
+
+        void NameConfirmation()
+        {
+            Console.MessageComplete += () => Console.Write("Sei sicuro di chiamarti " + GameVariables.GetVariable("CharacterName") + "?");
             NextState();
         }
 
@@ -134,20 +146,16 @@ namespace AncientTimes.Assets.Scripts.Intro
 
         void EndSex()
         {
-            if (GameVariables.GetSwitch("IsChosen"))
+            if (GameVariables.GetSwitch("IsChoosen"))
             {
                 Kerneth.SetActive(true);
                 KShadow.SetActive(true);
-                if (GameVariables.GetSwitch("IsMan"))
-                    Console.Write("Sei un ragazzo");
-                else
-                    Console.Write("Sei una ragazza");
-                
+                if (GameVariables.GetSwitch("IsMan")) Console.Write("Sei un ragazzo");
+                else Console.Write("Sei una ragazza");  
             }
         }
 
         #endregion Methods
-
     }
 }
 
@@ -156,11 +164,15 @@ namespace AncientTimes.Assets.Scripts.Intro
 internal enum IntroState
 {
     Beginning = 0,
-    StartExplanation = 1,
-    WaintingPresentation = 2,
-    ThaumeyComesOut = 3,
-    Explanation = 4,
-    Name = 5,
-    Sex = 6
+    StartExplanation,
+    WaintingPresentation,
+    ThaumeyComesOut,
+    Explanation,
+    WaitExplanation,
+    Sex,
+    WaitSexSelection,
+    Name,
+    WaitForNameTyping,
+    NameConfirmation
     //ecc ecc ecc
 }
