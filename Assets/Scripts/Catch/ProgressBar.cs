@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection.Emit;
 using UnityEngine;
 
 namespace Assets.Scripts.Catch
@@ -7,9 +8,10 @@ namespace Assets.Scripts.Catch
     {
         public Texture2D bar;
         public Texture2D barFull;
-        private Vector2 pos = new Vector2(10, 130);
-        private Vector2 size = new Vector2(180, 60);
+        private Vector2 pos = new Vector2(223, 691);
+        private Vector2 size = new Vector2(900, 62);
         private GUIStyle style;
+        private GUIStyle labelStyle;
         private Texture2D transparent;
         private float barPercentage;
         private int count;
@@ -18,6 +20,7 @@ namespace Assets.Scripts.Catch
 
         private void OnGUI()
         {
+            GUISizer.BeginGUI();
             // draw the background: 
             GUI.BeginGroup(new Rect(pos.x, pos.y, size.x, size.y), style);
             GUI.Box(new Rect(0, 0, size.x, size.y), bar, style);
@@ -29,11 +32,16 @@ namespace Assets.Scripts.Catch
 
             GUI.EndGroup();
 
-            GUI.Label(new Rect(5, 0, 30, 30), (Math.Round(timer, 2)).ToString());
+            GUI.skin.label = labelStyle;
+            GUI.Label(new Rect(5, 0, 30, 30), (Math.Round(timer, 2)).ToString(), labelStyle);
+
+            GUISizer.EndGUI();
         }
 
         private void Start()
         {
+            labelStyle = new GUIStyle { normal = new GUIStyleState { background = transparent, textColor = Color.white}, fontSize = 50}; 
+
             Pokemon pokemon = new Pokemon()
             {
                 Hp = 100,
@@ -50,6 +58,7 @@ namespace Assets.Scripts.Catch
             count = 0;
             pressuresNeeded = CatchHUDManager.GetMaxPressures(pokemon);
             timer = 3;
+            Camera.main.aspect = 16.0f/9.0f;
         }
 
         private void Update()
