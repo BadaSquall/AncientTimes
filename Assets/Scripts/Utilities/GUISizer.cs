@@ -6,8 +6,8 @@ public static class GUISizer
 {
     #region Properties
 
-    public static float WIDTH = 1280;
-    public static float HEIGHT = 720;
+    public static float WIDTH = 1366;
+    public static float HEIGHT = 768;
 
     static List<Matrix4x4> stack = new List<Matrix4x4>();
 
@@ -21,13 +21,23 @@ public static class GUISizer
     static public void BeginGUI()
     {
         stack.Add(GUI.matrix);
-        Matrix4x4 m = new Matrix4x4();
-        float scale = 1f;
 
-        if ((float)Screen.width / (float)Screen.height < (WIDTH / HEIGHT)) scale = (Screen.width / WIDTH);
-        else scale = (Screen.height / HEIGHT);
+        var m = new Matrix4x4();
 
-        m.SetTRS(Vector3.zero, Quaternion.identity, Vector3.one * scale);
+        var scale = Vector3.one;
+
+        scale.x = (Screen.width / WIDTH);
+        scale.y = (Screen.height / HEIGHT);
+
+        m.SetTRS(Vector3.zero, Quaternion.identity, scale);
+
+        //var scale = 1.0f;
+
+        //if ((float)Screen.width / (float)Screen.height < (WIDTH / HEIGHT)) scale = (Screen.width / WIDTH);
+        //else scale = (Screen.height / HEIGHT);
+
+        //m.SetTRS(Vector3.zero, Quaternion.identity, Vector3.one * scale);
+
         GUI.matrix *= m;
     }
 

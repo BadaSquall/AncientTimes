@@ -277,6 +277,8 @@ public class Pokemon
 	/// </summary>
 	public CatchCategory CatchCategory { get; set; }
 
+    public int Extra { get; set; }
+
 	#region Private
 
 	private int hp_;
