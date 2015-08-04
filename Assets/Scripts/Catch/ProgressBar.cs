@@ -5,7 +5,6 @@ namespace Assets.Scripts.Catch
 {
     public class ProgressBar : MonoBehaviour
     {
-        //public GameStatus GameStatus;
         public Texture2D bar;
         public Texture2D barFull;
         private Vector2 pos = new Vector2(10, 130);
@@ -14,7 +13,7 @@ namespace Assets.Scripts.Catch
         private Texture2D transparent;
         private float barPercentage;
         private int count;
-        private int pressuresNeeded;
+        private double pressuresNeeded;
         private float timer;
 
         private void OnGUI()
@@ -35,13 +34,21 @@ namespace Assets.Scripts.Catch
 
         private void Start()
         {
+            Pokemon pokemon = new Pokemon()
+            {
+                Hp = 100,
+                HpMax = 100,
+                CatchCategory = CatchCategory.NonCommon,
+                Level = 50
+            };
+
             transparent = new Texture2D(1, 1);
             transparent.SetPixels(new[] { new Color(0.0f, 0.0f, 0.0f, 0.0f) });
             transparent.Apply();
             style = new GUIStyle { normal = new GUIStyleState { background = transparent } };
             barPercentage = 0;
             count = 0;
-            pressuresNeeded = CatchHUDManager.GetMaxPressures();
+            pressuresNeeded = CatchHUDManager.GetMaxPressures(pokemon);
             timer = 3;
         }
 

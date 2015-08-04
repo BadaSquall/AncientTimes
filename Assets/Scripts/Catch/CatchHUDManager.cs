@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Runtime.Remoting.Messaging;
+using UnityEngine;
 
 namespace Assets.Scripts.Catch
 {
@@ -8,14 +9,31 @@ namespace Assets.Scripts.Catch
         /// Returns the number of pressures the players needs to catch the pokémon
         /// </summary>
         /// <returns></returns>
-        public static int GetMaxPressures()
+        public static double GetMaxPressures(Pokemon pokemon)
         {
-            //int n = NumberFromCategory(pokemon.CatchCategory) * ((double)pokemon.CurrentHp / (double)pokemon.TotalHp) * ((double)pokemon.Level/100);
+            var n = NumberFromCategory(pokemon.CatchCategory) * ((double)pokemon.Hp / (double)pokemon.HpMax) * ((double)pokemon.Level/100);
 
-            //if n < 10
-            //    new = 10;
+            if (n < 10)
+                n = 10;
 
-            return 20;
+            return n;
+        }
+
+        public static int NumberFromCategory(CatchCategory catchCategory)
+        {
+            switch (catchCategory)
+            {
+                case CatchCategory.Common:
+                    return 100;
+                case CatchCategory.NonCommon:
+                    return 200;
+                case CatchCategory.Rare:
+                    return 400;
+                case CatchCategory.SemiLegendary:
+                    return 800;
+                default:
+                    return 1200;
+            }
         }
     }
 }
