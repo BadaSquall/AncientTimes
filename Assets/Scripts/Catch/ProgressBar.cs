@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection.Emit;
+using Assets.Scripts.Utilities;
 using UnityEngine;
 
 namespace Assets.Scripts.Catch
@@ -40,15 +41,11 @@ namespace Assets.Scripts.Catch
 
         private void Start()
         {
-            labelStyle = new GUIStyle { normal = new GUIStyleState { background = transparent, textColor = Color.white}, fontSize = 50}; 
+            labelStyle = new GUIStyle { normal = new GUIStyleState { background = transparent, textColor = Color.white}, fontSize = 50};
 
-            Pokemon pokemon = new Pokemon()
-            {
-                Hp = 100,
-                HpMax = 100,
-                CatchCategory = CatchCategory.NonCommon,
-                Level = 50
-            };
+            //Pokemon pokemon = ScenesCommunicator.Pokemon;
+            Pokemon pokemon = new Pokemon() {Hp = 100, HpMax = 100, CatchCategory = CatchCategory.NonCommon, Level = 50};
+
 
             transparent = new Texture2D(1, 1);
             transparent.SetPixels(new[] { new Color(0.0f, 0.0f, 0.0f, 0.0f) });
@@ -70,7 +67,7 @@ namespace Assets.Scripts.Catch
                 barPercentage = (float)count/(float)pressuresNeeded;   
             }
             if (timer <= 0 || count >= pressuresNeeded)
-                Application.LoadLevel("");
+                Application.LoadLevel("Battle");
             
         }
     }

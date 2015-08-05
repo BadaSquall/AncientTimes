@@ -1,15 +1,9 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿namespace Assets.Scripts.Utilities
+{
+    public struct ScenesCommunicator
+    {
 
-public class ScenesCommunicator : MonoBehaviour {
+        public static Pokemon Pokemon;
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    }
 }

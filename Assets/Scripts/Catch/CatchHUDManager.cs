@@ -19,6 +19,11 @@ namespace Assets.Scripts.Catch
             return n;
         }
 
+        /// <summary>
+        /// Determines how many pressures are needed for the pokemon based on its category
+        /// </summary>
+        /// <param name="catchCategory"></param>
+        /// <returns></returns>
         public static int NumberFromCategory(CatchCategory catchCategory)
         {
             switch (catchCategory)
