@@ -41,6 +41,7 @@ namespace Assets.Scripts.Catch
 
         private void Start()
         {
+            ScenesCommunicator.IsCatched = false;
             labelStyle = new GUIStyle { normal = new GUIStyleState { background = transparent, textColor = Color.white}, fontSize = 50};
 
             //Pokemon pokemon = ScenesCommunicator.Pokemon;
@@ -67,8 +68,10 @@ namespace Assets.Scripts.Catch
                 barPercentage = (float)count/(float)pressuresNeeded;   
             }
             if (timer <= 0 || count >= pressuresNeeded)
+            {
+                ScenesCommunicator.IsCatched = true;
                 Application.LoadLevel("Battle");
-            
+            }
         }
     }
 }

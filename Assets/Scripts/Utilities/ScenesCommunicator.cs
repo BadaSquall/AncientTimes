@@ -4,6 +4,7 @@
     {
 
         public static Pokemon Pokemon;
+        public static bool IsCatched;
 
     }
 }
