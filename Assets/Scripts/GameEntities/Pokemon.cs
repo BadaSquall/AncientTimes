@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections;
+using System.Collections.Generic;
 
 /// <summary>
 /// Data-class containing all properties of a single pokemon.
@@ -122,72 +122,12 @@ public class Pokemon
 	/// Pokémon speed.
 	/// </summary>
 	public int Speed { get; set; }
-	
-	/// <summary>
-	/// Pokémon life point Individual Value.
-	/// </summary>
-	public int IVHp { get; set; }
-	
-	/// <summary>
-	/// Pokémon attack Individual Value.
-	/// </summary>
-	public int IVAttack { get; set; }
-	
-	/// <summary>
-	/// Pokémon defense Individual Value.
-	/// </summary>
-	public int IVDefense { get; set; }
-	
-	/// <summary>
-	/// Pokémon special attack Individual Value.
-	/// </summary>
-	public int IVSpecialAttack { get; set; }
-	
-	/// <summary>
-	/// Pokémon special defense Individual Value.
-	/// </summary>
-	public int IVSpecialDefense { get; set; }
-	
-	/// <summary>
-	/// Pokémon speed Individual Value.
-	/// </summary>
-	public int IVSpeed { get; set; }
-	
-	/// <summary>
-	/// Pokémon life point Effort Value.
-	/// </summary>
-	public int EVHp { get; set; }
-	
-	/// <summary>
-	/// Pokémon attack Effort Value.
-	/// </summary>
-	public int EVAttack { get; set; }
-	
-	/// <summary>
-	/// Pokémon defense Effort Value.
-	/// </summary>
-	public int EVDefense { get; set; }
-	
-	/// <summary>
-	/// Pokémon special attack Effort Value.
-	/// </summary>
-	public int EVSpecialAttack { get; set; }
-	
-	/// <summary>
-	/// Pokémon special defense Effort Value.
-	/// </summary>
-	public int EVSpecialDefense { get; set; }
-	
-	/// <summary>
-	/// Pokémon speed Effort Value.
-	/// </summary>
-	public int EVSpeed { get; set; }
-	
+
 	/// <summary>
 	/// Pokémon first type.
 	/// </summary>
 	public PokemonType TypeOne { get; set; }
-	
+
 	/// <summary>
 	/// Pokémon second type.
 	/// </summary>
@@ -226,6 +166,11 @@ public class Pokemon
 	/// If true the pokémon is shiny.
 	/// </summary>
 	public bool IsShiny { get; set; }
+
+	/// <summary>
+	/// If true the pokémon is exotic.
+	/// </summary>
+	public bool IsExotic { get; set; }
 	
 	/// <summary>
 	/// If true the ability of the pokémon is the first one.
@@ -266,6 +211,16 @@ public class Pokemon
 	/// Pokémon fourth move.
 	/// </summary>
 	public Move MoveFour { get; set; }
+
+	/// <summary>
+	/// Pokémon special move.
+	/// </summary>
+	public Move SpecialMove { get; set; }
+
+	/// <summary>
+	/// Pokémon special move condition.
+	/// </summary>
+	public SpecialMoveCondition SpecialMoveCondition { get; set; }
 	
 	/// <summary>
 	/// Pokémon ability
@@ -277,7 +232,25 @@ public class Pokemon
 	/// </summary>
 	public CatchCategory CatchCategory { get; set; }
 
-    public int Extra { get; set; }
+	/// <summary>
+	/// Pokémon generation.
+	/// </summary>
+	public int Generation { get; set; }
+
+	/// <summary>
+	/// Pokémon friendship.
+	/// </summary>
+	public int Friendship { get; set; }
+
+	/// <summary>
+	/// Pokémon affinities for every type.
+	/// </summary>
+	public Dictionary<PokemonType, int> Affinities { get; set; }
+
+	/// <summary>
+	/// Pokémon resistences for every type.
+	/// </summary>
+	public Dictionary<PokemonType, int> Resistences { get; set; }
 
 	#region Private
 
@@ -291,8 +264,15 @@ public class Pokemon
 	/// <summary>
 	/// Empty constructor.
 	/// </summary>
-	public Pokemon() { }
-	
+	public Pokemon() 
+	{
+		Affinities = new Dictionary<PokemonType, int>();
+		Resistences = new Dictionary<PokemonType, int>();
+
+		Generation = 0;
+		Friendship = 0;
+	}
+
 	#endregion
 	
 	#region Events
