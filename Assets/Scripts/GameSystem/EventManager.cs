@@ -31,7 +31,7 @@ namespace AncientTimes.Assets.Scripts.GameSystem
         {
 			if (evt == null || evt.Event == null) return;
             if (actionContainer != null) return;
-
+            
             foreach (var container in evt.Event.Containers)
             {
                 if (string.IsNullOrEmpty(container.Condition) || GameVariables.GetSwitch(container.Condition))
@@ -40,6 +40,12 @@ namespace AncientTimes.Assets.Scripts.GameSystem
                     return;
                 }
             }
+        }
+
+        public void CheckAutoEvent()
+        {
+            var auto = GameObject.FindGameObjectWithTag("AutoEvent");
+            if (auto != null) RegisterEvent(auto.GetComponent<GameEvent>());
         }
 
         #endregion Methods

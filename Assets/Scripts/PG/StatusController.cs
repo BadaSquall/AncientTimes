@@ -26,6 +26,7 @@ namespace AncientTimes.Assets.Scripts.PG
         private EventChecker upChecker;
         private EventChecker downChecker;
         private Animator overAnimator;
+        private Animator grassAnimator;
 
 		public GameEvent FocusedEvent;
 
@@ -39,6 +40,7 @@ namespace AncientTimes.Assets.Scripts.PG
         {
             animator = GetComponent<Animator>();
             overAnimator = transform.FindChild("Over").GetComponent<Animator>();
+            grassAnimator = transform.FindChild("Grass").GetComponent<Animator>();
             walkSpeed = 2.5f;
             eventManager = GameObject.FindGameObjectWithTag("EventManager").GetComponent<EventManager>();
             leftChecker = transform.FindChild("EventCheckerLeft").gameObject.GetComponent<EventChecker>();
@@ -73,6 +75,7 @@ namespace AncientTimes.Assets.Scripts.PG
             rigidbody2D.velocity = new Vector2(walkSpeed, 0.0f);
 			animator.SetTrigger("WalkRight");
             overAnimator.SetTrigger("WalkRight");
+            grassAnimator.SetTrigger("WalkRight");
         }
 
         public void WalkLeft()
@@ -82,6 +85,7 @@ namespace AncientTimes.Assets.Scripts.PG
             rigidbody2D.velocity = new Vector2(walkSpeed * (-1.0f), 0.0f);
 			animator.SetTrigger("WalkLeft");
             overAnimator.SetTrigger("WalkLeft");
+            grassAnimator.SetTrigger("WalkLeft");
         }
 
         public void WalkDown()
@@ -91,6 +95,7 @@ namespace AncientTimes.Assets.Scripts.PG
             rigidbody2D.velocity = new Vector2(0.0f, walkSpeed * (-1.0f));
 			animator.SetTrigger("WalkDown");
             overAnimator.SetTrigger("WalkDown");
+            grassAnimator.SetTrigger("WalkDown");
         }
 
         public void WalkUp()
@@ -100,6 +105,7 @@ namespace AncientTimes.Assets.Scripts.PG
             rigidbody2D.velocity = new Vector2(0.0f, walkSpeed);
 			animator.SetTrigger("WalkUp");
             overAnimator.SetTrigger("WalkUp");
+            grassAnimator.SetTrigger("WalkUp");
         }
 
         public void Idle()
@@ -107,6 +113,7 @@ namespace AncientTimes.Assets.Scripts.PG
             rigidbody2D.velocity = Vector2.zero;
             animator.SetTrigger("Idle");
             overAnimator.SetTrigger("Idle");
+            grassAnimator.SetTrigger("Idle");
         }
 
 		void OnCollisionEnter2D(Collision2D coll)
@@ -134,15 +141,23 @@ namespace AncientTimes.Assets.Scripts.PG
             {
                 case Direction.Right:
                     animator.SetTrigger("IdleRight");
+                    overAnimator.SetTrigger("IdleRight");
+                    grassAnimator.SetTrigger("IdleRight");
                     break;
                 case Direction.Left:
                     animator.SetTrigger("IdleLeft");
+                    overAnimator.SetTrigger("IdleLeft");
+                    grassAnimator.SetTrigger("IdleLeft");
                     break;
                 case Direction.Up:
                     animator.SetTrigger("IdleUp");
+                    overAnimator.SetTrigger("IdleUp");
+                    grassAnimator.SetTrigger("IdleUp");
                     break;
                 case Direction.Down:
                     animator.SetTrigger("IdleDown");
+                    overAnimator.SetTrigger("IdleDown");
+                    grassAnimator.SetTrigger("IdleDown");
                     break;
             }
         }

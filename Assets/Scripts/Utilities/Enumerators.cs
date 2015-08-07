@@ -17,6 +17,7 @@ namespace AncientTimes.Assets.Scripts.Utilities
     {
         Interaction = 0,
         Touch = 1,
-        MoveInto = 2
+        MoveInto = 2,
+        Auto = 3
     }
 }

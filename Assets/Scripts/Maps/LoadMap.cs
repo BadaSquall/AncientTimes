@@ -14,7 +14,7 @@ namespace AncientTimes.Assets.Scripts.WildPokemon
             Destroy(GameObject.FindGameObjectWithTag("Places"));
             currentNameMap = GameVariables.GetVariable("CurrentMap");
             Debug.Log(currentNameMap);
-            GameObject instance = Instantiate(Resources.Load(  "Maps/"+ currentNameMap, typeof(GameObject))) as GameObject;
+            GameObject instance = Instantiate(Resources.Load("Maps/"+ currentNameMap, typeof(GameObject))) as GameObject;
         }
     }
 }

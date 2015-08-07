@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace AncientTimes.Assets.Scripts.Utilities
 {
@@ -17,7 +18,7 @@ namespace AncientTimes.Assets.Scripts.Utilities
         static GameVariables()
         {
             switches = new Dictionary<string, bool>();
-            UpdateSwitch("IsFirstEncounter", true);
+            UpdateSwitch("NewGame", true);
             variables = new Dictionary<string, string>();
             UpdateVariable("CurrentMap", "Altaquercia");
         }
