@@ -71,10 +71,17 @@ namespace AncientTimes.Assets.Scripts.Intro
                 case IntroState.NameConfirmation:
                     NameConfirmation();
                     break;
+                case IntroState.Ending:
+                    Ending();
+                    break;
             }
         }
 
-        void NextState() { state++; }
+        void NextState() 
+        {
+            state++;
+            Debug.Log(state);
+        }
 
         void Timer()
         {
@@ -114,29 +121,33 @@ namespace AncientTimes.Assets.Scripts.Intro
         void Sex()
         {
             Console.Write("Sei un maschio o una femmina?");
-            Console.MessageComplete += () => ActiveSex(true);
+            Console.MessageComplete += UpdateSex;
             NextState();
         }
 
         public void SexConfirmed()
         {
-            
             NextState();
         }
 
         void Name()
         {
             Console.Write("Come ti chiami?", true, "CharacterName");
+            ActiveSex(!GameVariables.GetSwitch("IsChosen"));
             NextState();
         }
 
         void NameConfirmation()
         {
-            Console.MessageComplete += () => Console.Write("Sei sicuro di chiamarti " + GameVariables.GetVariable("CharacterName") + "?");
+            
+            ActiveSex(!GameVariables.GetSwitch("IsChosen"));
+            Console.Write("Sei sicuro di chiamarti " + GameVariables.GetVariable("CharacterName") + "?");
+
+            ActiveSex(!GameVariables.GetSwitch("IsChosen"));
             NextState();
         }
 
-        void ActiveSex(bool isActive)
+        public void ActiveSex(bool isActive)
         {
             male.SetActive(isActive);
             female.SetActive(isActive);
@@ -148,18 +159,26 @@ namespace AncientTimes.Assets.Scripts.Intro
             }
         }
 
+        public void UpdateSex()
+        {
+            ActiveSex(true);
+            Console.MessageComplete -= UpdateSex;
+        }
+
         void EndSex()
         {
             if (GameVariables.GetSwitch("IsChosen"))
             {
                 Kerneth.SetActive(true);
                 KShadow.SetActive(true);
-                if (GameVariables.GetSwitch("IsMan")) Console.Write("Sei un ragazzo");
-                else Console.Write("Sei una ragazza");  
             }
             NextState();
         }
 
+        void Ending()
+        {
+            Console.Write("Piacere " + GameVariables.GetVariable("CharacterName") + ", preparti ad un viaggio indimenticabile su Ancient Times!");
+        }
         #endregion Methods
     }
 }
@@ -179,6 +198,7 @@ internal enum IntroState
     EndSex,
     Name,
     WaitForNameTyping,
-    NameConfirmation
+    NameConfirmation,
+    Ending
     //ecc ecc ecc
 }
