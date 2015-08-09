@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace AncientTimes.Assets.Scripts.Utilities
 {
-    public struct GameVariables
+    public static class GameVariables
     {
         #region Properties
 
