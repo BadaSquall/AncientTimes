@@ -22,6 +22,7 @@ namespace AncientTimes.Assets.Scripts.Intro
         #endregion Properties
 
         #region Methods
+        
         void Start()
         {
             SexAnim = GameObject.Find("Sex").GetComponent<Animator>();
@@ -74,14 +75,13 @@ namespace AncientTimes.Assets.Scripts.Intro
                 case IntroState.Ending:
                     Ending();
                     break;
+                case IntroState.StartMap:
+                    StartMap();
+                    break;
             }
         }
 
-        void NextState() 
-        {
-            state++;
-            Debug.Log(state);
-        }
+        void NextState() { state++; }
 
         void Timer()
         {
@@ -115,13 +115,13 @@ namespace AncientTimes.Assets.Scripts.Intro
             Console.Write("Nonostante ciò non sappiamo ancora tutto su queste meraviglie della\n\nnatura.");
             Console.Write("Per questo mi sono ritirato tanti anni fa qui lontano da tutti per vivere\n\nancora di più a contatto con loro!");
             Console.Write("Vorrai perdonarmi ma ultimamente la mia vista è calata....\n\nperciò dimmi:");
+            Console.MessageComplete += UpdateSex;
             NextState();
         }
 
         void Sex()
         {
             Console.Write("Sei un maschio o una femmina?");
-            Console.MessageComplete += UpdateSex;
             NextState();
         }
 
@@ -139,7 +139,6 @@ namespace AncientTimes.Assets.Scripts.Intro
 
         void NameConfirmation()
         {
-            
             ActiveSex(!GameVariables.GetSwitch("IsChosen"));
             Console.Write("Sei sicuro di chiamarti " + GameVariables.GetVariable("CharacterName") + "?");
 
@@ -177,8 +176,15 @@ namespace AncientTimes.Assets.Scripts.Intro
 
         void Ending()
         {
-            Console.Write("Piacere " + GameVariables.GetVariable("CharacterName") + ", preparti ad un viaggio indimenticabile su Ancient Times!");
+            Console.Write("Piacere " + GameVariables.GetVariable("CharacterName") + ", preparti ad un viaggio indimenticabile nella regione di Thomas!");
+            NextState();
         }
+
+        void StartMap()
+        {
+            Application.LoadLevel("MapScene");
+        }
+
         #endregion Methods
     }
 }
@@ -195,10 +201,13 @@ internal enum IntroState
     WaitExplanation,
     Sex,
     WaitSexSelection,
+    WaitForTextOfSelectionRemoving,
     EndSex,
     Name,
     WaitForNameTyping,
     NameConfirmation,
-    Ending
+    Ending,
+    WaitForChanging,
+    StartMap
     //ecc ecc ecc
 }
