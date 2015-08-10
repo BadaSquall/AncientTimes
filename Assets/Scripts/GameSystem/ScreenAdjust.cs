@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-namespace Assets.Scripts.GameSystem
+namespace AncientTimes.Assets.Scripts.GameSystem
 {
     public class ScreenAdjust : MonoBehaviour
     {

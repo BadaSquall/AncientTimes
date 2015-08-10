@@ -1,6 +1,7 @@
 ﻿using AncientTimes.Assets.Scripts.Events.Actions.Helpers;
 using AncientTimes.Assets.Scripts.GameSystem;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace AncientTimes.Assets.Scripts.Events.Actions
 {
@@ -28,9 +29,9 @@ namespace AncientTimes.Assets.Scripts.Events.Actions
 
         public override bool Execute(float deltaTime)
         {
-            if (firstExecute)
+            if (firstExecute && !hasFinished)
             {
-                Dialogues.ForEach(dialogue => Console.Write(dialogue.Text));
+                Dialogues.ForEach(dialogue => { Debug.Log(dialogue.ImagePath); Console.Write(dialogue.Text, dialogue.Name, dialogue.ImagePath); });
                 Console.MessageComplete += MessageCompleted;
                 firstExecute = false;
             }

@@ -8,8 +8,10 @@ namespace AncientTimes.Assets.Scripts.Intro
     public class Sex : MonoBehaviour
     {
         #region Properties
+
         private GameObject shadow;
-        private string name;
+        private string characterName;
+
         #endregion Properties
 
         #region Methods
@@ -17,14 +19,14 @@ namespace AncientTimes.Assets.Scripts.Intro
         // Use this for initialization
         void Awake()
         {
-            name = this.gameObject.name;
+            characterName = this.gameObject.name;
 
-            if (name == "male") 
+            if (characterName == "male") 
             { 
                 shadow = GameObject.Find("shadowM");
                 shadow.SetActive(false);
             }
-            else if (name == "female")
+            else if (characterName == "female")
             { 
                 shadow = GameObject.Find("shadowF");
                 shadow.SetActive(false);
@@ -41,13 +43,13 @@ namespace AncientTimes.Assets.Scripts.Intro
         {
             if (Input.GetMouseButtonDown(0))
             {
-                if (name == "male")
+                if (characterName == "male")
                 {
                     GameVariables.UpdateSwitch("IsMan", true);
                     GameObject.Find("female").SetActive(false);
                     this.gameObject.SetActive(false);
                 }
-                else if (name == "female")
+                else if (characterName == "female")
                 {
                     GameVariables.UpdateSwitch("IsMan", false);
                     GameObject.Find("male").SetActive(false);

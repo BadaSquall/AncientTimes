@@ -1,5 +1,6 @@
 ﻿using AncientTimes.Assets.Scripts.Events;
 using AncientTimes.Assets.Scripts.GameSystem;
+using AncientTimes.Assets.Scripts.Utilities;
 using System.Collections;
 using UnityEngine;
 
@@ -20,6 +21,7 @@ namespace AncientTimes.Assets.Scripts.PG
 
         void OnTriggerStay2D(Collider2D other)
         {
+            if (GameVariables.GetSwitch("Pause")) return;
             if (Input.GetButtonDown("Submit"))
             {
                 var gameEvent = other.GetComponent<GameEvent>();

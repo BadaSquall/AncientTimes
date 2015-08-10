@@ -35,6 +35,11 @@ namespace AncientTimes.Assets.Scripts.GameSystem
         private static string variable;
 
         /// <summary>
+        /// Occurs when [message started].
+        /// </summary>
+        public static event Action MessageStarted;
+
+        /// <summary>
         /// Occurs when [message complete].
         /// </summary>
         public static event Action MessageComplete;
@@ -96,11 +101,16 @@ namespace AncientTimes.Assets.Scripts.GameSystem
 
             Console.compositions.Add(composition);
             consoleBackground.SetActive(true);
+
+            if (MessageStarted != null) MessageStarted();
         }
 
         public static void Write(string text, bool waitInsert, string variable, string name = "", string imagePath = "")
         {
             waitForInsert = waitInsert;
+
+            if (waitForInsert) messageInserted = "_";
+
             Console.variable = variable;
             Write(text, name, imagePath);
         }
@@ -163,17 +173,16 @@ namespace AncientTimes.Assets.Scripts.GameSystem
             {
                 if (c == "\b"[0])
                 {
-                    if (messageInserted.Length != 0) messageInserted = messageInserted.Substring(0, messageInserted.Length - 1);
+                    if (messageInserted.Length != 0) messageInserted = messageInserted.Substring(0, messageInserted.Length - 2) + "_";
                 }
-
-                else
-                    if (c == "\n"[0] || c == "\r"[0])
-                    {
-                        GameVariables.UpdateVariable(variable, messageInserted);
-                        waitForInsert = false;
-                        return false;
-                    }
-                    else messageInserted += c;
+                else if ((c == "\n"[0] || c == "\r"[0]))
+                {
+                    if (messageInserted == "_") return false;
+                    GameVariables.UpdateVariable(variable, messageInserted.Substring(0, messageInserted.Length - 1));
+                    waitForInsert = false;
+                    return false;
+                }
+                else messageInserted = messageInserted.Substring(0, messageInserted.Length - 1) + c + "_";
             }
 
             return true;

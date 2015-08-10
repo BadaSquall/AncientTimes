@@ -27,7 +27,7 @@
           <Dialogues>
             <Dialogue>
               <Name />
-              <ImagePath />
+              <ImagePath>Expressions/Jager/Sad</ImagePath>
               <Text>Adesso smamma</Text>
             </Dialogue>
           </Dialogues>
