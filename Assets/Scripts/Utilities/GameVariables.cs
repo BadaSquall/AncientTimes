@@ -20,7 +20,7 @@ namespace AncientTimes.Assets.Scripts.Utilities
             switches = new Dictionary<string, bool>();
             UpdateSwitch("NewGame", true);
             variables = new Dictionary<string, string>();
-            UpdateVariable("CurrentMap", "Altaquercia");
+            UpdateVariable("CurrentMap", "Isola");
         }
 
         #endregion Constructor
