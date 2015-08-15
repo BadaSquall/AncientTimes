@@ -33,6 +33,7 @@ namespace AncientTimes.Assets.Scripts.Intro
             female = GameObject.Find("female");
             Console.MessageComplete += () => NextState();
             ActiveSex(false);
+            GameVariables.Update("CurrentMap", "Isola");
         }
 
         void Update()

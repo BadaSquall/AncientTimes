@@ -34,7 +34,7 @@ namespace AncientTimes.Assets.Scripts.GameSystem
             
             foreach (var container in evt.Event.Containers)
             {
-                if (string.IsNullOrEmpty(container.Condition) || GameVariables.GetSwitch(container.Condition))
+                if (string.IsNullOrEmpty(container.Condition) || bool.Parse(GameVariables.Get(container.Condition, true)))
                 {
                     actionContainer = container.Clone();
                     return;
@@ -42,6 +42,9 @@ namespace AncientTimes.Assets.Scripts.GameSystem
             }
         }
 
+        /// <summary>
+        /// Checks if an automatic event exists and plays it if it does.
+        /// </summary>
         public void CheckAutoEvent()
         {
             var auto = GameObject.FindGameObjectWithTag("AutoEvent");

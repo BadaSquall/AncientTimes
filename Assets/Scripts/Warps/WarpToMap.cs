@@ -1,7 +1,7 @@
 ﻿using System.Net.Mime;
-using AncientTimes.Assets.Scripts.WildPokemon;
 using UnityEngine;
 using System.Collections;
+using AncientTimes.Assets.Scripts.Maps;
 
 namespace AncientTimes.Assets.Scripts.WildPokemon
 {
@@ -21,11 +21,7 @@ namespace AncientTimes.Assets.Scripts.WildPokemon
 
         #region Methods
 
-
-        private void Start()
-        {
-            Player = GameObject.FindGameObjectWithTag("Player");
-        }
+        private void Start() { Player = GameObject.FindGameObjectWithTag("Player"); }
 
         private void Update()
         {
@@ -34,24 +30,13 @@ namespace AncientTimes.Assets.Scripts.WildPokemon
                 MapLoader.Load(mapToWarp);
                 Player.transform.position = new Vector3(posX, posY); 
             }
-
         }
 
+        private void OnTriggerEnter2D(Collider2D coll) { IsIn = true; }
 
-        private void OnTriggerEnter2D(Collider2D coll)
-        {
-            IsIn = true;
-        }
+        private void OnTriggerStay2D(Collider2D coll) { IsIn = false; }
 
-        private void OnTriggerStay2D(Collider2D coll)
-        {
-            IsIn = false;
-        }
-
-        private void OnTriggerExit2D(Collider2D coll)
-        {
-            IsIn = false;
-        }
+        private void OnTriggerExit2D(Collider2D coll) { IsIn = false; }
 
         #endregion Methods
     }
