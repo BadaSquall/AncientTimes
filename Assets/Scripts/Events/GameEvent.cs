@@ -63,7 +63,11 @@ namespace AncientTimes.Assets.Scripts.Events
         void Start()
         {
             var filePath = @"Assets/Events/" + Application.loadedLevelName + "/" + name + ".xml";
-            if (File.Exists(filePath)) Event = (SerializableGameEvent)Utilities.XMLDeserializer.Deserialize(typeof(SerializableGameEvent), filePath);
+            if (File.Exists(filePath))
+            {
+                Event = (SerializableGameEvent)Utilities.XMLDeserializer.Deserialize(typeof(SerializableGameEvent), filePath);
+                Console.Write(Event.ToString());
+            }
         }
 
         //void OnTriggerStay2D(Collider2D collider)
