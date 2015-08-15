@@ -37,6 +37,14 @@ public class ShowDialogueLayoutManager : EventLayoutManagerBase
             var dialogue = showDialogue.Dialogues[dialogueIndex];
             ShowDialogueVisibles[showDialogue] = EditorGUILayout.Foldout(ShowDialogueVisibles[showDialogue], "    Dialogue n° " + dialogueIndex + ":", EditorStyles.boldLabel);
             GUILayout.BeginHorizontal();
+            GUILayout.Label("Name:");
+            dialogue.Name = GUILayout.TextArea(dialogue.Name);
+            GUILayout.EndHorizontal();
+            GUILayout.BeginHorizontal();
+            GUILayout.Label("Image Path: Assets/Sprites/Resources/");
+            dialogue.ImagePath = GUILayout.TextArea(dialogue.ImagePath);
+            GUILayout.EndHorizontal();
+            GUILayout.BeginHorizontal();
             GUILayout.Label("Text:");
             dialogue.Text = GUILayout.TextArea(dialogue.Text);
             GUILayout.EndHorizontal();

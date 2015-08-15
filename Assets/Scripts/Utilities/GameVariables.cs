@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace AncientTimes.Assets.Scripts.Utilities
 {
-    public struct GameVariables
+    public static class GameVariables
     {
         #region Properties
 
@@ -20,7 +20,7 @@ namespace AncientTimes.Assets.Scripts.Utilities
             switches = new Dictionary<string, bool>();
             UpdateSwitch("NewGame", true);
             variables = new Dictionary<string, string>();
-            UpdateVariable("CurrentMap", "Altaquercia");
+            UpdateVariable("CurrentMap", "Isola");
         }
 
         #endregion Constructor

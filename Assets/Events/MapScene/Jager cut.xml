@@ -19,5 +19,20 @@
         </ActionBase>
       </Actions>
     </Container>
+    <Container>
+      <Trigger>Interaction</Trigger>
+      <Condition>SecondDialogue</Condition>
+      <Actions>
+        <ActionBase xsi:type="ShowDialogue">
+          <Dialogues>
+            <Dialogue>
+              <Name />
+              <ImagePath>Expressions/Jager/Sad</ImagePath>
+              <Text>Adesso smamma</Text>
+            </Dialogue>
+          </Dialogues>
+        </ActionBase>
+      </Actions>
+    </Container>
   </Containers>
 </SerializableGameEvent>

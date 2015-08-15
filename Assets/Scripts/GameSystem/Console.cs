@@ -29,20 +29,20 @@ namespace AncientTimes.Assets.Scripts.GameSystem
         private static GameObject nextMessageTriangle;
         private static List<MessageComposition> compositions;
         private const int MaximumWritingSpeed = 5;
-        private static event Action messageComplete;
         private static string message;
         private static bool waitForInsert;
         private static string messageInserted;
         private static string variable;
 
         /// <summary>
+        /// Occurs when [message started].
+        /// </summary>
+        public static event Action MessageStarted;
+
+        /// <summary>
         /// Occurs when [message complete].
         /// </summary>
-        public static event Action MessageComplete
-        {
-            add { messageComplete = messageComplete == null ? new Action(value) : value; }
-            remove { if (string.IsNullOrEmpty(message)) return; messageComplete = value; }
-        }
+        public static event Action MessageComplete;
 
         #endregion Properties
 
@@ -101,11 +101,16 @@ namespace AncientTimes.Assets.Scripts.GameSystem
 
             Console.compositions.Add(composition);
             consoleBackground.SetActive(true);
+
+            if (MessageStarted != null) MessageStarted();
         }
 
         public static void Write(string text, bool waitInsert, string variable, string name = "", string imagePath = "")
         {
             waitForInsert = waitInsert;
+
+            if (waitForInsert) messageInserted = "_";
+
             Console.variable = variable;
             Write(text, name, imagePath);
         }
@@ -140,7 +145,7 @@ namespace AncientTimes.Assets.Scripts.GameSystem
             if (compositions.First().Image != null) Destroy(compositions.First().Image);
             compositions.Remove(compositions.First());
 
-            if (compositions.Count == 0 && messageComplete != null) messageComplete();
+            if (compositions.Count == 0 && MessageComplete != null) MessageComplete();
 
             ClearText();
             if (compositions.Count == 0) consoleBackground.SetActive(false);
@@ -162,23 +167,25 @@ namespace AncientTimes.Assets.Scripts.GameSystem
 
         private bool ListenToInsert()
         {
+            if (!waitForInsert) return false;
+
             foreach (var c in Input.inputString)
             {
                 if (c == "\b"[0])
                 {
-                    if (messageInserted.Length != 0) messageInserted = messageInserted.Substring(0, messageInserted.Length - 1);
+                    if (messageInserted.Length != 0) messageInserted = messageInserted.Substring(0, messageInserted.Length - 2) + "_";
                 }
-
-                else
-                    if (c == "\n"[0] || c == "\r"[0])
-                    {
-                        GameVariables.UpdateVariable(variable, messageInserted);
-                        waitForInsert = false;
-                    }
-                    else messageInserted += c;
+                else if ((c == "\n"[0] || c == "\r"[0]))
+                {
+                    if (messageInserted == "_") return false;
+                    GameVariables.UpdateVariable(variable, messageInserted.Substring(0, messageInserted.Length - 1));
+                    waitForInsert = false;
+                    return false;
+                }
+                else messageInserted = messageInserted.Substring(0, messageInserted.Length - 1) + c + "_";
             }
 
-            return waitForInsert;
+            return true;
         }
 
         /// <summary>

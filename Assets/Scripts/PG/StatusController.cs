@@ -59,6 +59,8 @@ namespace AncientTimes.Assets.Scripts.PG
             //if (Input.GetKeyDown(KeyCode.A)) LookAt(Direction.Left);
             //if (Input.GetButtonDown("Submit")) eventManager.RegisterEvent(FocusedEvent);
 
+            if (GameVariables.GetSwitch("Pause")) return;
+
             if (OnStatusChange == null) return;
 
             if (Input.GetButton("Horizontal") && Input.GetAxis("Horizontal") > 0) OnStatusChange(Status.WalkingRight);

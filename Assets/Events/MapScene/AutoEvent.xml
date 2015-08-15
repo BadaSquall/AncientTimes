@@ -9,9 +9,21 @@
           <Name>FirstDialogue</Name>
           <Value>true</Value>
         </ActionBase>
-        <ActionBase xsi:type="ChangeSwitch">
-          <Name>NewGame</Name>
-          <Value>false</Value>
+        <ActionBase xsi:type="ShowDialogue">
+          <Dialogues>
+            <Dialogue>
+              <Name />
+              <ImagePath>Expressions/Kerneth/Normal</ImagePath>
+              <Text>Bene ragazzi, prendete posto dove preferite.</Text>
+            </Dialogue>
+            <Dialogue>
+              <Name />
+              <ImagePath>Expressions/Kerneth/Happy</ImagePath>
+              <Text>Siete cresciuti molto da quando avete lasciato Altaquercia
+
+per raggiungere quest'isola!</Text>
+            </Dialogue>
+          </Dialogues>
         </ActionBase>
       </Actions>
     </Container>

@@ -15,7 +15,7 @@ namespace AncientTimes.Assets.Scripts.WildPokemon
 
         private bool isInside;
         private WildPokemonMap mapReader;
-        private WildPokemon wildPokemonSelected;
+        //private WildPokemon wildPokemonSelected;
         private float timeToAppared = 0.0F;
         private float TimeToApparedRate = 1.5F;
 
@@ -42,7 +42,7 @@ namespace AncientTimes.Assets.Scripts.WildPokemon
                     {
                         try
                         {
-                            wildPokemonSelected = GetWildPokemon(gameObject.tag);
+                            //wildPokemonSelected = GetWildPokemon(gameObject.tag);
 
                             //TODO: add a interface to create an Pokemon Object
                             // Pokemon p = new Pokemon(wildPokemonSelected.pokemonName, wildPokemonSelected.level);
@@ -50,7 +50,7 @@ namespace AncientTimes.Assets.Scripts.WildPokemon
                             //TODO: add an interface to Run a Pokèmon Battle
                             // Battle.GoBattle (p);
                         }
-                        catch (NullReferenceException exception)
+                        catch
                         {
                             Debug.Log("tag Name of field is not insert correctly");
                             throw;
@@ -63,39 +63,28 @@ namespace AncientTimes.Assets.Scripts.WildPokemon
 
         WildPokemon GetWildPokemon(string field)
         {
-            WildPokemon wildPokemon;
+            WildPokemon wildPokemon = null;
+
             switch (field)
             {
                 case "tallGrass":
                     wildPokemon = new WildPokemon(mapReader.tallGrass);
-                    return wildPokemon;
                     break;
-
                 case "sea":
-
                     wildPokemon = new WildPokemon(mapReader.sea);
-                    return wildPokemon;
                     break;
-
                 case "cave":
                     wildPokemon = new WildPokemon(mapReader.cave);
-                    return wildPokemon;
                     break;
             }
-            return null;
+
+            return wildPokemon;
         }
 
-        void OnTriggerEnter2D(Collider2D other)
-        {
-            isInside = true;
-        }
+        void OnTriggerEnter2D(Collider2D other) { isInside = true; }
 
-        void OnTriggerExit2D(Collider2D other)
-        {
-            isInside = false;
-        }
+        void OnTriggerExit2D(Collider2D other) { isInside = false; }
 
-    #endregion Methods
+        #endregion Methods
     }
-
 }
