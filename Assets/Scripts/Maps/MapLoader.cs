@@ -6,18 +6,17 @@ namespace AncientTimes.Assets.Scripts.WildPokemon
 {
     public class MapLoader : MonoBehaviour
     {
+        #region Methods
 
-        // Use this for initialization
-        void Start()
-        {
-            Load(GameVariables.GetVariable("CurrentMap"));
-        }
+        void Start() { Load(GameVariables.GetVariable("CurrentMap")); }
 
         public static void Load(string mapName)
         {
             Destroy(GameObject.FindGameObjectWithTag("Places"));
-            GameObject instance = Instantiate(Resources.Load("Maps/" + mapName, typeof(GameObject))) as GameObject;
-            GameVariables.UpdateVariable("CurrentMap",mapName);
+            Instantiate(Resources.Load("Maps/" + mapName, typeof(GameObject)));
+            GameVariables.UpdateVariable("CurrentMap", mapName);
         }
+
+        #endregion Methods
     }
 }
