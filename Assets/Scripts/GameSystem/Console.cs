@@ -178,7 +178,7 @@ namespace AncientTimes.Assets.Scripts.GameSystem
                 else if ((c == "\n"[0] || c == "\r"[0]))
                 {
                     if (messageInserted == "_") return false;
-                    GameVariables.UpdateVariable(variable, messageInserted.Substring(0, messageInserted.Length - 1));
+                    GameVariables.Update(variable, messageInserted.Substring(0, messageInserted.Length - 1));
                     waitForInsert = false;
                     return false;
                 }
