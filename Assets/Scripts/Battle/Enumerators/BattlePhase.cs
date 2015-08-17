@@ -3,6 +3,7 @@
 /// </summary>
 public enum BattlePhase 
 {
+	Choice,
 	AbilityCheck1,
 	Escape,
 	AbilityCheck2,
