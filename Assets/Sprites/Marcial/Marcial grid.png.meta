@@ -1,16 +1,25 @@
 fileFormatVersion: 2
-guid: 2ece9f13d3e1b094f874f191cd1580d0
+guid: 0b38ef71751067849a4efcc56e550aeb
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Boris gri_0
-    21300002: Boris gri_1
-    21300004: Boris gri_2
-    21300006: Boris gri_3
-    21300008: Boris gri_4
-    21300010: Boris gri_5
-    21300012: Boris gri_6
-    21300014: Boris gri_7
-    21300016: Boris gri_8
+    21300000: Marcial gri_0
+    21300002: Marcial gri_1
+    21300004: Marcial gri_2
+    21300006: Marcial gri_3
+    21300008: Marcial gri_4
+    21300010: Marcial gri_5
+    21300012: Marcial gri_6
+    21300014: Marcial gri_7
+    21300016: Marcial gri_8
+    21300018: Marcial grid_0
+    21300020: Marcial grid_1
+    21300022: Marcial grid_2
+    21300024: Marcial grid_3
+    21300026: Marcial grid_4
+    21300028: Marcial grid_5
+    21300030: Marcial grid_6
+    21300032: Marcial grid_7
+    21300034: Marcial grid_8
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -31,7 +40,7 @@ TextureImporter:
   generateCubemap: 0
   seamlessCubemap: 0
   textureFormat: -1
-  maxTextureSize: 1024
+  maxTextureSize: 512
   textureSettings:
     filterMode: -1
     aniso: 16
@@ -52,7 +61,7 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: Boris gri_0
+    - name: Marcial grid_0
       rect:
         serializedVersion: 2
         x: 0
@@ -62,7 +71,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Boris gri_1
+    - name: Marcial grid_1
       rect:
         serializedVersion: 2
         x: 64
@@ -72,7 +81,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Boris gri_2
+    - name: Marcial grid_2
       rect:
         serializedVersion: 2
         x: 128
@@ -82,7 +91,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Boris gri_3
+    - name: Marcial grid_3
       rect:
         serializedVersion: 2
         x: 0
@@ -92,7 +101,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Boris gri_4
+    - name: Marcial grid_4
       rect:
         serializedVersion: 2
         x: 64
@@ -102,7 +111,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Boris gri_5
+    - name: Marcial grid_5
       rect:
         serializedVersion: 2
         x: 128
@@ -112,7 +121,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Boris gri_6
+    - name: Marcial grid_6
       rect:
         serializedVersion: 2
         x: 0
@@ -122,7 +131,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Boris gri_7
+    - name: Marcial grid_7
       rect:
         serializedVersion: 2
         x: 64
@@ -132,7 +141,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Boris gri_8
+    - name: Marcial grid_8
       rect:
         serializedVersion: 2
         x: 128
