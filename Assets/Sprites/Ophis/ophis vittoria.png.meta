@@ -1,12 +1,12 @@
 fileFormatVersion: 2
-guid: 79cdfc3893d83cf42a1dca2dfe6a6aee
+guid: 85a3855777730a2419d7ac0b6a95297d
 TextureImporter:
   fileIDToRecycleName:
-    21300000: jager 2014 vittoria_0
-    21300002: jager 2014 vittoria_1
-    21300004: jager 2014 vittoria_2
-    21300006: jager 2014 vittoria_3
-    21300008: jager 2014 vittoria_4
+    21300000: ophis vittoria_0
+    21300002: ophis vittoria_1
+    21300004: ophis vittoria_2
+    21300006: ophis vittoria_3
+    21300008: ophis vittoria_4
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -26,7 +26,7 @@ TextureImporter:
   grayScaleToAlpha: 0
   generateCubemap: 0
   seamlessCubemap: 0
-  textureFormat: -1
+  textureFormat: -3
   maxTextureSize: 512
   textureSettings:
     filterMode: -1
@@ -48,7 +48,7 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: jager 2014 vittoria_0
+    - name: ophis vittoria_0
       rect:
         serializedVersion: 2
         x: 0
@@ -58,7 +58,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: jager 2014 vittoria_1
+    - name: ophis vittoria_1
       rect:
         serializedVersion: 2
         x: 64
@@ -68,7 +68,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: jager 2014 vittoria_2
+    - name: ophis vittoria_2
       rect:
         serializedVersion: 2
         x: 128
@@ -78,7 +78,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: jager 2014 vittoria_3
+    - name: ophis vittoria_3
       rect:
         serializedVersion: 2
         x: 192
@@ -88,7 +88,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: jager 2014 vittoria_4
+    - name: ophis vittoria_4
       rect:
         serializedVersion: 2
         x: 256

@@ -1,12 +1,16 @@
 fileFormatVersion: 2
-guid: 79cdfc3893d83cf42a1dca2dfe6a6aee
+guid: 0b38ef71751067849a4efcc56e550aeb
 TextureImporter:
   fileIDToRecycleName:
-    21300000: jager 2014 vittoria_0
-    21300002: jager 2014 vittoria_1
-    21300004: jager 2014 vittoria_2
-    21300006: jager 2014 vittoria_3
-    21300008: jager 2014 vittoria_4
+    21300000: Marcial gri_0
+    21300002: Marcial gri_1
+    21300004: Marcial gri_2
+    21300006: Marcial gri_3
+    21300008: Marcial gri_4
+    21300010: Marcial gri_5
+    21300012: Marcial gri_6
+    21300014: Marcial gri_7
+    21300016: Marcial gri_8
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -48,7 +52,67 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: jager 2014 vittoria_0
+    - name: Marcial gri_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 256
+        width: 64
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Marcial gri_1
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 256
+        width: 64
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Marcial gri_2
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 256
+        width: 64
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Marcial gri_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 128
+        width: 64
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Marcial gri_4
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 128
+        width: 64
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Marcial gri_5
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 128
+        width: 64
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Marcial gri_6
       rect:
         serializedVersion: 2
         x: 0
@@ -58,7 +122,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: jager 2014 vittoria_1
+    - name: Marcial gri_7
       rect:
         serializedVersion: 2
         x: 64
@@ -68,30 +132,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: jager 2014 vittoria_2
+    - name: Marcial gri_8
       rect:
         serializedVersion: 2
         x: 128
-        y: 0
-        width: 64
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: jager 2014 vittoria_3
-      rect:
-        serializedVersion: 2
-        x: 192
-        y: 0
-        width: 64
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: jager 2014 vittoria_4
-      rect:
-        serializedVersion: 2
-        x: 256
         y: 0
         width: 64
         height: 128

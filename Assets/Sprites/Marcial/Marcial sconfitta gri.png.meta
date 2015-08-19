@@ -1,12 +1,10 @@
 fileFormatVersion: 2
-guid: 79cdfc3893d83cf42a1dca2dfe6a6aee
+guid: 79bd2f3333633b0438499057755352b8
 TextureImporter:
   fileIDToRecycleName:
-    21300000: jager 2014 vittoria_0
-    21300002: jager 2014 vittoria_1
-    21300004: jager 2014 vittoria_2
-    21300006: jager 2014 vittoria_3
-    21300008: jager 2014 vittoria_4
+    21300000: Marcial sconfitta gri_0
+    21300002: Marcial sconfitta gri_1
+    21300004: Marcial sconfitta gri_2
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -48,7 +46,7 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: jager 2014 vittoria_0
+    - name: Marcial sconfitta gri_0
       rect:
         serializedVersion: 2
         x: 0
@@ -58,7 +56,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: jager 2014 vittoria_1
+    - name: Marcial sconfitta gri_1
       rect:
         serializedVersion: 2
         x: 64
@@ -68,30 +66,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: jager 2014 vittoria_2
+    - name: Marcial sconfitta gri_2
       rect:
         serializedVersion: 2
         x: 128
-        y: 0
-        width: 64
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: jager 2014 vittoria_3
-      rect:
-        serializedVersion: 2
-        x: 192
-        y: 0
-        width: 64
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: jager 2014 vittoria_4
-      rect:
-        serializedVersion: 2
-        x: 256
         y: 0
         width: 64
         height: 128
