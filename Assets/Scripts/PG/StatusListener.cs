@@ -103,23 +103,23 @@ namespace AncientTimes.Assets.Scripts.PG
             switch (newStatus)
             {
                 case StatusController.Status.WalkingLeft:
-                    if (GameVariables.Switches["IsPaused"])
+                    if (GameVariables.GetSwitch("IsPaused"))
                         hasToAbort = true;
                     break;
                 case StatusController.Status.WalkingRight:
-                    if (GameVariables.Switches["IsPaused"])
+                    if (GameVariables.GetSwitch("IsPaused"))
                         hasToAbort = true;
                     break;
                 case StatusController.Status.WalkingDown:
-                    if (GameVariables.Switches["IsPaused"])
+                    if (GameVariables.GetSwitch("IsPaused"))
                         hasToAbort = true;
                     break;
                 case StatusController.Status.WalkingUp:
-                    if (GameVariables.Switches["IsPaused"])
+                    if (GameVariables.GetSwitch("IsPaused"))
                         hasToAbort = true;
                     break;
                 case StatusController.Status.Idle:
-                    if (GameVariables.Switches["IsPaused"])
+                    if (GameVariables.GetSwitch("IsPaused"))
                         hasToAbort = true;
                     break;
             }

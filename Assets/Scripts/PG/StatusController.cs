@@ -20,7 +20,13 @@ namespace AncientTimes.Assets.Scripts.PG
         public static event OnStatusChangeHandler OnStatusChange;
         private Animator animator;
         private float walkSpeed;
-        public Console Dialogue;
+        public Console Dialogue { get; set; }
+        private EventChecker leftChecker;
+        private EventChecker rightChecker;
+        private EventChecker upChecker;
+        private EventChecker downChecker;
+        private Animator overAnimator;
+        private Animator grassAnimator;
 
 		public GameEvent FocusedEvent;
 
@@ -33,54 +39,83 @@ namespace AncientTimes.Assets.Scripts.PG
         void Start()
         {
             animator = GetComponent<Animator>();
-            walkSpeed = 5.0f;
+            overAnimator = transform.FindChild("Over").GetComponent<Animator>();
+            grassAnimator = transform.FindChild("Grass").GetComponent<Animator>();
+            walkSpeed = 2.5f;
             eventManager = GameObject.FindGameObjectWithTag("EventManager").GetComponent<EventManager>();
-            Console.MessageComplete += () => Debug.Log("Ci sono");
+            leftChecker = transform.FindChild("EventCheckerLeft").gameObject.GetComponent<EventChecker>();
+            rightChecker = transform.FindChild("EventCheckerRight").gameObject.GetComponent<EventChecker>();
+            upChecker = transform.FindChild("EventCheckerUp").gameObject.GetComponent<EventChecker>();
+            downChecker = transform.FindChild("EventCheckerDown").gameObject.GetComponent<EventChecker>();
+
+            DisableCheckers();
+            
+            //Console.MessageComplete += () => Debug.Log(GameVariables.GetVariable("CharacterName"));
         }
 
         void LateUpdate()
         {
-            if (Input.GetKeyDown(KeyCode.K)) Console.Write("Ciao"); //SerializeDeserializeEvent();
-            if (Input.GetKeyDown(KeyCode.A)) LookAt(Direction.Left);
-            //if (Input.GetKeyDown(KeyCode.Return)) eventManager.RegisterEvent(FocusedEvent);
+            //if (Input.GetButtonDown(KeyCode.K)) eventManager.RegisterEvent(GameObject.Find("Jager cut").GetComponent<GameEvent>()); //Console.Write("Come ti chiami?", true, "CharacterName", "terra", "Expressions/CapoTerra/sad"); //SerializeDeserializeEvent();
+            //if (Input.GetKeyDown(KeyCode.A)) LookAt(Direction.Left);
+            //if (Input.GetButtonDown("Submit")) eventManager.RegisterEvent(FocusedEvent);
+
+            if (GameVariables.GetSwitch("Pause")) return;
 
             if (OnStatusChange == null) return;
 
-            if (Input.GetKey("right")) OnStatusChange(Status.WalkingRight);
-            else if (Input.GetKey("left")) OnStatusChange(Status.WalkingLeft);
-            else if (Input.GetKey("down")) OnStatusChange(Status.WalkingDown);
-            else if (Input.GetKey("up")) OnStatusChange(Status.WalkingUp);
+            if (Input.GetButton("Horizontal") && Input.GetAxis("Horizontal") > 0) OnStatusChange(Status.WalkingRight);
+            else if (Input.GetButton("Horizontal") && Input.GetAxis("Horizontal") < 0) OnStatusChange(Status.WalkingLeft);
+            else if (Input.GetButton("Vertical") && Input.GetAxis("Vertical") < 0) OnStatusChange(Status.WalkingDown);
+            else if (Input.GetButton("Vertical") && Input.GetAxis("Vertical") > 0) OnStatusChange(Status.WalkingUp);
             else OnStatusChange(Status.Idle);
 		}
 
         public void WalkRight()
         {
+            DisableCheckers();
+            rightChecker.gameObject.SetActive(true);
             rigidbody2D.velocity = new Vector2(walkSpeed, 0.0f);
 			animator.SetTrigger("WalkRight");
+            overAnimator.SetTrigger("WalkRight");
+            grassAnimator.SetTrigger("WalkRight");
         }
 
         public void WalkLeft()
         {
+            DisableCheckers();
+            leftChecker.gameObject.SetActive(true);
             rigidbody2D.velocity = new Vector2(walkSpeed * (-1.0f), 0.0f);
 			animator.SetTrigger("WalkLeft");
+            overAnimator.SetTrigger("WalkLeft");
+            grassAnimator.SetTrigger("WalkLeft");
         }
 
         public void WalkDown()
         {
+            DisableCheckers();
+            downChecker.gameObject.SetActive(true);
             rigidbody2D.velocity = new Vector2(0.0f, walkSpeed * (-1.0f));
 			animator.SetTrigger("WalkDown");
+            overAnimator.SetTrigger("WalkDown");
+            grassAnimator.SetTrigger("WalkDown");
         }
 
         public void WalkUp()
         {
+            DisableCheckers();
+            upChecker.gameObject.SetActive(true);
             rigidbody2D.velocity = new Vector2(0.0f, walkSpeed);
 			animator.SetTrigger("WalkUp");
+            overAnimator.SetTrigger("WalkUp");
+            grassAnimator.SetTrigger("WalkUp");
         }
 
         public void Idle()
         {
             rigidbody2D.velocity = Vector2.zero;
             animator.SetTrigger("Idle");
+            overAnimator.SetTrigger("Idle");
+            grassAnimator.SetTrigger("Idle");
         }
 
 		void OnCollisionEnter2D(Collision2D coll)
@@ -108,17 +143,33 @@ namespace AncientTimes.Assets.Scripts.PG
             {
                 case Direction.Right:
                     animator.SetTrigger("IdleRight");
+                    overAnimator.SetTrigger("IdleRight");
+                    grassAnimator.SetTrigger("IdleRight");
                     break;
                 case Direction.Left:
                     animator.SetTrigger("IdleLeft");
+                    overAnimator.SetTrigger("IdleLeft");
+                    grassAnimator.SetTrigger("IdleLeft");
                     break;
                 case Direction.Up:
                     animator.SetTrigger("IdleUp");
+                    overAnimator.SetTrigger("IdleUp");
+                    grassAnimator.SetTrigger("IdleUp");
                     break;
                 case Direction.Down:
                     animator.SetTrigger("IdleDown");
+                    overAnimator.SetTrigger("IdleDown");
+                    grassAnimator.SetTrigger("IdleDown");
                     break;
             }
+        }
+
+        private void DisableCheckers()
+        {
+            leftChecker.gameObject.SetActive(false);
+            rightChecker.gameObject.SetActive(false);
+            downChecker.gameObject.SetActive(false);
+            upChecker.gameObject.SetActive(false);
         }
 
         #endregion Methods

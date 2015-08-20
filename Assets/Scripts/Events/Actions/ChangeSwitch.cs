@@ -16,9 +16,7 @@ namespace AncientTimes.Assets.Scripts.Events.Actions
 
         public override bool Execute(float deltaTime)
         {
-            if (GameVariables.Switches.ContainsKey(Name)) GameVariables.Switches[Name] = Value;
-            else GameVariables.Switches.Add(Name, Value);
-
+            GameVariables.UpdateSwitch(Name, Value);
             return true;
         }
 

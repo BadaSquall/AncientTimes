@@ -9,6 +9,7 @@ namespace AncientTimes.Assets.Scripts.Events.Actions
     [XmlInclude(typeof(ShowDialogue))]
     [XmlInclude(typeof(ChangeSwitch))]
     [XmlInclude(typeof(MoveCharacter))]
+    [XmlInclude(typeof(PlayAnimation))]
     public abstract class ActionBase
     {
         #region Methods

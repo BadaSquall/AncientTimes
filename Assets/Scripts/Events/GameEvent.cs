@@ -63,17 +63,21 @@ namespace AncientTimes.Assets.Scripts.Events
         void Start()
         {
             var filePath = @"Assets/Events/" + Application.loadedLevelName + "/" + name + ".xml";
-            if (File.Exists(filePath)) Event = (SerializableGameEvent)Utilities.XMLDeserializer.Deserialize(typeof(SerializableGameEvent), filePath);
-        }
-
-        void OnTriggerStay2D(Collider2D collider)
-        {
-            if (Input.GetKeyDown(KeyCode.Return))
+            if (File.Exists(filePath))
             {
-                GameObject.FindWithTag("Player").SendMessage("LookAt", gameObject);
-                GameObject.FindGameObjectWithTag("EventManager").GetComponent<EventManager>().RegisterEvent(this);
+                Event = (SerializableGameEvent)Utilities.XMLDeserializer.Deserialize(typeof(SerializableGameEvent), filePath);
+                Console.Write(Event.ToString());
             }
         }
+
+        //void OnTriggerStay2D(Collider2D collider)
+        //{
+        //    if (Input.GetButtonDown("Submit"))
+        //    {
+        //        GameObject.FindWithTag("Player").SendMessage("LookAt", gameObject);
+        //        GameObject.FindGameObjectWithTag("EventManager").GetComponent<EventManager>().RegisterEvent(this);
+        //    }
+        //}
 
         #endregion Methods
     }

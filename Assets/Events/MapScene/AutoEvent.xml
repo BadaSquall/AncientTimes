@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="us-ascii"?>
+<SerializableGameEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Containers>
+    <Container>
+      <Trigger>Interaction</Trigger>
+      <Condition>NewGame</Condition>
+      <Actions>
+        <ActionBase xsi:type="ChangeSwitch">
+          <Name>FirstDialogue</Name>
+          <Value>true</Value>
+        </ActionBase>
+        <ActionBase xsi:type="ShowDialogue">
+          <Dialogues>
+            <Dialogue>
+              <Name />
+              <ImagePath>Expressions/Kerneth/Normal</ImagePath>
+              <Text>Bene ragazzi, prendete posto dove preferite.</Text>
+            </Dialogue>
+            <Dialogue>
+              <Name />
+              <ImagePath>Expressions/Kerneth/Happy</ImagePath>
+              <Text>Siete cresciuti molto da quando avete lasciato Altaquercia
+
+per raggiungere quest'isola!</Text>
+            </Dialogue>
+          </Dialogues>
+        </ActionBase>
+      </Actions>
+    </Container>
+  </Containers>
+</SerializableGameEvent>

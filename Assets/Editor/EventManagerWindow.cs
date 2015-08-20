@@ -18,6 +18,7 @@ public class EventManagerWindow : EditorWindow
     
     private GameObject previousGameObject;
     private bool isPlaying;
+
     private Vector2 scrollPosition;
 
     #endregion Properties
@@ -30,6 +31,9 @@ public class EventManagerWindow : EditorWindow
         eventManagers.Add(new ChangeSwitchLayoutManager());
         eventManagers.Add(new ShowDialogueLayoutManager());
         eventManagers.Add(new MoveCharacterLayoutManager());
+        eventManagers.Add(new PlayAnimationLayoutManager());
+
+        scrollPosition = Vector2.zero;
     }
 
     #endregion Constructors
@@ -45,7 +49,11 @@ public class EventManagerWindow : EditorWindow
     {
         scrollPosition = EditorGUILayout.BeginScrollView(scrollPosition);
         {
-            if (!Selection.activeGameObject) return;
+            if (!Selection.activeGameObject)
+            {
+                EditorGUILayout.EndScrollView();
+                return;
+            }
 
             bool gameObjectChanged = false;
 
@@ -67,7 +75,11 @@ public class EventManagerWindow : EditorWindow
                     Selection.activeGameObject.AddComponent(typeof(GameEvent));
                     currentEvent = Selection.activeGameObject.GetComponent<GameEvent>();
                 }
-                else return;
+                else
+                {
+                    EditorGUILayout.EndScrollView();
+                    return;
+                }
             };
 
             var evt = currentEvent.Event;
@@ -162,9 +174,10 @@ public class EventManagerWindow : EditorWindow
                 var currentScenePath = EditorApplication.currentScene.Split('/');
                 currentScenePath[currentScenePath.Length - 1] = currentScenePath[currentScenePath.Length - 1].Remove(currentScenePath[currentScenePath.Length - 1].IndexOf(".unity"));
                 AncientTimes.Assets.Scripts.Utilities.XMLSerializer.Serialize(evt, @"Assets/Events/" + currentScenePath[currentScenePath.Length - 1] + "/",
-                   Selection.activeGameObject.name + ".xml");
+                    Selection.activeGameObject.name + ".xml");
             }
         }
+
         EditorGUILayout.EndScrollView();
     }
 

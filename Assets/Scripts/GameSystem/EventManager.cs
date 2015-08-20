@@ -31,17 +31,24 @@ namespace AncientTimes.Assets.Scripts.GameSystem
         {
 			if (evt == null || evt.Event == null) return;
             if (actionContainer != null) return;
-
+            
             foreach (var container in evt.Event.Containers)
             {
-                if (!GameVariables.Switches.ContainsKey(container.Condition)) return;
-
-                if (GameVariables.Switches[container.Condition])
+                if (string.IsNullOrEmpty(container.Condition) || bool.Parse(GameVariables.Get(container.Condition, true)))
                 {
                     actionContainer = container.Clone();
                     return;
                 }
             }
+        }
+
+        /// <summary>
+        /// Checks if an automatic event exists and plays it if it does.
+        /// </summary>
+        public void CheckAutoEvent()
+        {
+            var auto = GameObject.FindGameObjectWithTag("AutoEvent");
+            if (auto != null) RegisterEvent(auto.GetComponent<GameEvent>());
         }
 
         #endregion Methods
