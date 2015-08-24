@@ -35,6 +35,22 @@ public class Trainer
 	/// </summary>
 	public List<Pokemon> Team { get; private set; }
 
+    /// <summary>
+    /// Gets or sets the trainer ability.
+    /// </summary>
+    /// <value>
+    /// The trainer ability.
+    /// </value>
+    public Ability TrainerAbility { get; set; }
+
+    /// <summary>
+    /// Gets or sets the number of active pokemons in battle.
+    /// </summary>
+    /// <value>
+    /// The number of active pokemons in battle.
+    /// </value>
+    public int ActivePokemons { get; set; }
+
 	#region Constructor
 
 	/// <summary>
