@@ -1,4 +1,5 @@
-﻿using AncientTimes.Assets.Scripts.Utilities;
+﻿using System.Collections.Generic;
+using AncientTimes.Assets.Scripts.Utilities;
 using Assets.Scripts.Utilities;
 using UnityEngine;
 
@@ -14,7 +15,9 @@ namespace Assets.Scripts.Team
 
         private TeamType teamType;
 
-        //lista squadra
+        private Pokemon firstPokemon;
+
+        private List<Pokemon> Pokemons;
         
         void Start ()
         {
@@ -22,7 +25,12 @@ namespace Assets.Scripts.Team
                 teamType = TeamType.Battle;
             else teamType = TeamType.Menu;
 
-            
+            Pokemons = (List<Pokemon>) GameVariables.Get("PlayerTeam", new List<Pokemon>());
+            firstPokemon = ScenesCommunicator.PokemonInBattle;
+
+            Pokemons.Remove(firstPokemon);
+            Pokemons.Insert(0, firstPokemon);
+
         }
 	
         
