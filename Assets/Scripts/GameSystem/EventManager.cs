@@ -34,7 +34,7 @@ namespace AncientTimes.Assets.Scripts.GameSystem
             
             foreach (var container in evt.Event.Containers)
             {
-                if (string.IsNullOrEmpty(container.Condition) || bool.Parse(GameVariables.Get(container.Condition, true)))
+                if (string.IsNullOrEmpty(container.Condition) || bool.Parse((string) (GameVariables.Get(container.Condition, true))) )
                 {
                     actionContainer = container.Clone();
                     return;

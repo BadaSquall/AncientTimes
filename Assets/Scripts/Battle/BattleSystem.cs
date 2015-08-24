@@ -13,6 +13,8 @@ public class BattleSystem : MonoBehaviour
 
 	private BattlePhase currentPhase = BattlePhase.Choice;
 
+    private GameObject backgroundObject;
+
     private readonly List<GameObject> playerGameObjects = new List<GameObject>();
     private readonly List<GameObject> enemyGameObjects = new List<GameObject>(); 
 
@@ -30,8 +32,17 @@ public class BattleSystem : MonoBehaviour
 	{
 		InitializeQueue();
 
+	    var mapName = GameVariables.Get("CurrentMap", "");
+
+        // Resources.Load("BattleMaps/" + mapName");
+
         // test
-        StaticVariables.PlayerTeam.Add(new Pokemon
+	    backgroundObject = Instantiate(Resources.Load("BattleMaps/TempioNight"), 
+            new Vector3(0, 0, 1), new Quaternion(0, 0, 0, 0)) as GameObject;
+
+        // test
+	    var playerTeam = (List<Pokemon>) GameVariables.Get("PlayerTeam", new List<Pokemon>());
+        playerTeam.Add(new Pokemon
         {
             Name = "Hanemode"
         });
@@ -49,13 +60,17 @@ public class BattleSystem : MonoBehaviour
 	    }
 
         // Player Pokemon prefab istantiation
-	    foreach (var pokemon in StaticVariables.PlayerTeam.Take(activePokemonsNo))
+	    foreach (var pokemon in playerTeam.Take(activePokemonsNo))
 	    {
             // example prefab istantiation
             var tmpPrefab = Resources.Load("Prefab/Pokemon/" + pokemon.Name + "Rear");
 
             var tmpGameObject = Instantiate(tmpPrefab) as GameObject;
-            playerGameObjects.Add(tmpGameObject);
+
+	        if (tmpGameObject == null) continue;
+	        tmpGameObject.transform.position = SpritePositionCalculator.GetOffsetForPokemon(tmpGameObject, true);
+
+	        playerGameObjects.Add(tmpGameObject);
 	    }    
 
         // Enemy Pokemon prefab istantiation
@@ -65,6 +80,10 @@ public class BattleSystem : MonoBehaviour
             var tmpPrefab = Resources.Load("Prefab/Pokemon/" + pokemon.Name + "Front");
 
             var tmpGameObject = Instantiate(tmpPrefab) as GameObject;
+
+            if (tmpGameObject == null) continue;
+            tmpGameObject.transform.position = SpritePositionCalculator.GetOffsetForPokemon(tmpGameObject, false);
+
             enemyGameObjects.Add(tmpGameObject);
 	    }
 	}
@@ -145,7 +164,6 @@ public class BattleSystem : MonoBehaviour
     public static void StartWildBattle(string pokemonName, int level)
     {
         var pokemon = RandomPokemonGenerator.GenerateWildPokemon(pokemonName, level);
-
         EnemyTeam = new List<Pokemon> { pokemon };
 
         Application.LoadLevel("Battle");
