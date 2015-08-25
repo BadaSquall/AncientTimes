@@ -32,7 +32,15 @@ namespace Assets.Scripts.Team
             Pokemons.Insert(0, firstPokemon);
 
         }
-	
+
+        void OnGui()
+        {
+            GUISizer.BeginGUI();
+            
+            //roba
+
+            GUISizer.EndGUI();
+        }
         
         void Update () {
 	
