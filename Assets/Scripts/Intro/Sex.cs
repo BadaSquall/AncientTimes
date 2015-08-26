@@ -45,17 +45,17 @@ namespace AncientTimes.Assets.Scripts.Intro
             {
                 if (characterName == "male")
                 {
-                    GameVariables.UpdateSwitch("IsMan", true);
+                    GameVariables.Update("IsMan", true);
                     GameObject.Find("female").SetActive(false);
                     this.gameObject.SetActive(false);
                 }
                 else if (characterName == "female")
                 {
-                    GameVariables.UpdateSwitch("IsMan", false);
+                    GameVariables.Update("IsMan", false);
                     GameObject.Find("male").SetActive(false);
                     this.gameObject.SetActive(false);
                 }
-                GameVariables.UpdateSwitch("IsChosen", true);
+                GameVariables.Update("IsChosen", true);
                 GameObject.Find("Intro").GetComponent<Intro>().SendMessage("SexConfirmed");
             }
         }

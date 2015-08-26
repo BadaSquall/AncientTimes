@@ -19,21 +19,21 @@ namespace AncientTimes.Assets.Scripts.GameSystem
 
 	    void Pause()
 	    {
-            if (!GameVariables.GetSwitch("IsPaused"))
+            if (!bool.Parse(GameVariables.Get("IsPaused", false)))
             {
-                GameVariables.UpdateSwitch("IsPaused", true);
+                GameVariables.Update("IsPaused", true);
                 Time.timeScale = 0f;
             }
-            else if (GameVariables.GetSwitch("IsPaused"))
+            else if (bool.Parse(GameVariables.Get("IsPaused", false)))
             {
-                GameVariables.UpdateSwitch("IsPaused", false);
+                GameVariables.Update("IsPaused", false);
                 Time.timeScale = 1f;
             }
         }
 
 	    void OnGUI()
 	    {
-            if (GameVariables.GetSwitch("IsPaused"))
+            if (bool.Parse(GameVariables.Get("IsPaused", false)))
             {
                 GUILayout.BeginArea(new Rect(Screen.width/2 -100 , Screen.height/5 -50 , Screen.width, Screen.height));
                 GUILayout.Button("Pokedex", ButtonStyle);
@@ -45,7 +45,7 @@ namespace AncientTimes.Assets.Scripts.GameSystem
 
                 GUILayout.EndArea();
             }
-            else if (!GameVariables.GetSwitch("IsPaused")) GUI.enabled = false;
+            else if (!bool.Parse(GameVariables.Get("IsPaused", false))) GUI.enabled = false;
 	    }   
 
 	    #endregion Methods

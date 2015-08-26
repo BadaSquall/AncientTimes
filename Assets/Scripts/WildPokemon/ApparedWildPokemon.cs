@@ -26,7 +26,7 @@ namespace AncientTimes.Assets.Scripts.WildPokemon
         void Start()
         {
             mapReader = (WildPokemonMap)XMLDeserializer.Deserialize(typeof(WildPokemonMap), 
-                @"Assets/WildPokemonMap/" + GameVariables.GetVariable("CurrentMap") + ".xml");
+                @"Assets/WildPokemonMap/" + GameVariables.Get("CurrentMap", "Isola") + ".xml");
         }
 
         void Update()

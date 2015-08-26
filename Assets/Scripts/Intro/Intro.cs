@@ -134,16 +134,16 @@ namespace AncientTimes.Assets.Scripts.Intro
         void Name()
         {
             Console.Write("Come ti chiami?", true, "CharacterName");
-            ActiveSex(!GameVariables.GetSwitch("IsChosen"));
+            ActiveSex(!bool.Parse(GameVariables.Get("IsChosen", false)));
             NextState();
         }
 
         void NameConfirmation()
         {
-            ActiveSex(!GameVariables.GetSwitch("IsChosen"));
-            Console.Write("Sei sicuro di chiamarti " + GameVariables.GetVariable("CharacterName") + "?");
+            ActiveSex(!bool.Parse(GameVariables.Get("IsChosen", false)));
+            Console.Write("Sei sicuro di chiamarti " + GameVariables.Get("CharacterName", "Leon") + "?");
 
-            ActiveSex(!GameVariables.GetSwitch("IsChosen"));
+            ActiveSex(!bool.Parse(GameVariables.Get("IsChosen", false)));
             NextState();
         }
 

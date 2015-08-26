@@ -7,7 +7,7 @@ public class GameLifeCycle : MonoBehaviour
 {
 	void Start ()
     {
-        Console.MessageStarted += () => GameVariables.UpdateSwitch("Pause", true);
-        Console.MessageComplete += () => GameVariables.UpdateSwitch("Pause", false);
+        Console.MessageStarted += () => GameVariables.Update("Pause", true);
+        Console.MessageComplete += () => GameVariables.Update("Pause", false);
 	}
 }
