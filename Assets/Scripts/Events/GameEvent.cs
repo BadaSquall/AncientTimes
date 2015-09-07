@@ -66,7 +66,7 @@ namespace AncientTimes.Assets.Scripts.Events
             if (File.Exists(filePath))
             {
                 Event = (SerializableGameEvent)Utilities.XMLDeserializer.Deserialize(typeof(SerializableGameEvent), filePath);
-                Console.Write(Event.ToString());
+              /*  Console.Write(Event.ToString());*/
             }
         }
 
