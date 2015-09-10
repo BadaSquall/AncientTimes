@@ -16,6 +16,7 @@ namespace AncientTimes.Assets.Scripts.WildPokemon
         public string mapToWarp;
         public float posX;
         public float posY;
+        public string EndWarp;
 
         #endregion Properties
 
@@ -28,7 +29,7 @@ namespace AncientTimes.Assets.Scripts.WildPokemon
             if (IsIn)
             {
                 MapLoader.Load(mapToWarp);
-                Player.transform.position = new Vector3(posX, posY); 
+                Player.transform.position = GameObject.Find(EndWarp).transform.position; 
             }
         }
 

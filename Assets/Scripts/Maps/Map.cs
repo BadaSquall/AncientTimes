@@ -6,10 +6,6 @@ namespace AncientTimes.Assets.Scripts.Maps
 {
     public class Map : MonoBehaviour
     {
-        void Start()
-        {
-            var eventManager = GameObject.FindGameObjectWithTag("EventManager").GetComponent<EventManager>();
-            eventManager.CheckAutoEvent();
-        }
+        void Start() { EventManager.CheckAutoEvent(); }
     }
 }

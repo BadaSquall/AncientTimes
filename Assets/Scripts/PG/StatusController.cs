@@ -30,8 +30,6 @@ namespace AncientTimes.Assets.Scripts.PG
 
 		public GameEvent FocusedEvent;
 
-        public EventManager eventManager;
-
         #endregion Properties
 
         #region Methods
@@ -42,7 +40,6 @@ namespace AncientTimes.Assets.Scripts.PG
             overAnimator = transform.FindChild("Over").GetComponent<Animator>();
             grassAnimator = transform.FindChild("Grass").GetComponent<Animator>();
             walkSpeed = 2.5f;
-            eventManager = GameObject.FindGameObjectWithTag("EventManager").GetComponent<EventManager>();
             leftChecker = transform.FindChild("EventCheckerLeft").gameObject.GetComponent<EventChecker>();
             rightChecker = transform.FindChild("EventCheckerRight").gameObject.GetComponent<EventChecker>();
             upChecker = transform.FindChild("EventCheckerUp").gameObject.GetComponent<EventChecker>();
@@ -59,7 +56,7 @@ namespace AncientTimes.Assets.Scripts.PG
             //if (Input.GetKeyDown(KeyCode.A)) LookAt(Direction.Left);
             //if (Input.GetButtonDown("Submit")) eventManager.RegisterEvent(FocusedEvent);
 
-            if (GameVariables.GetSwitch("Pause")) return;
+            if (bool.Parse(GameVariables.Get("Pause", false))) return;
 
             if (OnStatusChange == null) return;
 
@@ -174,75 +171,5 @@ namespace AncientTimes.Assets.Scripts.PG
 
         #endregion Methods
 
-        #region JustForTest
-
-        private void SerializeDeserializeEvent()
-        {
-            var test = new GameObject();
-            test.AddComponent<GameEvent>();
-            var ge = test.GetComponent<GameEvent>();
-            ge.Event = new SerializableGameEvent();
-            ge.Event.Containers.Add(new Container()
-            {
-                Condition = "IsFirstEncounter"
-            });
-            ge.Event.Containers[0].Actions.Add(new ShowDialogue());
-            (ge.Event.Containers[0].Actions[0] as ShowDialogue).Dialogues.Add(new Dialogue()
-            {
-                Text = "Hey come stai?"
-            });
-            (ge.Event.Containers[0].Actions[0] as ShowDialogue).Dialogues.Add(new Dialogue()
-            {
-                Text = "Sapevo saresti venuto"
-            });
-            ge.Event.Containers[0].Actions.Add(new ChangeSwitch()
-            {
-                Name = "IsFirstEncounter",
-                Value = false
-            });
-            ge.Event.Containers[0].Actions.Add(new ChangeSwitch()
-            {
-                Name = "IsSecondEncounter",
-                Value = true
-            });
-            ge.Event.Containers.Add(new Container()
-            {
-                Condition = "IsSecondEncounter"
-            });
-            ge.Event.Containers[1].Actions.Add(new ShowDialogue());
-            (ge.Event.Containers[1].Actions[0] as ShowDialogue).Dialogues.Add(new Dialogue()
-            {
-                Text = "Mia sorella è un uomo :'("
-            });
-            ge.Event.Containers[1].Actions.Add(new ChangeSwitch()
-            {
-                Name = "IsSecondEncounter",
-                Value = false
-            });
-            ge.Event.Containers[1].Actions.Add(new ChangeSwitch()
-            {
-                Name = "IsThirdEncounter",
-                Value = true
-            });
-            ge.Event.Containers.Add(new Container()
-            {
-                Condition = "IsThirdEncounter"
-            });
-            ge.Event.Containers[2].Actions.Add(new MoveCharacter()
-            {
-                Direction = Direction.Right,
-                ObjectToMove = "CapoTerra"
-            });
-            ge.Event.Containers[2].Actions.Add(new MoveCharacter()
-            {
-                Direction = Direction.Down,
-                ObjectToMove = "CapoTerra"
-            });
-            //Utilities.XMLSerializer.Serialize(ge, @"Assets/Events/Temple/CapoTerra.xml");
-
-            eventManager.RegisterEvent(ge);
-        }
-
-        #endregion JustForTest
     }
 }

@@ -1,200 +1,461 @@
 ﻿using UnityEditor;
 using System.Collections.Generic;
 using UnityEngine;
-using AncientTimes.Assets.Scripts.Events;
 using System.Reflection;
 using System;
 using System.Linq;
-using AncientTimes.Assets.Scripts.Events.Actions;
 using System.IO;
+using AncientTimes.Assets.Scripts.Events.Actions;
+using AncientTimes.Assets.Scripts.Events;
 using AncientTimes.Assets.Scripts.Utilities;
 
+[InitializeOnLoad]
 public class EventManagerWindow : EditorWindow
 {
-    #region Properties
+	#region Properties
 
-    private int actionTypeIndex;
-    private List<EventLayoutManagerBase> eventManagers;
-    
-    private GameObject previousGameObject;
-    private bool isPlaying;
+	private List<Type> nodeTypes;
 
-    private Vector2 scrollPosition;
+	private static Texture2D bg;
 
-    #endregion Properties
+	private int actionTypeIndex;
+	private bool exitFromPlay;
+	
+	private GameObject previousGameObject;
+	private bool isPlaying;
+	private bool isInTransition;
+	private int nodeClicked;
 
-    #region Constructors
+	private Vector2 scrollPosition;
 
-    public EventManagerWindow()
-    {
-        eventManagers = new List<EventLayoutManagerBase>();
-        eventManagers.Add(new ChangeSwitchLayoutManager());
-        eventManagers.Add(new ShowDialogueLayoutManager());
-        eventManagers.Add(new MoveCharacterLayoutManager());
-        eventManagers.Add(new PlayAnimationLayoutManager());
+	private Vector2 mousePosition;
 
-        scrollPosition = Vector2.zero;
-    }
+	private bool isActiveObject;
 
-    #endregion Constructors
+	#endregion Properties
+	
+	#region Constructors
+	
+	public EventManagerWindow()
+	{
+		nodeTypes = Assembly.GetAssembly(typeof(BaseNode)).GetTypes()
+			.Where(myType => myType.IsClass && !myType.IsAbstract && myType.IsSubclassOf(typeof(BaseNode))).ToList();
+		scrollPosition = Vector2.zero;
+	}
+	
+	#endregion Constructors
+	
+	#region Methods
+	
+	[MenuItem("Window/Event Manager")]
+	public static void ShowWindow()
+	{
+		EditorWindow.GetWindow(typeof(EventManagerWindow));
+		bg = new Texture2D(1, 1, TextureFormat.RGBA32, false);
+		bg.SetPixel(0, 0, Color.black);
+		bg.Apply();
+	}
+	
+	private void OnEnable() { title = "Event Manager"; }
 
-    #region Methods
+	private void ConditionWindow(int id)
+	{
+		if (previousGameObject == null) return;
+		var gameEvent = previousGameObject.GetComponent<GameEvent>();
+		if (gameEvent == null) return;
+		gameEvent.Event.Condition =
+			EditorGUILayout.TextArea(previousGameObject.GetComponent<GameEvent>().Event.Condition, EditorStyles.textArea);
+	}
 
-    [MenuItem("Window/Event Manager")]
-    public static void ShowWindow() { EditorWindow.GetWindow(typeof(EventManagerWindow)); }
+	private void DrawWindow(int id)
+	{
+		var window = NodesList.Nodes[previousGameObject][id];
+		EditorGUILayout.BeginHorizontal();
+		window.IsNotCollapsed = EditorGUILayout.Foldout(window.IsNotCollapsed, "");
+		if (window.IsNotCollapsed)
+		{
+			EditorGUILayout.EndHorizontal();
+			EditorGUILayout.BeginHorizontal();
+			EditorGUILayout.LabelField("Label: ");
+			window.EventAction.Label = EditorGUILayout.TextArea(window.EventAction.Label);
+			EditorGUILayout.EndHorizontal();
+			window.DrawWindow();
+		}
+		else
+		{
+			EditorGUILayout.LabelField(window.EventAction.Label);
+			window.DrawWindowCollapsed();
+			EditorGUILayout.EndHorizontal();
+		}
+		if (!window.IsResizingWindow) GUI.DragWindow();
+		else window.ResizeWindow();
+	}
+	
+	void OnGUI()
+	{
+		//if (bg != null) GUI.DrawTexture(new Rect(0, 0, maxSize.x, maxSize.y), bg, ScaleMode.StretchToFill);
 
-    void OnEnable() { title = "Event Manager"; }
+		if (isPlaying && !EditorApplication.isPlaying)
+		{
+			previousGameObject = null;
+			isPlaying = false;
+			NodesList.Nodes.Clear();
+		}
 
-    void OnGUI()
-    {
-        scrollPosition = EditorGUILayout.BeginScrollView(scrollPosition);
-        {
-            if (!Selection.activeGameObject)
-            {
-                EditorGUILayout.EndScrollView();
-                return;
-            }
+		if (EditorApplication.isPlayingOrWillChangePlaymode && !EditorApplication.isPlaying)
+		{
+			previousGameObject = null;
+			NodesList.Nodes.Clear();
+		}
+		else if (EditorApplication.isPlaying && !isPlaying) isPlaying = true;
 
-            bool gameObjectChanged = false;
+		if (!isActiveObject)
+		{
+			GUI.Label(new Rect(0, 0, 500, 500), new GUIContent("Start selecting an object in the Hierarchy window"));
+			return;
+		}
 
-            if (Selection.activeGameObject != previousGameObject)
-            {
-                gameObjectChanged = true;
+		if (previousGameObject == null) return;
 
-                foreach (var manager in eventManagers) manager.FreeMemory();
+		if (!NodesList.Nodes.ContainsKey(previousGameObject)) return;
 
-                previousGameObject = Selection.activeGameObject;
-            }
+		if (previousGameObject.GetComponent<GameEvent>() == null)
+			GUI.Label(new Rect(0, 0, 500, 500), new GUIContent("Right click to create a new node and begin"));
 
-            var currentEvent = Selection.activeGameObject.GetComponent<GameEvent>();
+		scrollPosition = EditorGUILayout.BeginScrollView(scrollPosition);
+		{
+			var evt = Event.current;
+			mousePosition = evt.mousePosition;
+			var clickedOnNode = false;
 
-            if (!currentEvent)
-            {
-                if (GUILayout.Button("Create event"))
-                {
-                    Selection.activeGameObject.AddComponent(typeof(GameEvent));
-                    currentEvent = Selection.activeGameObject.GetComponent<GameEvent>();
-                }
-                else
-                {
-                    EditorGUILayout.EndScrollView();
-                    return;
-                }
-            };
+			if (NodesList.Nodes[previousGameObject].Count > nodeClicked)
+			{
+				var lastClickedNode = NodesList.Nodes[previousGameObject][nodeClicked];
 
-            var evt = currentEvent.Event;
+				NodesList.Nodes[previousGameObject].ForEach(node => node.CreateConnection());
 
-            if (gameObjectChanged)
-            {
-                var currentScenePath = UnityEditor.EditorApplication.currentScene.Split('/');
-                currentScenePath[currentScenePath.Length - 1] = currentScenePath[currentScenePath.Length - 1].Remove(currentScenePath[currentScenePath.Length - 1].IndexOf(".unity"));
-                var filePath = @"Assets/Events/" + currentScenePath[currentScenePath.Length - 1] + "/" + Selection.activeGameObject.name + ".xml";
+				if (isInTransition || lastClickedNode.IsInTransition)
+				{
+					if (lastClickedNode.IsInTransition) lastClickedNode.HandleTransition(mousePosition);
+					else CreateConnection(lastClickedNode.Window, evt.mousePosition);
 
-                if (File.Exists(filePath))
-                {
-                    currentEvent.Event = (SerializableGameEvent)AncientTimes.Assets.Scripts.Utilities.XMLDeserializer.Deserialize(typeof(SerializableGameEvent), filePath);
-                    evt = currentEvent.Event;
-                }
-            }
+					if (evt.type == EventType.MouseDown && evt.button == 0)
+					{
+						var transitioningNode = lastClickedNode;
 
-            GUILayout.Label("Containers", EditorStyles.boldLabel);
+						clickedOnNode = ClickedOnNode(evt);
 
-            var containerIndexes = new List<int>();
+						lastClickedNode = NodesList.Nodes[previousGameObject][nodeClicked];
 
-            for (var containerIndex = 0; containerIndex < evt.Containers.Count; containerIndex++)
-            {
-                var container = evt.Containers[containerIndex];
+						if (clickedOnNode && transitioningNode != lastClickedNode)
+						{
+							if (transitioningNode.ChangeOutput(lastClickedNode))
+							{
+								isInTransition = false;
+								lastClickedNode.IsInTransition = false;
+							}
+							else nodeClicked = NodesList.Nodes[previousGameObject].IndexOf(transitioningNode);
+						}
+						else if (!clickedOnNode)
+						{
+							isInTransition = false;
+							lastClickedNode.IsInTransition = false;
+						}
+					}
+				}
+			}
 
-                var showContainer = currentEvent.ContainersVisibles[container] = EditorGUILayout.Foldout(currentEvent.ContainersVisibles[container], "Container n° " + containerIndex + ":");
+			if (evt.type == EventType.MouseDown && evt.button == 1 && !isInTransition)
+			{
+				clickedOnNode = ClickedOnNode(evt);
 
-                var selectablesTypes = new List<Type>();
+				var menu = new GenericMenu();
 
-                if (showContainer)
-                {
-                    var selectableTriggers = new List<string>();
-                    var triggers = Enum.GetValues(typeof(EventTrigger));
+				if (!clickedOnNode)
+				{
+					for (var nodeIndex = 0; nodeIndex < nodeTypes.Count; nodeIndex++)
+					{
+						var nodeType = nodeTypes[nodeIndex];
+						menu.AddItem(new GUIContent("Add " + nodeType.Name), false, () => CreateNodeCallback(nodeType));
+					}
+				}
+				else
+				{
+					var node = NodesList.Nodes[previousGameObject][nodeClicked];
 
-                    foreach (var trigger in triggers) selectableTriggers.Add(trigger.ToString());
+					menu.AddItem(new GUIContent("Set as entry point"), false, EntryPointCallBack);
 
-                    currentEvent.TriggerIndexes[container] = EditorGUILayout.Popup(currentEvent.TriggerIndexes[container], selectableTriggers.ToArray());
+					if (!node.HasPersonalizedContextMenu)
+					{
+						menu.AddItem(new GUIContent("Create transition"), false, () => isInTransition = true);
+						menu.AddItem(new GUIContent("Delete transition"), false, () => node.RemoveOutput(null));
+					}
+					else node.CreatePersonalizedContextMenu(menu);
 
-                    //container.Trigger = (EventTrigger)Enum.Parse(typeof(EventTrigger), EditorGUILayout.TextField("    Trigger: ", container.Trigger.ToString()));
-                    container.Condition = EditorGUILayout.TextField("   Condition:", container.Condition);
-                    GUILayout.Label("   Actions", EditorStyles.boldLabel);
+					menu.AddItem(new GUIContent("Delete node"), false, () => node.Delete());
+				}
 
-                    var actionIndexes = new List<int>();
+				menu.ShowAsContext();
+				evt.Use();
+			}
 
-                    for (var actionIndex = 0; actionIndex < container.Actions.Count; actionIndex++)
-                    {
-                        var action = container.Actions[actionIndex];
-                        var showAction = currentEvent.ActionsVisibles[container][action] = EditorGUILayout.Foldout(currentEvent.ActionsVisibles[container][action], "Action (" + action.GetType().Name + ") n° " + actionIndex + ":");
+			if (NodesList.Nodes[previousGameObject].Count != 0)
+			{
+				BeginWindows();
+				{
+					GUI.Window(-1, new Rect(0, 0, 100, 50), ConditionWindow, "Condition");
 
-                        if (showAction)
-                        {
-                            foreach (var manager in eventManagers)
-                            {
-                                var actionType = action.GetType();
-                                if (manager.EventType == actionType)
-                                    manager.OnGUI(action);
-                            }
-                        }
+					NodesList.Nodes[previousGameObject].ForEach
+					(
+						x =>
+						{
+							if (x.IsFirstInput) GUI.color = Color.green;
+							else GUI.color = Color.cyan;
+							x.Window = GUI.Window(NodesList.Nodes[previousGameObject].IndexOf(x), x.Window, DrawWindow, new GUIContent(x.Name));
+		              	}
+					);
+				}
+				EndWindows();
+			}
+		}
+		EditorGUILayout.EndScrollView();
+	}
 
-                        if (GUILayout.Button("Remove action")) actionIndexes.Add(actionIndex);
-                    }
+	private void CreateNodeCallback(Type type, bool gameEventAdded = false)
+	{
+		var gameEvent = previousGameObject.GetComponent<GameEvent>();
 
-                    actionIndexes.ForEach(i => container.Actions.Remove(container.Actions[i]));
+		if (gameEvent == null)
+		{
+			previousGameObject.AddComponent(typeof(GameEvent));
+			CreateNodeCallback(type, true);
+			return;
+		}
+		else if (gameEventAdded)
+		{
+			var source = EditorUtility.SaveFilePanelInProject("Save event", gameEvent.gameObject.name + ".xml", "xml", "Please save in a Reources folder");
+			if(source.Length != 0)
+			{
+				File.WriteAllText(source, "");
+				AssetDatabase.Refresh();
+				var asset = AssetDatabase.LoadAssetAtPath(source, typeof(TextAsset)) as TextAsset;
+				gameEvent.EventFile = asset;
+			}
+			else
+			{
+				DestroyImmediate(previousGameObject.GetComponent<GameEvent>());
+				return;
+			}
+		}
 
-                    foreach (var type in Assembly.GetAssembly(typeof(ActionBase)).GetTypes().Where(t => string.Equals(t.Namespace, "AncientTimes.Assets.Scripts.Events.Actions", StringComparison.Ordinal)).ToArray())
-                        selectablesTypes.Add(type);
+		var node = Activator.CreateInstance(type) as BaseNode;
+		node.Window = new Rect(mousePosition.x, mousePosition.y, node.Window.width, node.Window.height);
+		AddToNodesList(node);
 
-                    selectablesTypes.Remove(selectablesTypes.Where(x => x.Name == "ActionBase").FirstOrDefault());
+		if (gameEvent.Event.FirstAction == null) 
+		{
+			var index = -1;
 
-                    var selectable = new List<string>();
-                    foreach (var type in selectablesTypes)
-                        selectable.Add(type.Name);
+			foreach (var firstNode in NodesList.Nodes[previousGameObject])
+			{
+				if (firstNode.IsFirstInput)
+				{
+					index = NodesList.Nodes[previousGameObject].IndexOf(firstNode);
+					break;
+				}
+			}
 
-                    actionTypeIndex = EditorGUILayout.Popup(actionTypeIndex, selectable.ToArray());
-                }
+			if(index == -1)
+			{
+				gameEvent.Event.FirstAction = node.EventAction;
+				node.IsFirstInput = true;
+			}
+			else gameEvent.Event.FirstAction = NodesList.Nodes[previousGameObject][index].EventAction;
+		}
 
-                if (GUILayout.Button("Add action"))
-                {
-                    var actionInstantiated = Activator.CreateInstance(selectablesTypes[actionTypeIndex]);
+		if (gameEventAdded) EventManagerSaveHook.Save(gameEvent.gameObject, NodesList.Nodes[gameEvent.gameObject]);
+	}
+	
+	private void EntryPointCallBack()
+	{
+		var firstNode = NodesList.Nodes[previousGameObject][nodeClicked];
+		firstNode.IsFirstInput = true;
+		firstNode.Parent.Event.FirstAction = firstNode.EventAction;
 
-                    container.Actions.Add(actionInstantiated as ActionBase);
-                }
+		foreach (var obj in NodesList.Nodes)
+		{
+			obj.Value.ForEach
+			(
+				node =>
+				{
+					if (node.GetOutputEquals(firstNode)) node.RemoveOutput(null);
+					if (node != firstNode && node.IsFirstInput) node.IsFirstInput = false;
+				}
+			);
+		}
+	}
 
-                if (GUILayout.Button("Remove container")) containerIndexes.Add(containerIndex);
-            }
+	private void AddToNodesList(BaseNode node)
+	{
+		node.Parent = previousGameObject.GetComponent<GameEvent>();
+		NodesList.Nodes[previousGameObject].Add(node);
+		node.Deleted += DeleteNode;
+	}
 
-            containerIndexes.ForEach(i => currentEvent.Event.Containers.Remove(currentEvent.Event.Containers[i]));
+	private void DeleteNode(BaseNode deletedNode)
+	{
+		GameObject inObject = null;
 
-            if (GUILayout.Button("Add container")) evt.Containers.Add(new Container());
-            if (GUILayout.Button("Save"))
-            {
-                var currentScenePath = EditorApplication.currentScene.Split('/');
-                currentScenePath[currentScenePath.Length - 1] = currentScenePath[currentScenePath.Length - 1].Remove(currentScenePath[currentScenePath.Length - 1].IndexOf(".unity"));
-                AncientTimes.Assets.Scripts.Utilities.XMLSerializer.Serialize(evt, @"Assets/Events/" + currentScenePath[currentScenePath.Length - 1] + "/",
-                    Selection.activeGameObject.name + ".xml");
-            }
-        }
+		foreach(var obj in NodesList.Nodes)
+		{
+			obj.Value.ForEach
+			(
+				node =>
+				{
+					if (node == deletedNode) inObject = obj.Key;
+				}
+			);
+		}
 
-        EditorGUILayout.EndScrollView();
-    }
+		NodesList.Nodes[inObject].Remove(deletedNode);
+		if (NodesList.Nodes[inObject].Count == 0) DestroyImmediate(inObject.GetComponent<GameEvent>());
+		deletedNode = null;
+	}
 
-    void Update()
-    {
-        if (EditorApplication.isPlaying) isPlaying = true;
-        else if (isPlaying)
-        {
-            isPlaying = false;
-            previousGameObject = null;
-            Repaint();
-        }
-    }
+	private bool ClickedOnNode(Event evt)
+	{
+		var clickedOnNode = false;
 
-    void OnInspectorUpdate() { Repaint(); }
+		NodesList.Nodes[previousGameObject].ForEach
+		(
+			node =>
+			{
+				if (node.Window.Contains(evt.mousePosition))
+				{
+					clickedOnNode = true;
+					nodeClicked = NodesList.Nodes[previousGameObject].IndexOf(node);
+				}
+			}
+		);
 
-    void OnSelectionChange() { Repaint(); }
+		return clickedOnNode;
+	}
 
-    #endregion Methods
+	private void CreateConnection(Rect startPos, Vector2 endPos)
+	{
+		var sPos = new Vector3(startPos.x + startPos.width / 2.0f, startPos.y + startPos.height, 0.0f);
+		var ePos = new Vector3(endPos.x, endPos.y, 0.0f);
+		var sTan = sPos + Vector3.up * 50.0f;
+		var eTan = ePos + Vector3.right * 50.0f;
+
+		Handles.DrawBezier(sPos, ePos, sTan, eTan, Color.black, null, 5);
+	}
+	
+	private void CreateList()
+	{
+		if (previousGameObject == null) return;
+		if (NodesList.Nodes.ContainsKey(previousGameObject)) return;
+
+		NodesList.Nodes.Add(previousGameObject, new List<BaseNode>());
+		var currentEvent = previousGameObject.GetComponent<GameEvent>();
+		
+		if (!currentEvent) return;
+
+		var file = currentEvent.EventFile;
+
+		currentEvent.Event = (SerializableGameEvent)AncientTimes.Assets.Scripts.Utilities.XMLDeserializer.Deserialize(typeof(SerializableGameEvent), file);
+
+		var action = currentEvent.Event.FirstAction;
+
+		CreateNodes(action, true);
+
+		for (int nodeIndex = 0; nodeIndex < NodesList.Nodes[previousGameObject].Count - 1; nodeIndex++)
+		{
+			for (int outputIndex = 1; outputIndex < NodesList.Nodes[previousGameObject].Count; outputIndex++)
+			{
+				NodesList.Nodes[previousGameObject][nodeIndex].CreateInitialOutput(NodesList.Nodes[previousGameObject][nodeIndex + 1]);
+			}
+		}
+	}
+
+	private BaseNode CreateNodes(ActionBase action, bool firstNode = false)
+	{
+		if (action != null)
+		{
+			BaseNode node = null;
+
+			foreach (var nodeType in nodeTypes)
+			{
+				node = Activator.CreateInstance(nodeType) as BaseNode;
+				
+				if (action.GetType() == node.ActionType)
+				{
+					if (firstNode)
+					{
+						node.IsFirstInput = true;
+						firstNode = false;
+					}
+
+					AddToNodesList(node);
+					NodesList.Nodes[previousGameObject][NodesList.Nodes[previousGameObject].Count - 1].FillNode(action);
+
+					if (!(node is IfElseNode))
+					{
+						action = action.NextAction;
+						CreateNodes(action);
+					}
+					else
+					{
+						var ifAction = (action as IfElse).IfAction;
+						var elseAction = (action as IfElse).ElseAction;
+						var ifNode = CreateNodes(ifAction);
+						var elseNode = CreateNodes(elseAction);
+						(node as IfElseNode).ChangeOutput(ifNode, true);
+						(node as IfElseNode).ChangeOutput(elseNode, false);
+					}
+					break;
+				}
+			}
+			
+			return node;
+		}
+		return null;
+	}
+
+	void Update()
+	{
+		isActiveObject = Selection.activeGameObject;
+
+		if (Selection.activeGameObject != previousGameObject && previousGameObject != null)
+		{
+			nodeClicked = 0;
+			previousGameObject = Selection.activeGameObject;
+			CreateList();
+		}
+		else
+		{
+			previousGameObject = Selection.activeGameObject;
+			CreateList();
+		}
+
+		if (EditorApplication.isPlaying) isPlaying = true;
+		else if (isPlaying)
+		{
+			isPlaying = false;
+			previousGameObject = null;
+			Repaint();
+		}
+	}
+
+	#region Messages
+
+	private void OnInspectorUpdate() { Repaint(); }
+	
+	private void OnSelectionChange() { Repaint(); }
+
+	private void OnHierarchyChange() { Repaint(); }
+
+	#endregion Messages
+
+	#endregion Methods
 }

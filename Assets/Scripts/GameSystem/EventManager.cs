@@ -1,56 +1,106 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections.Generic;
 using AncientTimes.Assets.Scripts.Events;
+using AncientTimes.Assets.Scripts.Events.Actions;
 using AncientTimes.Assets.Scripts.Utilities;
 using System.Linq;
 
 namespace AncientTimes.Assets.Scripts.GameSystem
 {
-    public class EventManager : MonoBehaviour
-    {
-        #region Properties
+	/// <summary>
+	/// The event manager class.
+	/// </summary>
+	public class EventManager : GameSystemObject
+	{
+		#region Properties
 
-        private Container actionContainer;
+		private static EventManager instance;
 
-        #endregion Properties
+		public static EventManager Instance
+		{
+			get
+			{
+				instance = instance ?? new EventManager();
+				return instance;
+			}
+		}
 
-        #region Methods
-        
-        void Update()
-        {
-            if (actionContainer == null) return;
+		private static ActionBase action;
 
-            var action = actionContainer.Actions[0];
+		/// <summary>
+		/// The current event being executed.
+		/// </summary>
+		public static GameEvent CurrentEvent;
 
-            if (action.Execute(Time.deltaTime)) actionContainer.Actions.Remove(action);
+		private static List<GameEvent> eventsInScene;
+		
+		#endregion Properties
 
-            if (actionContainer.Actions.Count == 0) actionContainer = null;
-        }
+		#region Constructor
 
-        public void RegisterEvent(GameEvent evt)
-        {
+		private EventManager() {}
+
+		#endregion Constructor
+
+		#region Methods
+
+		/// <summary>
+		/// Update this instance.
+		/// </summary>
+		public static void Update()
+		{
+			if (eventsInScene == null) return;
+
+			CheckActiveEvents();
+
+			if (action == null) return;
+			
+			if (action.Execute(Time.deltaTime)) action = action.NextAction;
+			
+			if (action == null) CurrentEvent = null;
+		}
+
+		/// <summary>
+		/// Registers the event and plays it.
+		/// </summary>
+		/// <param name="evt">The event.</param>
+		public static void RegisterEvent(GameEvent evt)
+		{
 			if (evt == null || evt.Event == null) return;
-            if (actionContainer != null) return;
-            
-            foreach (var container in evt.Event.Containers)
-            {
-                if (string.IsNullOrEmpty(container.Condition) || bool.Parse(GameVariables.Get(container.Condition, true)))
-                {
-                    actionContainer = container.Clone();
-                    return;
-                }
-            }
-        }
+			if (action != null) return;
+            Debug.Log(evt.gameObject.name);
+			action = evt.Event.FirstAction.Clone();
+			CurrentEvent = evt;
 
-        /// <summary>
-        /// Checks if an automatic event exists and plays it if it does.
-        /// </summary>
-        public void CheckAutoEvent()
-        {
-            var auto = GameObject.FindGameObjectWithTag("AutoEvent");
-            if (auto != null) RegisterEvent(auto.GetComponent<GameEvent>());
-        }
+			return;
+		}
+		
+		/// <summary>
+		/// Checks if an automatic event exists and plays it if it does.
+		/// </summary>
+		public static void CheckAutoEvent()
+		{
+			var auto = GameObject.FindGameObjectWithTag("AutoEvent");
+			if (auto != null) RegisterEvent(auto.GetComponent<GameEvent>());
+		}
 
-        #endregion Methods
-    }
+		/// <summary>
+		/// Loads the events in the current scene.
+		/// </summary>
+		public static void LoadEvents() { eventsInScene = Object.FindObjectsOfType<GameEvent>().ToList(); }
+
+		private static void CheckActiveEvents()
+		{
+			eventsInScene.ForEach
+			(
+				evt =>
+				{
+					if (bool.Parse(GameVariables.Get(evt.Event.Condition ?? "TrickyAlwaysExists!", true))) evt.gameObject.SetActive(true);
+					else evt.gameObject.SetActive(false);
+				}
+			);
+		}
+		
+		#endregion Methods
+	}
 }
