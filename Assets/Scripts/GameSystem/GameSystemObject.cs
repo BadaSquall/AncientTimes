@@ -10,6 +10,9 @@ namespace AncientTimes.Assets.Scripts.GameSystem
 		public delegate void DestroyHandler(GameObject objectToDestroy);
 		public event DestroyHandler Destroy;
 
+        public delegate UnityEngine.Object InstantiateHandler(UnityEngine.Object objectToInstantiate);
+        public event InstantiateHandler Instantiate;
+
 		#endregion Properties
 
 		#region Constructor
@@ -21,8 +24,8 @@ namespace AncientTimes.Assets.Scripts.GameSystem
 		#region Methods
 
 		protected void RaiseDestroy(GameObject objectToDestroy) { Destroy(objectToDestroy); }
+        protected UnityEngine.Object RaiseInstantiate(UnityEngine.Object objectToInstantiate) { return Instantiate(objectToInstantiate); }
 
 		#endregion Methods
 	}
-
 }

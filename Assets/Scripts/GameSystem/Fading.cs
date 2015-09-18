@@ -12,7 +12,7 @@ public class Fading : MonoBehaviour
 
     void OnGUI()
     {
-        alpha += fadeDir*fadeSpeed*Time.deltaTime;
+        alpha += fadeDir * fadeSpeed * Time.deltaTime;
         alpha = Mathf.Clamp01(alpha);
         GUI.color = new Color(GUI.color.r, GUI.color.g, GUI.color.b, alpha);
         GUI.depth = drawDepth;

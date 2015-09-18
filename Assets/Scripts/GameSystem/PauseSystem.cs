@@ -35,7 +35,7 @@ namespace AncientTimes.Assets.Scripts.GameSystem
 	    {
             if (bool.Parse(GameVariables.Get("IsPaused", false)))
             {
-                GUILayout.BeginArea(new Rect(Screen.width/2 -100 , Screen.height/5 -50 , Screen.width, Screen.height));
+                GUILayout.BeginArea(new Rect(Screen.width / 2 -100 , Screen.height / 5 -50 , Screen.width, Screen.height));
                 GUILayout.Button("Pokedex", ButtonStyle);
                 GUILayout.Button("Pokemon", ButtonStyle);
                 GUILayout.Button("Zaino", ButtonStyle);
