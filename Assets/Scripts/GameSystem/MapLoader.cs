@@ -30,10 +30,12 @@ namespace AncientTimes.Assets.Scripts.GameSystem
 
         #region Methods
 
-        public static void Load(string mapName)
+        public static void Load(string mapName, string EndWarp)
         {
+            GameObject Player = GameObject.FindGameObjectWithTag("Player");
             Instance.RaiseDestroy(GameObject.FindGameObjectWithTag("Places"));
             Instance.RaiseInstantiate(Resources.Load("Maps/" + mapName, typeof(GameObject)));
+            Player.transform.position = GameObject.Find(EndWarp).transform.position; 
             GameVariables.Update("CurrentMap", mapName);
             EventManager.CheckAutoEvent();
         }
