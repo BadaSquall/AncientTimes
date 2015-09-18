@@ -68,7 +68,7 @@ namespace AncientTimes.Assets.Scripts.GameSystem
 		
 		public static void OnGUI()
 		{
-			if (!isWriting) return;
+            if (!isWriting) return;
 
 			GUISizer.BeginGUI();
 
@@ -82,7 +82,7 @@ namespace AncientTimes.Assets.Scripts.GameSystem
 				GUI.DrawTexture(new Rect(50, GUISizer.HEIGHT - height - 25, GUISizer.WIDTH - 100, height), Background);
 			}
 
-			if (isMessageWrote && NextMessageTriangle != null)
+			if (isMessageWrote && NextMessageTriangle)
 			{
 				GUI.DrawTexture(new Rect(GUISizer.WIDTH - 150, GUISizer.HEIGHT - 80, 30, 30), NextMessageTriangle);
 			}
@@ -97,7 +97,7 @@ namespace AncientTimes.Assets.Scripts.GameSystem
 		/// </summary>
 		/// <param name="text">The message.</param>
 		public static void Write(string text, string imagePath = "")
-		{
+        {
 			var composition = new MessageComposition() { Text = text };
 			
 			if (imagePath != null && imagePath != "")

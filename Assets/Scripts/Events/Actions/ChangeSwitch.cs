@@ -28,6 +28,8 @@ namespace AncientTimes.Assets.Scripts.Events.Actions
                 Value = this.Value
             };
 
+            if (NextAction != null) action.NextAction = NextAction.Clone();
+
             return action;
         }
 

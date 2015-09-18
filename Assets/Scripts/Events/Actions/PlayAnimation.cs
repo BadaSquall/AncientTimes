@@ -32,6 +32,8 @@ namespace AncientTimes.Assets.Scripts.Events.Actions
                 ObjectToAnimate = this.ObjectToAnimate
             };
 
+            if (NextAction != null) action.NextAction = NextAction.Clone();
+
             return action;
         }
 

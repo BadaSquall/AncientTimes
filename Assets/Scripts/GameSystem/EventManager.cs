@@ -54,8 +54,8 @@ namespace AncientTimes.Assets.Scripts.GameSystem
 			CheckActiveEvents();
 
 			if (action == null) return;
-			
-			if (action.Execute(Time.deltaTime)) action = action.NextAction;
+
+            if (action.Execute(Time.deltaTime)) action = action.NextAction;
 			
 			if (action == null) CurrentEvent = null;
 		}
@@ -67,8 +67,7 @@ namespace AncientTimes.Assets.Scripts.GameSystem
 		public static void RegisterEvent(GameEvent evt)
 		{
 			if (evt == null || evt.Event == null) return;
-			if (action != null) return;
-            Debug.Log(evt.gameObject.name);
+            if (action != null) return;
 			action = evt.Event.FirstAction.Clone();
 			CurrentEvent = evt;
 

@@ -45,6 +45,8 @@ namespace AncientTimes.Assets.Scripts.Events.Actions
 
             Dialogues.ForEach(dialogue => action.Dialogues.Add(dialogue.Clone()));
 
+            if (NextAction != null) action.NextAction = NextAction.Clone();
+
             return action;
         }
 

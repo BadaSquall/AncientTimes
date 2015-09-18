@@ -32,6 +32,7 @@ namespace AncientTimes.Assets.Scripts.Events.Actions
 
 			action.IfAction = IfAction.Clone();
 			action.ElseAction = ElseAction.Clone();
+
 			if (NextAction != null) action.NextAction = NextAction.Clone();
 
 			return action;

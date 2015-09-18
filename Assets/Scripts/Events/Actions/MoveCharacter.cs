@@ -65,6 +65,8 @@ namespace AncientTimes.Assets.Scripts.Events.Actions
                 Speed = this.Speed
             };
 
+            if (NextAction != null) action.NextAction = NextAction.Clone();
+
             return action;
         }
 
