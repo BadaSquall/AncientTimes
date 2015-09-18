@@ -15,7 +15,13 @@ namespace AncientTimes.Assets.Scripts.GameSystem
 	    #region Methods
 
 	    // Update is called once per frame
-	    void Update () { if (Input.GetKeyDown (KeyCode.Escape)) Pause(); }
+        void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                Pause();
+            }
+        }
 
 	    void Pause()
 	    {
