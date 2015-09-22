@@ -27,14 +27,18 @@ namespace AncientTimes.Assets.Scripts.Events.Actions
 
         #region Methods
 
-        public override bool Execute(float deltaTime)
+        public override void Execute(float deltaTime)
         {
-            var hasFinished = false;
-
             if (!isMoving)
             {
                 objectToMoveInstance = GameObject.Find(ObjectToMove);
-                if (!objectToMoveInstance) return true;
+
+                if (!objectToMoveInstance)
+                {
+                    IsFinished = true;
+                    return;
+                }
+
                 isMoving = true;
                 var animator = objectToMoveInstance.GetComponent<Animator>();
                 if (animator) animator.SetTrigger("Walk" + Direction.ToString());
@@ -43,22 +47,21 @@ namespace AncientTimes.Assets.Scripts.Events.Actions
                 SetSpeed();
             }
 
-            hasFinished = CheckRemainingDistance();
+            IsFinished = CheckRemainingDistance();
 
-            if (hasFinished)
+            if (IsFinished)
             {
                 objectToMoveInstance.rigidbody2D.velocity = Vector2.zero;
                 var animator = objectToMoveInstance.GetComponent<Animator>();
                 if (animator) animator.SetTrigger("Idle");
             }
-
-            return hasFinished;
         }
 
         public override ActionBase Clone()
         {
             var action = new MoveCharacter()
             {
+                IsParallel = this.IsParallel,
                 Direction = this.Direction,
                 ObjectToMove = this.ObjectToMove,
                 Distance = this.Distance,

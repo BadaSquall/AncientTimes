@@ -11,7 +11,6 @@ namespace AncientTimes.Assets.Scripts.Events.Actions
 
         public List<Dialogue> Dialogues { get; set; }
         private bool firstExecute;
-        private bool hasFinished;
 
         #endregion Properties
 
@@ -27,21 +26,26 @@ namespace AncientTimes.Assets.Scripts.Events.Actions
 
         #region Methods
 
-        public override bool Execute(float deltaTime)
+        public override void Execute(float deltaTime)
         {
-            if (firstExecute && !hasFinished)
+            if (firstExecute && !IsFinished)
             {
-                Dialogues.ForEach(dialogue => Console.Write(dialogue.Text, dialogue.ImagePath));
-                Console.MessageComplete += MessageCompleted;
+                if (Dialogues.Count == 0)
+                {
+                    IsFinished = true;
+                    return;
+                }
+
+                Console.Write(Dialogues[0].Text, Dialogues[0].ImagePath);
+                Console.MessageComplete += PopDialogue;
                 firstExecute = false;
             }
-
-            return hasFinished;
         }
 
         public override ActionBase Clone()
         {
             var action = new ShowDialogue();
+            action.IsParallel = this.IsParallel;
 
             Dialogues.ForEach(dialogue => action.Dialogues.Add(dialogue.Clone()));
 
@@ -50,11 +54,24 @@ namespace AncientTimes.Assets.Scripts.Events.Actions
             return action;
         }
 
-        void MessageCompleted()
+        private void PopDialogue()
         {
-            hasFinished = true;
+            Dialogues.RemoveAt(0);
+
+            if (Dialogues.Count == 0)
+            {
+                MessageCompleted();
+                return;
+            }
+
+            Console.Write(Dialogues[0].Text, Dialogues[0].ImagePath);
+        }
+
+        private void MessageCompleted()
+        {
+            IsFinished = true;
             firstExecute = true;
-            Console.MessageComplete -= MessageCompleted;
+            Console.MessageComplete -= PopDialogue;
         }
 
         #endregion Methods

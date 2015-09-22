@@ -2,17 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using UnityEngine;
 
 namespace AncientTimes.Assets.Scripts.Events.Actions
 {
-    public class PlayAnimation : ActionBase
+    public class Wait : ActionBase
     {
         #region Properties
 
-        public string Trigger { get; set; }
-        public string ObjectToAnimate { get; set; }
-        //private GameObject objectToAnimateInstance;
+        public float TimeToWait;
+        private float timeElapsed;
 
         #endregion Properties
 
@@ -20,23 +18,24 @@ namespace AncientTimes.Assets.Scripts.Events.Actions
 
         public override void Execute(float deltaTime)
         {
-            GameObject.Find(ObjectToAnimate).GetComponent<Animator>().SetTrigger(Trigger);
-            IsFinished = true;
+            timeElapsed += deltaTime;
+
+            if (timeElapsed >= TimeToWait) IsFinished = true;
         }
 
         public override ActionBase Clone()
         {
-            var action = new PlayAnimation()
+            var action = new Wait()
             {
                 IsParallel = this.IsParallel,
-                Trigger = this.Trigger,
-                ObjectToAnimate = this.ObjectToAnimate
+                TimeToWait = this.TimeToWait
             };
 
             if (NextAction != null) action.NextAction = NextAction.Clone();
 
             return action;
         }
+
 
         #endregion Methods
     }

@@ -15,18 +15,19 @@ namespace AncientTimes.Assets.Scripts.Events.Actions
 
 		#region Methods
 
-		public override bool Execute(float deltaTime)
+		public override void Execute(float deltaTime)
 		{
 			if (bool.Parse(GameVariables.Get(VariableName, true))) NextAction = IfAction;
 			else NextAction = ElseAction;
 
-			return true;
+			IsFinished = true;
 		}
 
 		public override ActionBase Clone()
 		{
 			var action = new IfElse()
 			{
+                IsParallel = this.IsParallel,
 				VariableName = this.VariableName
 			};
 

@@ -23,7 +23,11 @@ public class IfElseNode : BaseNode
 		HasPersonalizedContextMenu = true;
 	}
 
-	public override void DrawWindow()
+    #endregion Constructor
+
+    #region Methods
+
+    public override void DrawWindow()
 	{
 		var ifElse = EventAction as IfElse;
 
@@ -201,5 +205,5 @@ public class IfElseNode : BaseNode
 		}
 	}
 
-	#endregion Constructor
+	#endregion Methods
 }

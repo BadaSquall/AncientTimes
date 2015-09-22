@@ -6,13 +6,7 @@ using AncientTimes.Assets.Scripts.Events.Actions;
 using AncientTimes.Assets.Scripts.Utilities;
 
 public class MoveCharacterNode : BaseNode
-{
-    #region Properties
-
-    private int directionSelected;
-
-    #endregion Properties
-    
+{ 
     #region Constructor
 
     public MoveCharacterNode()
@@ -29,6 +23,7 @@ public class MoveCharacterNode : BaseNode
     public override void DrawWindow()
     {
         var moveCharacter = EventAction as MoveCharacter;
+        var directionSelected = Convert.ToInt32(moveCharacter.Direction);
 
         EditorGUILayout.BeginVertical();
         {
@@ -52,4 +47,3 @@ public class MoveCharacterNode : BaseNode
 
     #endregion Methods
 }
-

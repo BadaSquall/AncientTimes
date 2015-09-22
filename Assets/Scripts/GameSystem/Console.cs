@@ -65,7 +65,10 @@ namespace AncientTimes.Assets.Scripts.GameSystem
 		#endregion Constructor
 		
 		#region Methods
-		
+
+        /// <summary>
+        /// Used to draw GUI elements on the screen.
+        /// </summary>
 		public static void OnGUI()
 		{
             if (!isWriting) return;
@@ -179,7 +182,7 @@ namespace AncientTimes.Assets.Scripts.GameSystem
 			var numberOfLetters = 1;
 
 #if UNITY_EDITOR
-			if (Input.GetButtonDown("Submit"))
+			if (Input.GetButton("Submit"))
 #else
 			if (Input.touchCount > 0)
 #endif
@@ -188,7 +191,11 @@ namespace AncientTimes.Assets.Scripts.GameSystem
 			numberOfLetters = numberOfLetters == 1 || compositions.First().Text.Length - message.Length < MaximumWritingSpeed ? 1 : MaximumWritingSpeed;
 			message = compositions.First().Text.Substring(0, message.Length + numberOfLetters);
 		}
-		
+
+        /// <summary>
+        /// Keeps listening the input from the keyboard and writes in the console whatever is inserted.
+        /// </summary>
+        /// <returns>Returns true when return key is pressed.</returns>
 		private static bool ListenToInsert()
 		{
 			if (!waitForInsert) return false;

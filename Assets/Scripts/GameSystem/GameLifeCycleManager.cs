@@ -11,6 +11,7 @@ namespace AncientTimes.Assets.Scripts.GameSystem
 
 		public Texture2D ConsoleBackground;
 		public Texture2D NextMessageTriangle;
+        public bool ManageMapLoader;
 
 		#endregion Properties
 
@@ -18,10 +19,6 @@ namespace AncientTimes.Assets.Scripts.GameSystem
 
 		private void Start()
 		{
-			Camera.main.aspect = 16.0f / 9.0f;
-
-			Console.MessageStarted += () => GameVariables.Update("PlayerInputOff", true);
-			Console.MessageComplete += () => GameVariables.Update("PlayerInputOff", false);
 			Console.Background = ConsoleBackground;
 			Console.NextMessageTriangle = NextMessageTriangle;
 
@@ -33,8 +30,10 @@ namespace AncientTimes.Assets.Scripts.GameSystem
             EventManager.Instance.Instantiate += InstantiateManager;
             MapLoader.Instance.Instantiate += InstantiateManager;
 
-			EventManager.LoadEvents();
-            EventManager.CheckAutoEvent();
+            EventManager.EventStarted += () => GameVariables.Update("PlayerInputOff", true);
+            EventManager.EventFinished += () => GameVariables.Update("PlayerInputOff", false);
+
+            if (ManageMapLoader) MapLoader.Load(GameVariables.Get("CurrentMap", "Isola"));
 		}
 
 		private void Update()

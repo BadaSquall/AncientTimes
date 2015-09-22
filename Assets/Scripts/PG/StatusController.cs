@@ -46,19 +46,16 @@ namespace AncientTimes.Assets.Scripts.PG
             downChecker = transform.FindChild("EventCheckerDown").gameObject.GetComponent<EventChecker>();
 
             DisableCheckers();
-            
-            //Console.MessageComplete += () => Debug.Log(GameVariables.GetVariable("CharacterName"));
         }
 
         void LateUpdate()
         {
-            //if (Input.GetButtonDown(KeyCode.K)) eventManager.RegisterEvent(GameObject.Find("Jager cut").GetComponent<GameEvent>()); //Console.Write("Come ti chiami?", true, "CharacterName", "terra", "Expressions/CapoTerra/sad"); //SerializeDeserializeEvent();
-            //if (Input.GetKeyDown(KeyCode.A)) LookAt(Direction.Left);
-            //if (Input.GetButtonDown("Submit")) eventManager.RegisterEvent(FocusedEvent);
-
-            if (bool.Parse(GameVariables.Get("Pause", false))) return;
+            if (bool.Parse(GameVariables.Get("PlayerInputOff", false))) return;
 
             if (OnStatusChange == null) return;
+
+            if (Input.GetKey(KeyCode.LeftShift)) animator.SetBool("Running", true);
+            else animator.SetBool("Running", false);
 
             if (Input.GetButton("Horizontal") && Input.GetAxis("Horizontal") > 0) OnStatusChange(Status.WalkingRight);
             else if (Input.GetButton("Horizontal") && Input.GetAxis("Horizontal") < 0) OnStatusChange(Status.WalkingLeft);
@@ -71,7 +68,7 @@ namespace AncientTimes.Assets.Scripts.PG
         {
             DisableCheckers();
             rightChecker.gameObject.SetActive(true);
-            rigidbody2D.velocity = new Vector2(walkSpeed, 0.0f);
+            rigidbody2D.velocity = new Vector2(walkSpeed * (animator.GetBool("Running") ? 2 : 1), 0.0f);
 			animator.SetTrigger("WalkRight");
             overAnimator.SetTrigger("WalkRight");
             grassAnimator.SetTrigger("WalkRight");
@@ -81,7 +78,7 @@ namespace AncientTimes.Assets.Scripts.PG
         {
             DisableCheckers();
             leftChecker.gameObject.SetActive(true);
-            rigidbody2D.velocity = new Vector2(walkSpeed * (-1.0f), 0.0f);
+            rigidbody2D.velocity = new Vector2(walkSpeed * (animator.GetBool("Running") ? 2 : 1) * (-1.0f), 0.0f);
 			animator.SetTrigger("WalkLeft");
             overAnimator.SetTrigger("WalkLeft");
             grassAnimator.SetTrigger("WalkLeft");
@@ -91,7 +88,7 @@ namespace AncientTimes.Assets.Scripts.PG
         {
             DisableCheckers();
             downChecker.gameObject.SetActive(true);
-            rigidbody2D.velocity = new Vector2(0.0f, walkSpeed * (-1.0f));
+            rigidbody2D.velocity = new Vector2(0.0f, walkSpeed * (animator.GetBool("Running") ? 2 : 1) * (-1.0f));
 			animator.SetTrigger("WalkDown");
             overAnimator.SetTrigger("WalkDown");
             grassAnimator.SetTrigger("WalkDown");
@@ -101,7 +98,7 @@ namespace AncientTimes.Assets.Scripts.PG
         {
             DisableCheckers();
             upChecker.gameObject.SetActive(true);
-            rigidbody2D.velocity = new Vector2(0.0f, walkSpeed);
+            rigidbody2D.velocity = new Vector2(0.0f, walkSpeed * (animator.GetBool("Running") ? 2 : 1));
 			animator.SetTrigger("WalkUp");
             overAnimator.SetTrigger("WalkUp");
             grassAnimator.SetTrigger("WalkUp");
@@ -170,6 +167,5 @@ namespace AncientTimes.Assets.Scripts.PG
         }
 
         #endregion Methods
-
     }
 }

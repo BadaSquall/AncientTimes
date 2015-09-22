@@ -16,8 +16,6 @@ public class EventManagerWindow : EditorWindow
 
 	private List<Type> nodeTypes;
 
-	private static Texture2D bg;
-
 	private int actionTypeIndex;
 	private bool exitFromPlay;
 	
@@ -48,13 +46,7 @@ public class EventManagerWindow : EditorWindow
 	#region Methods
 	
 	[MenuItem("Window/Event Manager")]
-	public static void ShowWindow()
-	{
-		EditorWindow.GetWindow(typeof(EventManagerWindow));
-		bg = new Texture2D(1, 1, TextureFormat.RGBA32, false);
-		bg.SetPixel(0, 0, Color.black);
-		bg.Apply();
-	}
+	public static void ShowWindow() { EditorWindow.GetWindow(typeof(EventManagerWindow)); }
 	
 	private void OnEnable() { title = "Event Manager"; }
 
@@ -63,8 +55,7 @@ public class EventManagerWindow : EditorWindow
 		if (previousGameObject == null) return;
 		var gameEvent = previousGameObject.GetComponent<GameEvent>();
 		if (gameEvent == null) return;
-		gameEvent.Event.Condition =
-			EditorGUILayout.TextArea(previousGameObject.GetComponent<GameEvent>().Event.Condition, EditorStyles.textArea);
+		gameEvent.Event.Condition = EditorGUILayout.TextArea(previousGameObject.GetComponent<GameEvent>().Event.Condition, EditorStyles.textArea);
 	}
 
 	private void DrawWindow(int id)
@@ -72,15 +63,30 @@ public class EventManagerWindow : EditorWindow
 		var window = NodesList.Nodes[previousGameObject][id];
 		EditorGUILayout.BeginHorizontal();
 		window.IsNotCollapsed = EditorGUILayout.Foldout(window.IsNotCollapsed, "");
+
 		if (window.IsNotCollapsed)
-		{
-			EditorGUILayout.EndHorizontal();
-			EditorGUILayout.BeginHorizontal();
-			EditorGUILayout.LabelField("Label: ");
-			window.EventAction.Label = EditorGUILayout.TextArea(window.EventAction.Label);
-			EditorGUILayout.EndHorizontal();
-			window.DrawWindow();
-		}
+        {
+            EditorGUILayout.EndHorizontal();
+
+            EditorGUILayout.BeginHorizontal();
+            {
+                EditorGUILayout.LabelField("Label: ");
+                window.EventAction.Label = EditorGUILayout.TextArea(window.EventAction.Label);
+            }
+            EditorGUILayout.EndHorizontal();
+
+            if (window.ActionType != typeof(IfElse))
+            {
+                EditorGUILayout.BeginHorizontal();
+                {
+                    EditorGUILayout.LabelField("Is parallel: ");
+                    window.EventAction.IsParallel = EditorGUILayout.Toggle(window.EventAction.IsParallel);
+                }
+                EditorGUILayout.EndHorizontal();
+            }
+
+            window.DrawWindow();
+        }
 		else
 		{
 			EditorGUILayout.LabelField(window.EventAction.Label);
@@ -93,8 +99,6 @@ public class EventManagerWindow : EditorWindow
 	
 	void OnGUI()
 	{
-		//if (bg != null) GUI.DrawTexture(new Rect(0, 0, maxSize.x, maxSize.y), bg, ScaleMode.StretchToFill);
-
 		if (isPlaying && !EditorApplication.isPlaying)
 		{
 			previousGameObject = null;

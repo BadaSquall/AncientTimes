@@ -14,16 +14,17 @@ namespace AncientTimes.Assets.Scripts.Events.Actions
 
         #region Methods
 
-        public override bool Execute(float deltaTime)
+        public override void Execute(float deltaTime)
         {
-            GameVariables.UpdateSwitch(Name, Value);
-            return true;
+            GameVariables.Update(Name, Value);
+            IsFinished = true;
         }
 
         public override ActionBase Clone()
         {
             var action = new ChangeSwitch()
             {
+                IsParallel = this.IsParallel,
                 Name = this.Name,
                 Value = this.Value
             };

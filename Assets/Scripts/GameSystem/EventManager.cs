@@ -27,6 +27,10 @@ namespace AncientTimes.Assets.Scripts.GameSystem
 
 		private static ActionBase action;
 
+        public static event System.Action EventStarted;
+
+        public static event System.Action EventFinished;
+
 		/// <summary>
 		/// The current event being executed.
 		/// </summary>
@@ -53,11 +57,14 @@ namespace AncientTimes.Assets.Scripts.GameSystem
 
 			CheckActiveEvents();
 
-			if (action == null) return;
+            if (action == null) return;
 
-            if (action.Execute(Time.deltaTime)) action = action.NextAction;
-			
-			if (action == null) CurrentEvent = null;
+            if (ExecuteActions(action))
+            {
+                action = null;
+                CurrentEvent = null;
+                if (EventFinished != null) EventFinished();
+            }
 		}
 
 		/// <summary>
@@ -70,6 +77,7 @@ namespace AncientTimes.Assets.Scripts.GameSystem
             if (action != null) return;
 			action = evt.Event.FirstAction.Clone();
 			CurrentEvent = evt;
+            if (EventStarted != null) EventStarted();
 
 			return;
 		}
@@ -88,6 +96,9 @@ namespace AncientTimes.Assets.Scripts.GameSystem
 		/// </summary>
 		public static void LoadEvents() { eventsInScene = Object.FindObjectsOfType<GameEvent>().ToList(); }
 
+        /// <summary>
+        /// Checks the active events.
+        /// </summary>
 		private static void CheckActiveEvents()
 		{
 			eventsInScene.ForEach
@@ -99,6 +110,21 @@ namespace AncientTimes.Assets.Scripts.GameSystem
 				}
 			);
 		}
+
+        /// <summary>
+        /// Executes the actions.
+        /// </summary>
+        /// <param name="actionToExecute">The action to execute.</param>
+        private static bool ExecuteActions(ActionBase actionToExecute)
+        {
+            if (actionToExecute == null) return true;
+
+            if (!actionToExecute.IsFinished) actionToExecute.Execute(Time.deltaTime);
+
+            return actionToExecute.IsParallel ? ExecuteActions(actionToExecute.NextAction) && actionToExecute.IsFinished :
+                actionToExecute.IsFinished ? ExecuteActions(actionToExecute.NextAction) :
+                    false;
+        }
 		
 		#endregion Methods
 	}

@@ -23,15 +23,18 @@ namespace AncientTimes.Assets.Scripts.Events
 		
 		#region Methods
 		
-		void Start()
+		private void Start()
 		{
 			if (EventFile == null)
 			{
 				Debug.LogWarning("An event file should be attached to a Game Event object");
 				return;
 			}
-			Event = (SerializableGameEvent)Utilities.XMLDeserializer.Deserialize(typeof(SerializableGameEvent), EventFile);
+
+            ForceLoad();
 		}
+
+        public void ForceLoad() { Event = (SerializableGameEvent)Utilities.XMLDeserializer.Deserialize(typeof(SerializableGameEvent), EventFile); }
 		
 		#endregion Methods
 	}

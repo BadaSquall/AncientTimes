@@ -6,6 +6,14 @@ namespace AncientTimes.Assets.Scripts.Maps
 {
     public class Map : MonoBehaviour
     {
-        void Start() { EventManager.CheckAutoEvent(); }
+        #region Properties
+
+        void Start()
+        {
+            EventManager.LoadEvents();
+            EventManager.CheckAutoEvent();
+        }
+
+        #endregion Properties
     }
 }

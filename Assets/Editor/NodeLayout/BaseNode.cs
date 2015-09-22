@@ -163,6 +163,7 @@ public abstract class BaseNode
 		var changed = !node.IsFirstInput && node.Output != this && !node.HasInput;
 		if (changed)
 		{
+            RemoveOutput(this);
 			node.HasInput = true;
 			Output = node;
 			EventAction.NextAction = Output.EventAction;

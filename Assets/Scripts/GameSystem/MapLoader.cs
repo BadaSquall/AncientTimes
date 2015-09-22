@@ -35,7 +35,6 @@ namespace AncientTimes.Assets.Scripts.GameSystem
             Instance.RaiseDestroy(GameObject.FindGameObjectWithTag("Places"));
             Instance.RaiseInstantiate(Resources.Load("Maps/" + mapName, typeof(GameObject)));
             GameVariables.Update("CurrentMap", mapName);
-            EventManager.CheckAutoEvent();
         }
 
         #endregion Methods

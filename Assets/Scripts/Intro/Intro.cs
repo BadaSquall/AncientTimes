@@ -167,7 +167,7 @@ namespace AncientTimes.Assets.Scripts.Intro
 
         void EndSex()
         {
-            if (GameVariables.GetSwitch("IsChosen"))
+            if (bool.Parse(GameVariables.Get("IsChosen", false)))
             {
                 Kerneth.SetActive(true);
                 KShadow.SetActive(true);
@@ -177,7 +177,7 @@ namespace AncientTimes.Assets.Scripts.Intro
 
         void Ending()
         {
-            Console.Write("Piacere " + GameVariables.GetVariable("CharacterName") + ", preparti ad un viaggio indimenticabile nella regione di Thomas!");
+            Console.Write("Piacere " + GameVariables.Get("CharacterName", "Leon") + ", preparti ad un viaggio indimenticabile nella regione di Thomas!");
             NextState();
         }
 
