@@ -35,13 +35,14 @@ namespace AncientTimes.Assets.Scripts.GameSystem
             GameObject Player = GameObject.FindGameObjectWithTag("Player");
             Instance.RaiseDestroy(GameObject.FindGameObjectWithTag("Places"));
             Instance.RaiseInstantiate(Resources.Load("Maps/" + mapName, typeof(GameObject)));
-            Player.transform.position = GameObject.Find(EndWarp).transform.position; 
+            Player.transform.position = GameObject.Find(EndWarp).transform.position;
+            GameObject.Find("_Fade").GetComponent<Fading>().Fade();
+            GameObject.Find("_Fade").GetComponent<Fading>().BeginFade(-1);
             GameVariables.Update("CurrentMap", mapName);
         }
 
         public static void Load(string mapName)
         {
-            GameObject Player = GameObject.FindGameObjectWithTag("Player");
             Instance.RaiseDestroy(GameObject.FindGameObjectWithTag("Places"));
             Instance.RaiseInstantiate(Resources.Load("Maps/" + mapName, typeof(GameObject)));
             GameVariables.Update("CurrentMap", mapName);
