@@ -40,13 +40,6 @@ namespace AncientTimes.Assets.Scripts.GameSystem
             GameVariables.Update("CurrentMap", mapName);
         }
 
-        public static void Load(string mapName)
-        {
-            Instance.RaiseDestroy(GameObject.FindGameObjectWithTag("Places"));
-            Instance.RaiseInstantiate(Resources.Load("Maps/" + mapName, typeof(GameObject)));
-            GameVariables.Update("CurrentMap", mapName);
-        }
-
         #endregion Methods
     }
 }
