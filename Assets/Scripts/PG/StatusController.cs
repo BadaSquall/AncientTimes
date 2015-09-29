@@ -54,8 +54,16 @@ namespace AncientTimes.Assets.Scripts.PG
 
             if (OnStatusChange == null) return;
 
-            if (Input.GetKey(KeyCode.LeftShift)) animator.SetBool("Running", true);
-            else animator.SetBool("Running", false);
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                animator.SetBool("Running", true);
+                grassAnimator.SetBool("Running", true);
+            }
+            else
+            {
+                animator.SetBool("Running", false);
+                grassAnimator.SetBool("Running", false);
+            }
 
             if (Input.GetButton("Horizontal") && Input.GetAxis("Horizontal") > 0) OnStatusChange(Status.WalkingRight);
             else if (Input.GetButton("Horizontal") && Input.GetAxis("Horizontal") < 0) OnStatusChange(Status.WalkingLeft);

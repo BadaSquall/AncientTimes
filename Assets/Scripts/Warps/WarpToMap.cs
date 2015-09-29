@@ -9,7 +9,6 @@ namespace AncientTimes.Assets.Scripts.WildPokemon
 
     public class WarpToMap : MonoBehaviour
     {
-
         #region Properties
 
         private GameObject Player;
@@ -27,8 +26,7 @@ namespace AncientTimes.Assets.Scripts.WildPokemon
 
         private void FixedUpdate()
         {
-            if (IsIn)
-                MapLoader.Load(mapToWarp, EndWarp);
+            if (IsIn) MapLoader.Load(mapToWarp);
         }
 
         private void Update()

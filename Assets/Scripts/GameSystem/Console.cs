@@ -156,11 +156,7 @@ namespace AncientTimes.Assets.Scripts.GameSystem
 			
 			if (ListenToInsert()) return;
 
-#if UNITY_EDITOR
 			if (!Input.GetButtonDown("Submit")) return;
-#else
-			if (Input.touchCount == 0 && Input.GetTouch(0).phase != TouchPhase.Began) return;
-#endif
 			
 			blinkMilliseconds = 0;
 			blinkTimes = 0;
