@@ -6,12 +6,16 @@ using System.Xml.Serialization;
 
 namespace AncientTimes.Assets.Scripts.Events.Actions
 {
-	[XmlInclude(typeof(ShowDialogue))]
+    [XmlInclude(typeof(ChangePosition))]
 	[XmlInclude(typeof(ChangeSwitch))]
+    [XmlInclude(typeof(Empty))]
+    [XmlInclude(typeof(Fade))]
 	[XmlInclude(typeof(IfElse))]
+    [XmlInclude(typeof(LookAtDirection))]
     [XmlInclude(typeof(MoveCharacter))]
     [XmlInclude(typeof(PlayAnimation))]
-    [XmlInclude(typeof(LookAtDirection))]
+    [XmlInclude(typeof(PlayCharacterAnimation))]
+    [XmlInclude(typeof(ShowDialogue))]
     [XmlInclude(typeof(Wait))]
 	public abstract class ActionBase
 	{

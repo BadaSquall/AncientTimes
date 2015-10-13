@@ -10,9 +10,10 @@ namespace AncientTimes.Assets.Scripts.Events.Actions
     {
         #region Properties
 
-        public string Trigger { get; set; }
+        public string Animation { get; set; }
         public string ObjectToAnimate { get; set; }
-        //private GameObject objectToAnimateInstance;
+        private bool firstCycle = true;
+        private Animator animator;
 
         #endregion Properties
 
@@ -20,8 +21,16 @@ namespace AncientTimes.Assets.Scripts.Events.Actions
 
         public override void Execute(float deltaTime)
         {
-            GameObject.Find(ObjectToAnimate).GetComponent<Animator>().SetTrigger(Trigger);
-            IsFinished = true;
+            if (firstCycle)
+            {
+                animator = GameObject.Find(ObjectToAnimate).GetComponent<Animator>();
+                animator.Play(Animation);
+                firstCycle = false;
+                return;
+            }
+
+            var state = animator.GetCurrentAnimatorStateInfo(0);
+            if ((state.IsName(Animation) && state.normalizedTime >= 1.0f) || !state.IsName(Animation)) IsFinished = true;
         }
 
         public override ActionBase Clone()
@@ -29,7 +38,7 @@ namespace AncientTimes.Assets.Scripts.Events.Actions
             var action = new PlayAnimation()
             {
                 IsParallel = this.IsParallel,
-                Trigger = this.Trigger,
+                Animation = this.Animation,
                 ObjectToAnimate = this.ObjectToAnimate
             };
 

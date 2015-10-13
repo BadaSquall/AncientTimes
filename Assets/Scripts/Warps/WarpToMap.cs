@@ -13,8 +13,6 @@ namespace AncientTimes.Assets.Scripts.WildPokemon
 
         private GameObject Player;
         private bool IsIn = false;
-        public float posX;
-        public float posY;
         public string mapToWarp;
         public string EndWarp;
 
@@ -24,18 +22,7 @@ namespace AncientTimes.Assets.Scripts.WildPokemon
 
         private void Start() {  }
 
-        private void FixedUpdate()
-        {
-            if (IsIn) MapLoader.Load(mapToWarp);
-        }
-
-        private void Update()
-        {
-            if (IsIn)
-            {
-
-            }
-        }
+        private void FixedUpdate() { if (IsIn) MapLoader.Load(mapToWarp); }
 
         private void OnTriggerEnter2D(Collider2D coll) { IsIn = true; }
 

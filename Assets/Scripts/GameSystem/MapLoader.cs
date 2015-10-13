@@ -35,8 +35,7 @@ namespace AncientTimes.Assets.Scripts.GameSystem
         {
             Instance.RaiseDestroy(GameObject.FindGameObjectWithTag("Places"));
             Instance.RaiseInstantiate(Resources.Load("Maps/" + mapName, typeof(GameObject))); ;
-            GameObject.Find("_Fade").GetComponent<Fading>().Fade();
-            GameObject.Find("_Fade").GetComponent<Fading>().BeginFade(-1);
+            Fading.FadeIn();
             GameVariables.Update("CurrentMap", mapName);
         }
 

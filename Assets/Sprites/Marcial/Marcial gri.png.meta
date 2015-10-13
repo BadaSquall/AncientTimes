@@ -52,95 +52,95 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: Marcial gri_0
+    - name: 
       rect:
         serializedVersion: 2
         x: 0
         y: 256
         width: 64
         height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Marcial gri_1
+    - name: 
       rect:
         serializedVersion: 2
         x: 64
         y: 256
         width: 64
         height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Marcial gri_2
+    - name: 
       rect:
         serializedVersion: 2
         x: 128
         y: 256
         width: 64
         height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Marcial gri_3
+    - name: 
       rect:
         serializedVersion: 2
         x: 0
         y: 128
         width: 64
         height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Marcial gri_4
+    - name: 
       rect:
         serializedVersion: 2
         x: 64
         y: 128
         width: 64
         height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Marcial gri_5
+    - name: 
       rect:
         serializedVersion: 2
         x: 128
         y: 128
         width: 64
         height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Marcial gri_6
+    - name: 
       rect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 64
         height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Marcial gri_7
+    - name: 
       rect:
         serializedVersion: 2
         x: 64
         y: 0
         width: 64
         height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Marcial gri_8
+    - name: 
       rect:
         serializedVersion: 2
         x: 128
         y: 0
         width: 64
         height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 

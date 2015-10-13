@@ -25,8 +25,8 @@ public class PlayAnimationNode : BaseNode
 
         EditorGUILayout.BeginVertical();
         {
-            EditorGUILayout.LabelField("Trigger:", EditorStyles.boldLabel);
-            playAnimation.Trigger = EditorGUILayout.TextArea(playAnimation.Trigger);
+            EditorGUILayout.LabelField("Animation:", EditorStyles.boldLabel);
+            playAnimation.Animation = EditorGUILayout.TextArea(playAnimation.Animation);
             EditorGUILayout.LabelField("Object to animate:", EditorStyles.boldLabel);
             playAnimation.ObjectToAnimate = EditorGUILayout.TextArea(playAnimation.ObjectToAnimate);
         }

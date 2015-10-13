@@ -299,7 +299,7 @@ public class EventManagerWindow : EditorWindow
 		}
 	}
 
-	private void AddToNodesList(BaseNode node)
+    private void AddToNodesList(BaseNode node)
 	{
 		node.Parent = previousGameObject.GetComponent<GameEvent>();
 		NodesList.Nodes[previousGameObject].Add(node);

@@ -7,7 +7,6 @@ namespace AncientTimes.Assets.Scripts.PG
 {
     public class PGLoader : MonoBehaviour
     {
-
         #region Properties
 
         private GameObject PlayerIstantiated;

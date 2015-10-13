@@ -1,25 +1,12 @@
 fileFormatVersion: 2
-guid: ab75f841baf6a244da44e221091765b5
+guid: 43504dddd4430fe42beba1ddca94c435
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Marcial gri_0
-    21300002: Marcial gri_1
-    21300004: Marcial gri_2
-    21300006: Marcial gri_3
-    21300008: Marcial gri_4
-    21300010: Marcial gri_5
-    21300012: Marcial gri_6
-    21300014: Marcial gri_7
-    21300016: Marcial gri_8
-    21300018: Marcial grid_0
-    21300020: Marcial grid_1
-    21300022: Marcial grid_2
-    21300024: Marcial grid_3
-    21300026: Marcial grid_4
-    21300028: Marcial grid_5
-    21300030: Marcial grid_6
-    21300032: Marcial grid_7
-    21300034: Marcial grid_8
+    21300000: happy-sign_0
+    21300002: happy-sign_1
+    21300004: happy-sign_2
+    21300006: happy-sign_3
+    21300008: happy-sign_4
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -61,94 +48,54 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: Marcial grid_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 256
-        width: 64
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Marcial grid_1
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 256
-        width: 64
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Marcial grid_2
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 256
-        width: 64
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Marcial grid_3
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 128
-        width: 64
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Marcial grid_4
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 128
-        width: 64
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Marcial grid_5
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 128
-        width: 64
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Marcial grid_6
+    - name: happy-sign_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 64
         height: 128
-      alignment: 0
+      alignment: 7
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Marcial grid_7
+    - name: happy-sign_1
       rect:
         serializedVersion: 2
         x: 64
         y: 0
         width: 64
         height: 128
-      alignment: 0
+      alignment: 7
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Marcial grid_8
+    - name: happy-sign_2
       rect:
         serializedVersion: 2
         x: 128
         y: 0
         width: 64
         height: 128
-      alignment: 0
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: happy-sign_3
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 64
+        height: 128
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: happy-sign_4
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 64
+        height: 128
+      alignment: 7
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
