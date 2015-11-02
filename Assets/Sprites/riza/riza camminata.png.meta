@@ -59,165 +59,165 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: riza camminata_0
+    - name: 
       rect:
         serializedVersion: 2
         x: 0
         y: 384
         width: 64
         height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: riza camminata_1
+    - name: 
       rect:
         serializedVersion: 2
         x: 64
         y: 384
         width: 64
         height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: riza camminata_2
+    - name: 
       rect:
         serializedVersion: 2
         x: 128
         y: 384
         width: 64
         height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: riza camminata_3
+    - name: 
       rect:
         serializedVersion: 2
         x: 192
         y: 384
         width: 64
         height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: riza camminata_4
+    - name: 
       rect:
         serializedVersion: 2
         x: 0
         y: 256
         width: 64
         height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: riza camminata_5
+    - name: 
       rect:
         serializedVersion: 2
         x: 64
         y: 256
         width: 64
         height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: riza camminata_6
+    - name: 
       rect:
         serializedVersion: 2
         x: 128
         y: 256
         width: 64
         height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: riza camminata_7
+    - name: 
       rect:
         serializedVersion: 2
         x: 192
         y: 256
         width: 64
         height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: riza camminata_8
+    - name: 
       rect:
         serializedVersion: 2
         x: 0
         y: 128
         width: 64
         height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: riza camminata_9
+    - name: 
       rect:
         serializedVersion: 2
         x: 64
         y: 128
         width: 64
         height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: riza camminata_10
+    - name: 
       rect:
         serializedVersion: 2
         x: 128
         y: 128
         width: 64
         height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: riza camminata_11
+    - name: 
       rect:
         serializedVersion: 2
         x: 192
         y: 128
         width: 64
         height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: riza camminata_12
+    - name: 
       rect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 64
         height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: riza camminata_13
+    - name: 
       rect:
         serializedVersion: 2
         x: 64
         y: 0
         width: 64
         height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: riza camminata_14
+    - name: 
       rect:
         serializedVersion: 2
         x: 128
         y: 0
         width: 64
         height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: riza camminata_15
+    - name: 
       rect:
         serializedVersion: 2
         x: 192
         y: 0
         width: 64
         height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 

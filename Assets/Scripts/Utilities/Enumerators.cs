@@ -20,4 +20,9 @@ namespace AncientTimes.Assets.Scripts.Utilities
         MoveInto = 2,
         Auto = 3
     }
+
+    public enum CharacterAnimation
+    {
+        Happy = 0
+    }
 }

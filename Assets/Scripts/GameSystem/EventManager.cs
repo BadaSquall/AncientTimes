@@ -75,7 +75,6 @@ namespace AncientTimes.Assets.Scripts.GameSystem
 		{
 			if (evt == null || evt.Event == null) return;
             if (action != null) return;
-            if (evt.Event.FirstAction == null) Debug.Log(evt.name);
 			action = evt.Event.FirstAction.Clone();
 			CurrentEvent = evt;
             if (EventStarted != null) EventStarted();
