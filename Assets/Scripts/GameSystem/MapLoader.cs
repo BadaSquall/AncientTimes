@@ -1,7 +1,7 @@
-using AncientTimes.Assets.Scripts.Utilities;
-using UnityEngine;
-using System.Collections;
 using AncientTimes.Assets.Scripts;
+using AncientTimes.Assets.Scripts.Utilities;
+using System.Collections;
+using UnityEngine;
 
 namespace AncientTimes.Assets.Scripts.GameSystem
 {
@@ -24,29 +24,22 @@ namespace AncientTimes.Assets.Scripts.GameSystem
 
         #region Constructor
 
-        private MapLoader() { }
+        private MapLoader()
+        { }
 
         #endregion Constructor
 
         #region Methods
 
-        public static void Load(string mapName, string EndWarp)
+        public static void Load(string mapName)
         {
-            GameObject Player = GameObject.FindGameObjectWithTag("Player");
             Instance.RaiseDestroy(GameObject.FindGameObjectWithTag("Places"));
-            Instance.RaiseInstantiate(Resources.Load("Maps/" + mapName, typeof(GameObject)));
-            Player.transform.position = GameObject.Find(EndWarp).transform.position;
+            Instance.RaiseInstantiate(Resources.Load("Maps/" + mapName, typeof(GameObject))); ;
             GameObject.Find("_Fade").GetComponent<Fading>().Fade();
             GameObject.Find("_Fade").GetComponent<Fading>().BeginFade(-1);
             GameVariables.Update("CurrentMap", mapName);
         }
 
-        public static void Load(string mapName)
-        {
-            Instance.RaiseDestroy(GameObject.FindGameObjectWithTag("Places"));
-            Instance.RaiseInstantiate(Resources.Load("Maps/" + mapName, typeof(GameObject)));
-            GameVariables.Update("CurrentMap", mapName);
-        }
         #endregion Methods
     }
 }
