@@ -6,11 +6,6 @@
 public class Move
 {
 	/// <summary>
-	/// BattleAction describing this move.
-	/// </summary>
-	public BattleAction BattleAction { get; set; }
-
-	/// <summary>
 	/// Move name.
 	/// </summary>
 	public string Name { get; set; }
@@ -84,6 +79,11 @@ public class Move
 	/// Defines if the prefab of the move must shown on the attacker instead of the attacked pokemon.
 	/// </summary>
 	public bool OnAttacker { get; set; }
+
+    /// <summary>
+    /// Specify which pokemon will be targeted by this move.
+    /// </summary>
+    public Target Target { get; set; }
 
 	#region Constructor
 	

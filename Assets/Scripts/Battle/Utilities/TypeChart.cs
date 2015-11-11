@@ -414,5 +414,16 @@ static public class TypeChart
         return typeChart.ContainsKey(type) ? typeChart[type].NoEffect : null;
     }
 
+    /// <summary>
+    /// Determines whether the specified move is STAB for the specified pokemon.
+    /// </summary>
+    /// <param name="pokemon">The pokemon.</param>
+    /// <param name="type">The type.</param>
+    /// <returns></returns>
+    public static bool IsStab(Pokemon pokemon, PokemonType type)
+    {
+        return pokemon.TypeOne == type || pokemon.TypeTwo == type;
+    }
+
     #endregion
 }

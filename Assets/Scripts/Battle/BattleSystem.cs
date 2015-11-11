@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using AncientTimes.Assets.Scripts.Utilities;
 
@@ -11,16 +12,19 @@ public class BattleSystem : MonoBehaviour
 	private readonly Dictionary<BattlePhase, IPriorityQueue<BattleAction>> phaseQueue = 
 		new Dictionary<BattlePhase, IPriorityQueue<BattleAction>>();
 
-	private BattlePhase currentPhase = BattlePhase.Choice;
-
     private GameObject backgroundObject;
-
     private readonly List<GameObject> playerGameObjects = new List<GameObject>();
-    private readonly List<GameObject> enemyGameObjects = new List<GameObject>(); 
+    private readonly List<GameObject> enemyGameObjects = new List<GameObject>();
+    private GameObject moveObject;
+
+    private readonly BattleState battleState = new BattleState();
+
+    private BattleAction currentAction = null;
 
 	#endregion
 
     #region Public Static
+
     // TODO: put into a static struct if they get too many, maybe BattleInfo?
     public static List<Pokemon> EnemyTeam = new List<Pokemon>();
     public static Trainer Trainer;
@@ -89,31 +93,53 @@ public class BattleSystem : MonoBehaviour
 	}
 	
 	// Update is called once per frame
-	void Update () 
+	void Update ()
 	{
-		if (phaseQueue[currentPhase].Count() == 0) 
+        // Check if action animation completed
+	    if (moveObject != null && currentAction != null)
+	    {
+	        var stateInfo = moveObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0);
+
+	        if (stateInfo.IsName(currentAction.ExecutedMove.Name) && stateInfo.normalizedTime >= 1.0f)
+	        {
+	            currentAction.IsActionCompleted = true;
+	        }
+	    }
+
+	    if (currentAction != null && !currentAction.IsActionCompleted) return;
+
+        if (phaseQueue[battleState.CurrentPhase].Count() == 0) 
 		{
-			if(currentPhase == BattlePhase.AbilityCheck9)
-				currentPhase = BattlePhase.Choice;
-			else 
-				currentPhase = (BattlePhase)((int) currentPhase + 1);
+            if (battleState.CurrentPhase == BattlePhase.AbilityCheck9)
+                battleState.CurrentPhase = BattlePhase.Choice;
+			else
+                battleState.CurrentPhase = (BattlePhase)((int) battleState.CurrentPhase + 1);
 		}
 
-		if (currentPhase == BattlePhase.Choice) 
+        if (battleState.CurrentPhase == BattlePhase.Choice) 
 		{
 			LetPlayerChooseAndRegister();
 			LetAiChooseAndRegister();
 
-			currentPhase = BattlePhase.AbilityCheck1;
+            battleState.CurrentPhase = BattlePhase.AbilityCheck1;
 		} 
 		else 
 		{
-			var currentAction = phaseQueue[currentPhase].Dequeue();
+            currentAction = phaseQueue[battleState.CurrentPhase].Dequeue();
 
-			// execute currentAction
+		    if (currentAction != null)
+		    {
+                var actionPrefab = Resources.Load(currentAction.PrefabPath);
+                moveObject = Instantiate(actionPrefab) as GameObject;
+
+		        currentAction.Execute(Time.time, battleState);
+		    }
 		}
 	}
 
+    /// <summary>
+    /// Called when the GameObject is destroyed.
+    /// </summary>
     void OnDestroy()
     {
         foreach (var gameObj in playerGameObjects)
@@ -125,6 +151,8 @@ public class BattleSystem : MonoBehaviour
         {
             Destroy(gameObj);
         }
+
+        Destroy(backgroundObject);
     }
 
     /// <summary>

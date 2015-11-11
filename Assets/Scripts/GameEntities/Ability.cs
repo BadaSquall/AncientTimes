@@ -2,11 +2,7 @@
 
 public class Ability
 {
-	/// <summary>
-	/// BattleAction describing this move.
-	/// </summary>
-	public BattleAction BattleAction { get; set; }
-	
+
 	/// <summary>
 	/// Ability name.
 	/// </summary>
