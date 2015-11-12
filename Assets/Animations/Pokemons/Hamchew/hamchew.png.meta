@@ -1,0 +1,179 @@
+fileFormatVersion: 2
+guid: f9b978a68c3859e43810d1ebe87db2e3
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: hamchew_0
+    21300002: hamchew_1
+    21300004: hamchew_2
+    21300006: hamchew_3
+    21300008: hamchew_4
+    21300010: hamchew_5
+    21300012: hamchew_6
+    21300014: hamchew_7
+    21300016: hamchew_8
+    21300018: hamchew_9
+    21300020: hamchew_10
+    21300022: hamchew_11
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 1024
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: hamchew_0
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 5
+        width: 96
+        height: 92
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: hamchew_1
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 5
+        width: 96
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: hamchew_2
+      rect:
+        serializedVersion: 2
+        x: 230
+        y: 5
+        width: 99
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: hamchew_3
+      rect:
+        serializedVersion: 2
+        x: 342
+        y: 5
+        width: 98
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: hamchew_4
+      rect:
+        serializedVersion: 2
+        x: 453
+        y: 5
+        width: 95
+        height: 92
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: hamchew_5
+      rect:
+        serializedVersion: 2
+        x: 565
+        y: 5
+        width: 93
+        height: 92
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: hamchew_6
+      rect:
+        serializedVersion: 2
+        x: 676
+        y: 5
+        width: 94
+        height: 92
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: hamchew_7
+      rect:
+        serializedVersion: 2
+        x: 787
+        y: 5
+        width: 94
+        height: 92
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: hamchew_8
+      rect:
+        serializedVersion: 2
+        x: 898
+        y: 5
+        width: 93
+        height: 92
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: hamchew_9
+      rect:
+        serializedVersion: 2
+        x: 1009
+        y: 5
+        width: 94
+        height: 92
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: hamchew_10
+      rect:
+        serializedVersion: 2
+        x: 1119
+        y: 5
+        width: 95
+        height: 92
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: hamchew_11
+      rect:
+        serializedVersion: 2
+        x: 1229
+        y: 5
+        width: 99
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 

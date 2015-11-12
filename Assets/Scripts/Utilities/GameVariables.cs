@@ -11,7 +11,7 @@ namespace AncientTimes.Assets.Scripts.Utilities
         /// <summary>
         /// The collection of dynamic variables
         /// </summary>
-        private static Dictionary<string, string> collection;
+        private static Dictionary<string, object> collection;
 
         #endregion Properties
 
@@ -20,7 +20,7 @@ namespace AncientTimes.Assets.Scripts.Utilities
         /// <summary>
         /// Initializes the <see cref="GameVariables"/> class.
         /// </summary>
-        static GameVariables() { collection = new Dictionary<string, string>(); }
+        static GameVariables() { collection = new Dictionary<string, object>(); }
 
         #endregion Constructor
 
@@ -55,24 +55,24 @@ namespace AncientTimes.Assets.Scripts.Utilities
         /// Updates the variable if exists, create it otherwise.
         /// </summary>
         /// <param name="variableName">Name of the variable to update/create.</param>
-        /// <param name="value">The value we want to give to the variable. (The value will be saved calling ToString() method)</param>
+        /// <param name="value">The value we want to give to the variable. (The value will be saved as it is)</param>
         public static void Update(string variableName, object value)
         {
-            if (collection.ContainsKey(variableName)) collection[variableName] = value.ToString();
-            else collection.Add(variableName, value.ToString());
+            if (collection.ContainsKey(variableName)) collection[variableName] = value;
+            else collection.Add(variableName, value);
         }
 
         [ObsoleteAttribute("use Get method instead")]
         public static string GetVariable(string variableName)
         {
-            if (collection.ContainsKey(variableName)) return collection[variableName];
+            if (collection.ContainsKey(variableName)) return (string) collection[variableName];
             else return "";
         }
 
         [ObsoleteAttribute("use Get method instead")]
         public static bool GetSwitch(string switchName)
         {
-            if (collection.ContainsKey(switchName)) return bool.Parse(collection[switchName]);
+            if (collection.ContainsKey(switchName)) return bool.Parse((string) collection[switchName]);
             else return false;
         }
 
@@ -86,7 +86,7 @@ namespace AncientTimes.Assets.Scripts.Utilities
         /// </returns>
         public static string Get(string variableName, string defaultValue)
         {
-            if (collection.ContainsKey(variableName)) return collection[variableName];
+            if (collection.ContainsKey(variableName)) return (string) collection[variableName];
             else return defaultValue;
         }
 
@@ -98,10 +98,10 @@ namespace AncientTimes.Assets.Scripts.Utilities
         /// <returns>
         /// The variable.
         /// </returns>
-        public static string Get(string variableName, object defaultValue)
+        public static object Get(string variableName, object defaultValue)
         {
             if (collection.ContainsKey(variableName)) return collection[variableName];
-            else return defaultValue.ToString();
+            else return defaultValue;
         }
 
         /// <summary>

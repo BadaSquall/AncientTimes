@@ -1,0 +1,454 @@
+fileFormatVersion: 2
+guid: efdc917215e2f724e8dcefd1cf457e5f
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: stato veleno_0
+    21300002: stato veleno_1
+    21300004: stato veleno_2
+    21300006: stato veleno_3
+    21300008: stato veleno_4
+    21300010: stato veleno_5
+    21300012: stato veleno_6
+    21300014: stato veleno_7
+    21300016: stato veleno_8
+    21300018: stato veleno_9
+    21300020: stato veleno_10
+    21300022: stato veleno_11
+    21300024: stato veleno_12
+    21300026: stato veleno_13
+    21300028: stato veleno_14
+    21300030: stato veleno_15
+    21300032: stato veleno_16
+    21300034: stato veleno_17
+    21300036: stato veleno_18
+    21300038: stato veleno_19
+    21300040: stato veleno_20
+    21300042: stato veleno_21
+    21300044: stato veleno_22
+    21300046: stato veleno_23
+    21300048: stato veleno_24
+    21300050: stato veleno_25
+    21300052: stato veleno_26
+    21300054: stato veleno_27
+    21300056: stato veleno_28
+    21300058: stato veleno_29
+    21300060: stato veleno_30
+    21300062: stato veleno_31
+    21300064: stato veleno_32
+    21300066: stato veleno_33
+    21300068: stato veleno_34
+    21300070: stato veleno_35
+    21300072: stato veleno_36
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 1024
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: stato veleno_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 436
+        width: 87
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: stato veleno_1
+      rect:
+        serializedVersion: 2
+        x: 87
+        y: 436
+        width: 87
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: stato veleno_2
+      rect:
+        serializedVersion: 2
+        x: 174
+        y: 436
+        width: 87
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: stato veleno_3
+      rect:
+        serializedVersion: 2
+        x: 261
+        y: 436
+        width: 87
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: stato veleno_4
+      rect:
+        serializedVersion: 2
+        x: 348
+        y: 436
+        width: 87
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: stato veleno_5
+      rect:
+        serializedVersion: 2
+        x: 435
+        y: 436
+        width: 87
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: stato veleno_6
+      rect:
+        serializedVersion: 2
+        x: 522
+        y: 436
+        width: 87
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: stato veleno_7
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 349
+        width: 87
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: stato veleno_8
+      rect:
+        serializedVersion: 2
+        x: 87
+        y: 349
+        width: 87
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: stato veleno_9
+      rect:
+        serializedVersion: 2
+        x: 174
+        y: 349
+        width: 87
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: stato veleno_10
+      rect:
+        serializedVersion: 2
+        x: 261
+        y: 349
+        width: 87
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: stato veleno_11
+      rect:
+        serializedVersion: 2
+        x: 348
+        y: 349
+        width: 87
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: stato veleno_12
+      rect:
+        serializedVersion: 2
+        x: 435
+        y: 349
+        width: 87
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: stato veleno_13
+      rect:
+        serializedVersion: 2
+        x: 522
+        y: 349
+        width: 87
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: stato veleno_14
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 262
+        width: 87
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: stato veleno_15
+      rect:
+        serializedVersion: 2
+        x: 87
+        y: 262
+        width: 87
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: stato veleno_16
+      rect:
+        serializedVersion: 2
+        x: 174
+        y: 262
+        width: 87
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: stato veleno_17
+      rect:
+        serializedVersion: 2
+        x: 261
+        y: 262
+        width: 87
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: stato veleno_18
+      rect:
+        serializedVersion: 2
+        x: 348
+        y: 262
+        width: 87
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: stato veleno_19
+      rect:
+        serializedVersion: 2
+        x: 435
+        y: 262
+        width: 87
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: stato veleno_20
+      rect:
+        serializedVersion: 2
+        x: 522
+        y: 262
+        width: 87
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: stato veleno_21
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 175
+        width: 87
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: stato veleno_22
+      rect:
+        serializedVersion: 2
+        x: 87
+        y: 175
+        width: 87
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: stato veleno_23
+      rect:
+        serializedVersion: 2
+        x: 174
+        y: 175
+        width: 87
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: stato veleno_24
+      rect:
+        serializedVersion: 2
+        x: 261
+        y: 175
+        width: 87
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: stato veleno_25
+      rect:
+        serializedVersion: 2
+        x: 348
+        y: 175
+        width: 87
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: stato veleno_26
+      rect:
+        serializedVersion: 2
+        x: 435
+        y: 175
+        width: 87
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: stato veleno_27
+      rect:
+        serializedVersion: 2
+        x: 522
+        y: 175
+        width: 87
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: stato veleno_28
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 88
+        width: 87
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: stato veleno_29
+      rect:
+        serializedVersion: 2
+        x: 87
+        y: 88
+        width: 87
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: stato veleno_30
+      rect:
+        serializedVersion: 2
+        x: 174
+        y: 88
+        width: 87
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: stato veleno_31
+      rect:
+        serializedVersion: 2
+        x: 261
+        y: 88
+        width: 87
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: stato veleno_32
+      rect:
+        serializedVersion: 2
+        x: 348
+        y: 88
+        width: 87
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: stato veleno_33
+      rect:
+        serializedVersion: 2
+        x: 435
+        y: 88
+        width: 87
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: stato veleno_34
+      rect:
+        serializedVersion: 2
+        x: 522
+        y: 88
+        width: 87
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: stato veleno_35
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1
+        width: 87
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: stato veleno_36
+      rect:
+        serializedVersion: 2
+        x: 87
+        y: 1
+        width: 87
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
