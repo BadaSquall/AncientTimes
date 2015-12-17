@@ -13,7 +13,7 @@ namespace AncientTimes.Assets.Scripts.GameSystem
 	    #endregion Properties
 
 	    #region Methods
-
+        /*
 	    // Update is called once per frame
         void Update()
         {
@@ -53,7 +53,7 @@ namespace AncientTimes.Assets.Scripts.GameSystem
             }
             else if (!bool.Parse(GameVariables.Get("IsPaused", false))) GUI.enabled = false;
 	    }   
-
+        */
 	    #endregion Methods
     }
 }

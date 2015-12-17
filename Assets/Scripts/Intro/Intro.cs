@@ -22,7 +22,7 @@ namespace AncientTimes.Assets.Scripts.Intro
         #endregion Properties
 
         #region Methods
-        
+
         void Start()
         {
             SexAnim = GameObject.Find("Sex").GetComponent<Animator>();
@@ -96,9 +96,9 @@ namespace AncientTimes.Assets.Scripts.Intro
 
         void StartExplanation()
         {
-	        Console.Write("Ben arrivato!");
-	        Console.Write("Benvenuto in questo mondo popolato dai Pokémon!");
-	        Console.Write("Io sono Kerneth ma tutti mi chiamano 'vecchio saggio' perché ho\n\ndedicato tutta la mia vita allo studio e al rispetto dei Pokémon!");
+            Console.Write("Ben arrivato!");
+            Console.Write("Benvenuto in questo mondo popolato dai Pokémon!");
+            Console.Write("Io sono Kerneth ma tutti mi chiamano 'vecchio saggio' perché ho\n\ndedicato tutta la mia vita allo studio e al rispetto dei Pokémon!");
             Console.Write("Forse ti sarai chiesto che cosa siano i Pokémon di cui tanto parlo:\n\ntoh, eccone uno, quando si dice la coincidenza.");
             NextState();
         }
@@ -134,16 +134,16 @@ namespace AncientTimes.Assets.Scripts.Intro
         void Name()
         {
             Console.Write("Come ti chiami?", true, "CharacterName");
-            ActiveSex(!bool.Parse(GameVariables.Get("IsChosen", false)));
+            ActiveSex(!GameVariables.GetSwitch("IsChosen"));
             NextState();
         }
 
         void NameConfirmation()
         {
-            ActiveSex(!bool.Parse(GameVariables.Get("IsChosen", false)));
-            Console.Write("Sei sicuro di chiamarti " + GameVariables.Get("CharacterName", "Leon") + "?");
+            ActiveSex(!GameVariables.GetSwitch("IsChosen"));
+            Console.Write("Sei sicuro di chiamarti " + GameVariables.GetVariable("CharacterName") + "?");
 
-            ActiveSex(!bool.Parse(GameVariables.Get("IsChosen", false)));
+            ActiveSex(!GameVariables.GetSwitch("IsChosen"));
             NextState();
         }
 

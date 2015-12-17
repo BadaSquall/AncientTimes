@@ -1,6 +1,8 @@
-﻿using AncientTimes.Assets.Scripts.Utilities;
+﻿
+using AncientTimes.Assets.Scripts.Utilities;
 using UnityEngine;
 using System.Collections;
+using System.Linq;
 
 namespace AncientTimes.Assets.Scripts.PG
 {
@@ -14,24 +16,23 @@ namespace AncientTimes.Assets.Scripts.PG
 
         #region Methods
 
-        void Start()
-        {
-            Load((GameVariables.Get("IsMan", true)));
-        }
+        void Start() { Load(GameVariables.Get("IsMan", true)); }
 
         void Load(string isMan)
         {
-            if (isMan.Equals("True")) Instantiate(Resources.Load("PG/" + "NPClarity", typeof(GameObject)));
-            else Instantiate(Resources.Load("PG/" + "NPLeon", typeof(GameObject)));
-
+            if (isMan.Equals("True")) SetPlayer("Clarity/Clarity");
+            else SetPlayer("Leon/Leon");
             NPIstantiated = GameObject.FindGameObjectWithTag("NonPlayer");
             SetPosition(NPIstantiated, this.gameObject.transform.position);
         }
 
-        void SetPosition(GameObject player, Vector3 coordinates)
+        void SetPlayer(string path)
         {
-            player.transform.position = coordinates;
+            foreach (var NoPlayer in GameObject.FindGameObjectsWithTag("NonPlayer"))
+                NoPlayer.GetComponent<Animator>().runtimeAnimatorController = Resources.Load(path) as RuntimeAnimatorController;
         }
+
+        void SetPosition(GameObject player, Vector3 coordinates) { player.transform.position = coordinates; }
 
         #endregion Methods
     }
