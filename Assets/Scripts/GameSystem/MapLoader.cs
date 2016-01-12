@@ -34,7 +34,7 @@ namespace AncientTimes.Assets.Scripts.GameSystem
         public static void Load(string mapName)
         {
             Instance.RaiseDestroy(GameObject.FindGameObjectWithTag("Places"));
-            Instance.RaiseInstantiate(Resources.Load("Maps/" + mapName, typeof(GameObject))); ;
+            Instance.RaiseInstantiate(Resources.Load("Maps/" + mapName, typeof(GameObject)));
             Fading.FadeIn();
             GameVariables.Update("CurrentMap", mapName);
         }

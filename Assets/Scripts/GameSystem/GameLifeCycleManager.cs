@@ -36,7 +36,6 @@ namespace AncientTimes.Assets.Scripts.GameSystem
             Fading.FadeTexture = FadeTexture;
 
             if (ManageMapLoader) MapLoader.Load(GameVariables.Get("CurrentMap", "Isola"));
-
 		}
 
 		private void Update()

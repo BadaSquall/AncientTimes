@@ -17,6 +17,8 @@ public class TeamSystem : MonoBehaviour
 
     private GameObject menu;
     private GameObject det_menu;
+    private GameObject sub_mosse;
+    private GameObject sub_generale;
     #endregion Properties
     #region Methods
 
@@ -25,6 +27,8 @@ public class TeamSystem : MonoBehaviour
         ChangeChoice(1);
         menu = GameObject.Find("principal_menu");
         det_menu = GameObject.Find("detail_menu");
+        sub_generale = GameObject.Find("detail_menu/Multimenu/sub_generale");
+        sub_mosse = GameObject.Find("detail_menu/Multimenu/sub_mosse");
         det_menu.SetActive(false);
     }
 
@@ -127,15 +131,23 @@ public class TeamSystem : MonoBehaviour
         GameObject.Find("detail_menu/PokemonImg").GetComponent<SpriteRenderer>().sprite = GameObject.Find("principal_menu/" + now).GetComponent<SpriteRenderer>().sprite;
         GameObject.Find("detail_menu/Pokemon_name").GetComponent<Text>().text = GameObject.Find("principal_menu/" + now + "/Name").GetComponent<Text>().text;
         GameObject.Find("detail_menu/Pokemon_lvl").GetComponent<Text>().text = "Lv. " + GameObject.Find("principal_menu/" + now + "/LVL").GetComponent<Text>().text;
-        GameObject.Find("detail_menu/Multimenu/Mosse").GetComponent<Button>().onClick.AddListener(Attacks);
+        GameObject.Find("detail_menu/Multimenu/Mosse").GetComponent<Button>().onClick.AddListener(AttacksClicked);
+        GameObject.Find("detail_menu/Multimenu/Generale").GetComponent<Button>().onClick.AddListener(GeneralClicked);
         menu.SetActive(false);
+        sub_mosse.SetActive(false);
     }
 
-    private void Attacks()
+    private void AttacksClicked()
     {
-        Debug.Log("funziona");
+        sub_mosse.SetActive(true);
+        sub_generale.SetActive(false);
     }
 
+    private void GeneralClicked()
+    {
+        sub_generale.SetActive(true);
+        sub_mosse.SetActive(false);
+    }
     enum choices
     {
         first = 1,
