@@ -62,6 +62,7 @@ public class TeamSystem : MonoBehaviour
     private void LoadMenu()
     {
         //1
+        GameObject.Find("principal_menu/1").GetComponent<SpriteRenderer>().sprite = Resources.Load("") as Sprite;
         foreach (Transform child in GameObject.Find("principal_menu/1").transform)
         {
             string name = child.name;
@@ -71,10 +72,13 @@ public class TeamSystem : MonoBehaviour
                     child.GetComponent<Text>().text = "10/10";
                     break;
                 case "Name":
-                    child.GetComponent<Text>().text = "Volern porcodue";
+                    child.GetComponent<Text>().text = "Volern";
                     break;
                 case "LVL":
                     child.GetComponent<Text>().text = "50";
+                    break;
+                case "HPBar":
+                    child.transform.GetChild(0).GetComponent<Image>().fillAmount = 0.5f;
                     break;
             }
         }
