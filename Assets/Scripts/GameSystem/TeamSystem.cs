@@ -30,6 +30,7 @@ public class TeamSystem : MonoBehaviour
         sub_generale = GameObject.Find("detail_menu/Multimenu/sub_generale");
         sub_mosse = GameObject.Find("detail_menu/Multimenu/sub_mosse");
         det_menu.SetActive(false);
+        LoadMenu();
     }
 
     void Update () {
@@ -57,6 +58,37 @@ public class TeamSystem : MonoBehaviour
         
 	}
 
+
+    private void LoadMenu()
+    {
+        //1
+        foreach (Transform child in GameObject.Find("principal_menu/1").transform)
+        {
+            string name = child.name;
+            switch (name)
+            {
+                case "HP":
+                    child.GetComponent<Text>().text = "10/10";
+                    break;
+                case "Name":
+                    child.GetComponent<Text>().text = "Volern porcodue";
+                    break;
+                case "LVL":
+                    child.GetComponent<Text>().text = "50";
+                    break;
+            }
+        }
+
+        //2
+
+        //3
+
+        //4
+
+        //5
+
+        //6
+    }
 
     private void FunctionMenu()
     {
@@ -128,11 +160,28 @@ public class TeamSystem : MonoBehaviour
     private void PokemonDetailLoad()
     {
         det_menu.SetActive(true);
+        //Base
         GameObject.Find("detail_menu/PokemonImg").GetComponent<SpriteRenderer>().sprite = GameObject.Find("principal_menu/" + now).GetComponent<SpriteRenderer>().sprite;
         GameObject.Find("detail_menu/Pokemon_name").GetComponent<Text>().text = GameObject.Find("principal_menu/" + now + "/Name").GetComponent<Text>().text;
         GameObject.Find("detail_menu/Pokemon_lvl").GetComponent<Text>().text = "Lv. " + GameObject.Find("principal_menu/" + now + "/LVL").GetComponent<Text>().text;
+
         GameObject.Find("detail_menu/Multimenu/Mosse").GetComponent<Button>().onClick.AddListener(AttacksClicked);
         GameObject.Find("detail_menu/Multimenu/Generale").GetComponent<Button>().onClick.AddListener(GeneralClicked);
+
+        //Generale
+        GameObject.Find("detail_menu/Multimenu/sub_generale/NrPokedex").GetComponent<Text>().text = "666";
+        GameObject.Find("detail_menu/Multimenu/sub_generale/name").GetComponent<Text>().text = "Blinx";
+        GameObject.Find("detail_menu/Multimenu/sub_generale/Type").GetComponent<Text>().text = "Folletto";
+        GameObject.Find("detail_menu/Multimenu/sub_generale/Exp").GetComponent<Text>().text = "0000000001";
+        GameObject.Find("detail_menu/Multimenu/sub_generale/ExpToLvl").GetComponent<Text>().text = "1000000001";
+
+        //Mosse
+        for (int i = 1; i <= 4; i++)
+        {
+            GameObject.Find("detail_menu/Multimenu/sub_mosse/" + i).GetComponent<Text>().text = "funziona";
+            GameObject.Find("detail_menu/Multimenu/sub_mosse/" + i + "_moves").GetComponent<Text>().text = "10/" + i + "0";
+        }
+
         menu.SetActive(false);
         sub_mosse.SetActive(false);
     }
