@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class TeamSystem : MonoBehaviour
 {
-
     #region Properties
     
     private int now = 1;
@@ -20,6 +19,7 @@ public class TeamSystem : MonoBehaviour
     private GameObject sub_mosse;
     private GameObject sub_generale;
     #endregion Properties
+
     #region Methods
 
     void Start()
@@ -33,23 +33,13 @@ public class TeamSystem : MonoBehaviour
         LoadMenu();
     }
 
-    void Update () {
-
-        //menu
-        if (menu.activeSelf)
-        {
-            FunctionMenu();
-        }
+    void Update ()
+    {
+        if (menu.activeSelf) FunctionMenu();
         
-        //dettagli pokemon
-        if (isDetail)
-        {
-            DetailMenu();
-        }
+        if (isDetail) DetailMenu();
 
-        //Chiusura menu
-        if (Input.GetKeyDown(KeyCode.Escape) && menu.activeSelf)
-            menu.SetActive(false);
+        if (Input.GetKeyDown(KeyCode.Escape) && menu.activeSelf) menu.SetActive(false);
         else if (Input.GetKeyDown(KeyCode.Escape) && det_menu.activeSelf)
         {
             det_menu.SetActive(false);
@@ -58,14 +48,14 @@ public class TeamSystem : MonoBehaviour
         
 	}
 
-
     private void LoadMenu()
     {
-        //1
         GameObject.Find("principal_menu/1").GetComponent<SpriteRenderer>().sprite = Resources.Load("") as Sprite;
+
         foreach (Transform child in GameObject.Find("principal_menu/1").transform)
         {
-            string name = child.name;
+            var name = child.name;
+
             switch (name)
             {
                 case "HP":
