@@ -31,7 +31,7 @@ namespace AncientTimes.Assets.Scripts.Events.Actions
         {
             if (firstExecute && !hasFinished)
             {
-                Dialogues.ForEach(dialogue => { Debug.Log(dialogue.ImagePath); Console.Write(dialogue.Text, dialogue.Name, dialogue.ImagePath); });
+                Dialogues.ForEach(dialogue => Console.Write(dialogue.Text, dialogue.Name, dialogue.ImagePath));
                 Console.MessageComplete += MessageCompleted;
                 firstExecute = false;
             }
