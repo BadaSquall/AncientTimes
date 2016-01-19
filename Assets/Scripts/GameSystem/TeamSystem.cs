@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class TeamSystem : MonoBehaviour
 {
-
     #region Properties
     
     private int now = 1;
@@ -20,6 +19,7 @@ public class TeamSystem : MonoBehaviour
     private GameObject sub_mosse;
     private GameObject sub_generale;
     #endregion Properties
+
     #region Methods
 
     void Start()
@@ -33,23 +33,13 @@ public class TeamSystem : MonoBehaviour
         LoadMenu();
     }
 
-    void Update () {
-
-        //menu
-        if (menu.activeSelf)
-        {
-            FunctionMenu();
-        }
+    void Update ()
+    {
+        if (menu.activeSelf) FunctionMenu();
         
-        //dettagli pokemon
-        if (isDetail)
-        {
-            DetailMenu();
-        }
+        if (isDetail) DetailMenu();
 
-        //Chiusura menu
-        if (Input.GetKeyDown(KeyCode.Escape) && menu.activeSelf)
-            menu.SetActive(false);
+        if (Input.GetKeyDown(KeyCode.Escape) && menu.activeSelf) menu.SetActive(false);
         else if (Input.GetKeyDown(KeyCode.Escape) && det_menu.activeSelf)
         {
             det_menu.SetActive(false);
@@ -58,14 +48,14 @@ public class TeamSystem : MonoBehaviour
         
 	}
 
-
     private void LoadMenu()
     {
-        //1
-        GameObject.Find("principal_menu/1").GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("");
+        GameObject.Find("principal_menu/1").GetComponent<SpriteRenderer>().sprite = Resources.Load("") as Sprite;
+
         foreach (Transform child in GameObject.Find("principal_menu/1").transform)
         {
-            string name = child.name;
+            var name = child.name;
+
             switch (name)
             {
                 case "HP":
@@ -79,12 +69,6 @@ public class TeamSystem : MonoBehaviour
                     break;
                 case "HPBar":
                     child.transform.GetChild(0).GetComponent<Image>().fillAmount = 0.5f;
-                    break;
-                case "Sex":
-                    child.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Team/male");
-                    break;
-                case "Object":
-                    child.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Team/female");
                     break;
             }
         }
@@ -151,25 +135,16 @@ public class TeamSystem : MonoBehaviour
 
     private void ChangePositionPokemon(int begin, int end)
     {
-        float temp_hpbar = GameObject.Find("principal_menu/" + end + "/HPBar/HPBarLife").GetComponent<Image>().fillAmount;
         string temp_hp = GameObject.Find("principal_menu/" + end + "/HP").GetComponent<Text>().text;
         string temp_lvl = GameObject.Find("principal_menu/" + end + "/LVL").GetComponent<Text>().text;
         string temp_name = GameObject.Find("principal_menu/" + end + "/Name").GetComponent<Text>().text;
         Sprite temp_sprite = GameObject.Find("principal_menu/" + end).GetComponent<SpriteRenderer>().sprite;
-        Sprite temp_sex = GameObject.Find("principal_menu/" + end + "/Sex").GetComponent<SpriteRenderer>().sprite;
-        Sprite temp_object = GameObject.Find("principal_menu/" + end + "/Object").GetComponent<SpriteRenderer>().sprite;
 
-        GameObject.Find("principal_menu/" + end + "/Object").GetComponent<SpriteRenderer>().sprite = GameObject.Find("principal_menu/" + begin + "/Object").GetComponent<SpriteRenderer>().sprite
-        GameObject.Find("principal_menu/" + end + "/Sex").GetComponent<SpriteRenderer>().sprite = GameObject.Find("principal_menu/" + begin + "/Sex").GetComponent<SpriteRenderer>().sprite;
-        GameObject.Find("principal_menu/" + end + "/HPBar/HPBarLife").GetComponent<Image>().fillAmount = GameObject.Find("principal_menu/" + begin + "/HPBar/HPBarLife").GetComponent<Image>().fillAmount;
         GameObject.Find("principal_menu/" + end + "/HP").GetComponent<Text>().text = GameObject.Find("principal_menu/" + begin + "/HP").GetComponent<Text>().text;
         GameObject.Find("principal_menu/" + end + "/LVL").GetComponent<Text>().text = GameObject.Find("principal_menu/" + begin + "/LVL").GetComponent<Text>().text;
         GameObject.Find("principal_menu/" + end + "/Name").GetComponent<Text>().text = GameObject.Find("principal_menu/" + begin + "/Name").GetComponent<Text>().text;
         GameObject.Find("principal_menu/" + end).GetComponent<SpriteRenderer>().sprite = GameObject.Find("principal_menu/" + begin).GetComponent<SpriteRenderer>().sprite;
 
-        GameObject.Find("principal_menu/" + begin + "/Object").GetComponent<SpriteRenderer>().sprite = temp_object;
-        GameObject.Find("principal_menu/" + begin + "/Sex").GetComponent<SpriteRenderer>().sprite = temp_sex;
-        GameObject.Find("principal_menu/" + begin + "/HPBar/HPBarLife").GetComponent<Image>().fillAmount = temp_hpbar;
         GameObject.Find("principal_menu/" + begin + "/HP").GetComponent<Text>().text = temp_hp;
         GameObject.Find("principal_menu/" + begin + "/LVL").GetComponent<Text>().text = temp_lvl;
         GameObject.Find("principal_menu/" + begin + "/Name").GetComponent<Text>().text = temp_name;
