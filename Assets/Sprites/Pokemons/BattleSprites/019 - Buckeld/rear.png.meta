@@ -1,0 +1,168 @@
+fileFormatVersion: 2
+guid: 61b91d5ee61a63a42b3f7dbb8cb11892
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: rear_0
+    21300002: rear_1
+    21300004: rear_2
+    21300006: rear_3
+    21300008: rear_4
+    21300010: rear_5
+    21300012: rear_6
+    21300014: rear_7
+    21300016: rear_8
+    21300018: rear_9
+    21300020: rear_10
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  seamlessCubemap: 0
+  textureFormat: -2
+  maxTextureSize: 4096
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: rear_0
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 14
+        width: 134
+        height: 166
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: rear_1
+      rect:
+        serializedVersion: 2
+        x: 310
+        y: 14
+        width: 134
+        height: 169
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: rear_2
+      rect:
+        serializedVersion: 2
+        x: 550
+        y: 14
+        width: 135
+        height: 169
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: rear_3
+      rect:
+        serializedVersion: 2
+        x: 792
+        y: 14
+        width: 133
+        height: 169
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: rear_4
+      rect:
+        serializedVersion: 2
+        x: 1033
+        y: 14
+        width: 130
+        height: 169
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: rear_5
+      rect:
+        serializedVersion: 2
+        x: 1273
+        y: 14
+        width: 129
+        height: 171
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: rear_6
+      rect:
+        serializedVersion: 2
+        x: 1513
+        y: 15
+        width: 127
+        height: 170
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: rear_7
+      rect:
+        serializedVersion: 2
+        x: 1757
+        y: 14
+        width: 129
+        height: 169
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: rear_8
+      rect:
+        serializedVersion: 2
+        x: 1998
+        y: 14
+        width: 132
+        height: 169
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: rear_9
+      rect:
+        serializedVersion: 2
+        x: 2238
+        y: 14
+        width: 134
+        height: 171
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: rear_10
+      rect:
+        serializedVersion: 2
+        x: 2479
+        y: 14
+        width: 134
+        height: 171
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
