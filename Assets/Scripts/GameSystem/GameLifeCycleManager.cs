@@ -13,7 +13,6 @@ namespace AncientTimes.Assets.Scripts.GameSystem
 		public Texture2D NextMessageTriangle;
         public Texture2D FadeTexture;
         public bool ManageMapLoader;
-
 		#endregion Properties
 
 		#region Methods

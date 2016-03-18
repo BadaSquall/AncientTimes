@@ -1,1 +1,4 @@
-<?xml version="1.0" encoding="utf-16"?><SerializableGameEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><Trigger>Interaction</Trigger><Condition>Dialogue Started</Condition><FirstAction xsi:type="Empty"><IsFinished>false</IsFinished><IsParallel>false</IsParallel><WindowX>84</WindowX><WindowY>104</WindowY></FirstAction></SerializableGameEvent>
+<?xml version="1.0" encoding="utf-16"?><SerializableGameEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><Trigger>Interaction</Trigger><Condition /><FirstAction xsi:type="ShowDialogue"><IsFinished>false</IsFinished><IsParallel>false</IsParallel><Label>Text
+</Label><WindowX>56</WindowX><WindowY>140</WindowY><Dialogues><Dialogue><Name /><ImagePath>Expressions/Boris/normal</ImagePath><Text>Il saggio Kerneth è sempre perso 
+nel suo mondo... </Text></Dialogue><Dialogue><Name /><ImagePath>Expressions/Boris/sad</ImagePath><Text>Non ha nemmeno 
+risposto alla mia domanda!</Text></Dialogue></Dialogues></FirstAction></SerializableGameEvent>
