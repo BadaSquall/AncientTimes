@@ -42,6 +42,8 @@ public class TeamSystem : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape) && menu.activeSelf) menu.SetActive(false);
         else if (Input.GetKeyDown(KeyCode.Escape) && det_menu.activeSelf)
         {
+            sub_mosse.SetActive(true);
+            sub_generale.SetActive(true);
             det_menu.SetActive(false);
             menu.SetActive(true);
         }
@@ -172,8 +174,18 @@ public class TeamSystem : MonoBehaviour
         //Mosse
         for (int i = 1; i <= 4; i++)
         {
-            GameObject.Find("detail_menu/Multimenu/sub_mosse/" + i).GetComponent<Text>().text = "funziona";
-            GameObject.Find("detail_menu/Multimenu/sub_mosse/" + i + "_moves").GetComponent<Text>().text = "10/" + i + "0";
+            foreach (Transform child in sub_mosse.transform)
+            {
+                if (child.name == i.ToString())
+                {
+                    child.GetComponent<Text>().text = "Funziona " + i;
+                }
+                if (child.name == i + "_moves")
+                {
+                    child.GetComponent<Text>().text = "10/" + i + "0";
+                }
+
+            }
         }
 
         menu.SetActive(false);
