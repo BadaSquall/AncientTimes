@@ -18,13 +18,22 @@ public class TeamSystem : MonoBehaviour
     private GameObject det_menu;
     private GameObject sub_mosse;
     private GameObject sub_generale;
+    private GameObject PokemonMenu;
+
+    private GameObject[] Places;
     #endregion Properties
 
     #region Methods
 
+    void Awake()
+    {
+        Places = Resources.FindObjectsOfTypeAll<GameObject>();
+    }
+
     void Start()
     {
         ChangeChoice(1);
+        PokemonMenu = GameObject.Find("PokemonMenu");
         menu = GameObject.Find("principal_menu");
         det_menu = GameObject.Find("detail_menu");
         sub_generale = GameObject.Find("detail_menu/Multimenu/sub_generale");
@@ -33,13 +42,22 @@ public class TeamSystem : MonoBehaviour
         LoadMenu();
     }
 
-    void Update ()
+    void Update()
     {
         if (menu.activeSelf) FunctionMenu();
-        
+
         if (isDetail) DetailMenu();
 
-        if (Input.GetKeyDown(KeyCode.Escape) && menu.activeSelf) menu.SetActive(false);
+        if (Input.GetKeyDown(KeyCode.Escape) && menu.activeSelf)
+        {
+            foreach (GameObject place in Places)
+            {
+                if(place.tag == "Places")
+                    place.SetActive(true);
+            }
+            menu.SetActive(false);
+            PokemonMenu.SetActive(false);
+        }
         else if (Input.GetKeyDown(KeyCode.Escape) && det_menu.activeSelf)
         {
             sub_mosse.SetActive(true);
@@ -47,12 +65,11 @@ public class TeamSystem : MonoBehaviour
             det_menu.SetActive(false);
             menu.SetActive(true);
         }
-        
-	}
+    }
 
     private void LoadMenu()
     {
-        GameObject.Find("principal_menu/1").GetComponent<SpriteRenderer>().sprite = Resources.Load("") as Sprite;
+        //GameObject.Find("principal_menu/1").GetComponent<SpriteRenderer>().sprite = Resources.Load("") as Sprite;
 
         foreach (Transform child in GameObject.Find("principal_menu/1").transform)
         {
